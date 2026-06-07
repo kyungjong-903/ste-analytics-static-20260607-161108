@@ -106,9 +106,9 @@
         : metric('vs Plan', UI.delta(royVsPlan,{}), royVsPlan>=0?'g':'r') + `<div class="h-metric" data-tip="${royContractTip}"><div class="ml">vs Contract</div><div class="mv" style="color:var(--green)">${royPace.toFixed(0)}%</div></div>` + metric('vs YoY', UI.delta(royVsYoY,{}), royVsYoY>=0?'g':'r');
 
       const heroes = `<div class="grid" style="grid-template-columns:repeat(3,1fr)">
-        ${hero({ go:'a2', name:own+'Sales', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
-          val: (planView ? m(wholesaleSales.plan, ent) : m(wholesaleSales.netSales, ent)).book, cur: (planView?'Wholesale planned net sales · ':'Wholesale net sales · ')+periodLabel(s.period),
-          metrics: salesMetrics(wholesaleSales) })}
+        ${hero({ go:'a2', name:own+'Net Sales', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
+          val: (planView ? m(sales.plan, ent) : m(sales.netSales, ent)).book, cur: (planView?'Net sales all plan · ':'Net sales all · ')+periodLabel(s.period),
+          metrics: salesMetrics(sales) })}
         ${hero({ go:'a2', name:'Retail', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
           val: (planView ? m(retailSales.plan, ent) : m(retailSales.netSales, ent)).book, cur: (planView?'Retail planned net sales · ':'Retail net sales · ')+periodLabel(s.period),
           metrics: salesMetrics(retailSales) })}

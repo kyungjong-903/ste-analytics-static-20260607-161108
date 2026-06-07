@@ -178,11 +178,13 @@ function checkLegacyOverviewRoyaltyCopy() {
 function checkOverviewWholesaleAndRetailSalesCards() {
   const html = stripped(Screens.a1.render({ ...baseState, view: "actual" }));
   const ent = STEData.byId("sugifr");
-  const wholesale = STEData.money(STEData.salesFor("sugifr", "ytd", "wholesale").netSales, ent).book;
+  const all = STEData.money(STEData.salesFor("sugifr", "ytd").netSales, ent).book;
   const retail = STEData.money(STEData.salesFor("sugifr", "ytd", "retail").netSales, ent).book;
 
-  assert(html.includes("Wholesale net sales"), "Overview Sales card should be scoped to Wholesale net sales");
-  assert(html.includes(wholesale), `Overview Sales card should show Wholesale net sales ${wholesale}`);
+  assert(html.includes(">Net Sales<"), "Overview Sales card should be labeled Net Sales");
+  assert(html.includes("Net sales all"), "Overview Net Sales card should describe all-channel net sales");
+  assert(html.includes(all), `Overview Net Sales card should show all-channel net sales ${all}`);
+  assert(!html.includes("Wholesale net sales"), "Overview Sales card should not be scoped to Wholesale net sales");
   assert(html.includes(">Retail<") || html.includes(">Retail Sales<"), "Overview should render a Retail sales card");
   assert(html.includes("Retail net sales"), "Overview Retail card should describe Retail net sales");
   assert(html.includes(retail), `Overview Retail card should show Retail net sales ${retail}`);
