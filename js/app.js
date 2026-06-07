@@ -305,6 +305,11 @@
         </div>
       `;
     });
+    document.querySelectorAll(".ste-sidebar-viewmode").forEach(pill => {
+      pill.textContent = _viewLabel;
+      pill.classList.toggle("is-licensor", !!_isHQ);
+      pill.classList.toggle("is-licensee", !_isHQ);
+    });
     // Inject a small icon-only sidebar toggle at the LEFT of each header,
     // before the breadcrumb. Standard SaaS pattern; avoids cluttering the
     // sidebar itself.
@@ -336,27 +341,23 @@
       const u = window.STE && STE.currentUser();
       const isAdmin = u && window.STE && STE.isAdmin && STE.isAdmin(u);
       const isHQ    = u && window.STE && STE.isHQ    && STE.isHQ(u);
-      if (!isAdmin) {
-        document.querySelectorAll('.sidebar a[href^="#/admin"]').forEach(a => {
-          a.style.display = "none";
-          // Hidden Admin is still the first .nav-item-bottom in the DOM, so it
-          // absorbs the margin-top:auto pin (and the divider) meant for the
-          // first *visible* bottom item — which leaves Help Center stuck to the
-          // main nav. Drop the class so the pin moves to the next visible one.
-          a.classList.remove("nav-item-bottom");
-        });
-      }
+      document.querySelectorAll('.sidebar a[href^="#/admin"]').forEach(a => {
+        a.style.display = isAdmin ? "" : "none";
+        // Hidden Admin is still the first .nav-item-bottom in the DOM, so it
+        // absorbs the margin-top:auto pin (and the divider) meant for the
+        // first *visible* bottom item — which leaves Help Center stuck to the
+        // main nav. Drop the class while hidden and restore it for admins.
+        a.classList.toggle("nav-item-bottom", !!isAdmin);
+      });
       // Design Studio used to be licensee-only, but per the licensor-platform
       // decision HQ now sees the studio (read-only across all licensees plus
       // their own boards, with a licensee filter). Other licensee-only items,
       // if any, stay hidden for HQ.
-      if (isHQ) {
-        document.querySelectorAll('.sidebar [data-licensee-only="1"]').forEach(a => {
-          const href = a.getAttribute("href") || "";
-          if (href.startsWith("#/design-studio")) return;
-          a.style.display = "none";
-        });
-      }
+      document.querySelectorAll('.sidebar [data-licensee-only="1"]').forEach(a => {
+        const href = a.getAttribute("href") || "";
+        const visible = !isHQ || href.startsWith("#/design-studio");
+        a.style.display = visible ? "" : "none";
+      });
     } catch (e) {}
 
     // Apply persisted collapse state + wire toggle
