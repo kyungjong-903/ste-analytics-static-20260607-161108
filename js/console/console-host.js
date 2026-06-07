@@ -160,7 +160,7 @@
   }
   function lockedScope() {
     return `<div class="filter-group">
-      <span class="filter-lab">Licensee</span>
+      <span class="filter-lab">Scope</span>
       <div class="lic-trigger" style="cursor:default">
         <span class="flag flag-anon"></span>
         <div class="lt"><b>Licensee A</b><small>Auto-scoped to your account</small></div>
