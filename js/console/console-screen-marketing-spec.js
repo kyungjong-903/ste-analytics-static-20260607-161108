@@ -34,6 +34,29 @@
     return `${value.toFixed(1)}x`;
   }
 
+  function periodLabel(state) {
+    const labels = {
+      ytd: "Year-to-Date",
+      q1: "Q1",
+      q2: "Q2",
+      q3: "Q3",
+      q4: "Q4",
+      cum1: "Through Q1",
+      cum2: "Through Q2",
+      cum3: "Through Q3",
+      full: "Full Year",
+    };
+    if (state.axis === "season" && state.season && state.season !== "all") {
+      return state.season.toUpperCase();
+    }
+    return `${labels[state.period] || state.period || "Year-to-Date"} ${state.year || "2026"}`;
+  }
+
+  function sub(state) {
+    const code = global.UI && global.UI.dispCode ? global.UI.dispCode(state) : D().byId(state.entId).code;
+    return `${code} - ${periodLabel(state)} - spend, ROI, SNS and compliance`;
+  }
+
   function latestActual(series) {
     const values = (series || []).filter((v) => v != null);
     return values.length ? values[values.length - 1] : 0;
@@ -456,5 +479,5 @@
   }
 
   global.Screens = global.Screens || {};
-  global.Screens.a5 = { title: "Marketing", render, init };
+  global.Screens.a5 = { title: "Marketing", sub, render, init };
 })(window);
