@@ -5,10 +5,16 @@ globalThis.window = globalThis;
 globalThis.Screens = {};
 globalThis.UI = {
   dispCode(state) {
-    return globalThis.STEData.byId(state.entId).code;
+    return state && state.mode === "licensee" ? "Licensee A" : globalThis.STEData.byId(state.entId).code;
   },
   delta(value) {
     return `${value >= 0 ? "+" : ""}${Number(value || 0).toFixed(1)}%`;
+  },
+  curSym() {
+    return "€";
+  },
+  flag() {
+    return "";
   },
 };
 
@@ -16,6 +22,7 @@ globalThis.UI = {
   "js/console/console-data.js",
   "js/console/console-spec-model.js",
   "js/console/console-spec-widgets.js",
+  "js/console/console-screens-a12.js",
   "js/console/console-screen-overview-spec.js",
   "js/console/console-screen-distribution-spec.js",
   "js/console/console-screen-marketing-spec.js",
@@ -35,6 +42,7 @@ const baseState = {
   season: "all",
   axis: "calendar",
   channel: null,
+  licenseeSelf: "sugifr",
 };
 
 function stripped(html) {
@@ -42,14 +50,16 @@ function stripped(html) {
 }
 
 function checkOverviewCoversAnalyticsPages() {
-  assert(Screens.a1 && typeof Screens.a1.render === "function", "Overview spec screen override was not registered");
+  assert(Screens.a1 && typeof Screens.a1.render === "function", "Overview screen was not registered");
   const html = stripped(Screens.a1.render({ ...baseState, view: "actual" }));
-  ["Sales & Royalty", "Distribution", "Inventory", "Marketing"].forEach((label) => {
+  ["Sales", "Royalty", "Distribution", "Inventory", "Marketing"].forEach((label) => {
     assert(html.includes(label), `Overview is missing ${label} summary`);
   });
   ["data-go=\"a2\"", "data-go=\"a3\"", "data-go=\"a4\"", "data-go=\"a5\""].forEach((target) => {
     assert(html.includes(target), `Overview is missing navigation target ${target}`);
   });
+  assert(html.includes("Tier Share"), "Overview should keep the hero-card UI and show Distribution as Tier Share");
+  assert(!html.includes("full analytics summary"), "Overview should not render the simplified spec-card override");
 }
 
 function checkMarketingPlanUsesPlanSpend() {
@@ -101,11 +111,18 @@ function checkLegacyOverviewRoyaltyCopy() {
   assert(!legacyOverview.includes("'Royalty earned · '"), "Legacy overview Royalty card should not say Royalty earned");
 }
 
+function checkOverviewSpecOverrideDisabled() {
+  const overviewSpec = fs.readFileSync("js/console/console-screen-overview-spec.js", "utf8");
+  assert(overviewSpec.includes("intentionally a no-op"), "Overview spec override should remain disabled");
+  assert(!overviewSpec.includes("global.Screens.a1"), "Overview spec file must not override Screens.a1");
+}
+
 checkOverviewCoversAnalyticsPages();
 checkDistributionPlanUsesPlanDoors();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
 checkLegacyOverviewDistributionCardUsesTierShare();
 checkLegacyOverviewRoyaltyCopy();
+checkOverviewSpecOverrideDisabled();
 
 console.log("analytics overview and plan toggles OK");
