@@ -296,7 +296,7 @@
           </div>
         </div>
         <div class="ste-console mode-licensee">
-          ${salesUsesSugiPoc ? "" : renderFilter()}
+          ${salesUsesSugiPoc ? '<div class="filterbar sugi-sales-filterbar" id="ste-sales-filterbar"></div>' : renderFilter()}
           <div class="cc-main" id="ste-console-main"></div>
         </div>
       </div>

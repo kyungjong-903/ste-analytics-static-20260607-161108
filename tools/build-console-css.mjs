@@ -80,6 +80,7 @@ result += `
 .ste-console .filterwrap { position: relative; z-index: 4; margin-bottom: 12px; }
 .ste-console .sugi-sales-poc .filterbar { display: flex; flex-wrap: wrap; align-items: center; align-content: flex-start; gap: 10px 12px; height: auto; min-height: 58px; overflow: visible; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
 .ste-console .f-group, .ste-console .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.ste-console .filter-row-break { flex: 0 0 100%; width: 100%; height: 0; }
 .ste-console .f-lab { color: var(--ink-3); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .ste-console .f-sep { width: 1px; min-height: 26px; align-self: stretch; background: var(--border); }
 .ste-console select { border: 1px solid var(--border); border-radius: 8px; background: var(--panel-3); color: var(--ink); padding: 6px 8px; font: 600 12px Inter, sans-serif; }

@@ -12,9 +12,10 @@
     if (!root) return;
     hostState = nextState || hostState;
     syncFromHost();
+    const hasHostFilter = !!document.getElementById('ste-sales-filterbar');
     root.innerHTML = `
       <div class="sugi-sales-poc">
-        <div class="filterwrap"><div class="filterbar" id="filterbar"></div></div>
+        ${hasHostFilter ? '' : '<div class="filterwrap"><div class="filterbar sugi-sales-filterbar" id="filterbar"></div></div>'}
         <div class="tabs" id="tabs"></div>
         <div id="main"></div>
         <div class="footnote">PoC v1.0 · 2026-06-07 · Spec: STE_Analytics_Spec_Sales_Royalty.md + STE_Analytics_MockData_SUGI_France.md</div>
@@ -517,7 +518,7 @@
       '<div class="f-group"><span class="f-lab">Season</span>'+sel('f-season',seaOpts,st.season)+'</div>'+
       '<span style="flex:1"></span>'+
       '<div class="f-group"><span class="f-lab">View</span>'+seg('view',[['actual','Actual'],['plan','Plan']],st.view)+'</div>'+
-      '<div class="f-sep"></div>'+
+      '<div class="filter-row-break"></div>'+
       '<div class="f-group"><span class="f-lab">Distribution Channel</span>'+seg('channel',[['all','All'],['wholesale','Wholesale'],['retail','Retail']],st.channel,1)+'</div>'+
       '<div class="f-group"><span class="f-lab">Region</span>'+seg('region',[['all','All'],['france','France'],['dach','DACH'],['benelux','Benelux'],['na','N. Africa']],st.region,1)+'</div>';
   }
@@ -780,7 +781,8 @@
   function paint(){
     if (!document.querySelector('.sugi-sales-poc')) return;
     disposeCharts();initQ=[];
-    document.getElementById('filterbar').innerHTML=renderFilter();
+    const filterEl=document.getElementById('ste-sales-filterbar')||document.getElementById('filterbar');
+    if(filterEl)filterEl.innerHTML=renderFilter();
     document.getElementById('tabs').innerHTML=renderTabs();
     const c=ctx();
     document.getElementById('main').innerHTML=renderBody(c);
@@ -797,7 +799,7 @@
 
   /* ---------------- events ---------------- */
   document.addEventListener('click',e=>{
-    const scope = e.target.closest('.sugi-sales-poc');
+    const scope = e.target.closest('.sugi-sales-poc,.sugi-sales-filterbar');
     if (!scope) return;
     const t=e.target.closest('[data-view],[data-channel],[data-region],[data-tab],[data-export],[data-crumb],[data-geoview],[data-vardim],[data-investigate],[data-sortk]');
     if(!t)return;
@@ -814,7 +816,7 @@
     if(d.export){toast('Preparing '+(d.export==='pdf'?'PDF':'Excel')+' export… (PoC stub)');return;}
   });
   document.addEventListener('change',e=>{
-    if (!e.target.closest('.sugi-sales-poc')) return;
+    if (!e.target.closest('.sugi-sales-poc,.sugi-sales-filterbar')) return;
     if(e.target.id==='f-year'){st.year=e.target.value;paint();}
     else if(e.target.id==='f-period'){st.period=e.target.value;paint();}
     else if(e.target.id==='f-season'){st.season=e.target.value;if(st.season!=='all')st.period='ytd';paint();}
