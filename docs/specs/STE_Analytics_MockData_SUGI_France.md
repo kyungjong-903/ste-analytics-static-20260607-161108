@@ -1,6 +1,6 @@
 # STE Analytics — Mock Data Spec (SUGI France)
 ### Overview 기준 · 기간별 / 시즌별 정리
-### v1.0 · 2026-06-07
+### v1.1 · 2026-06-07
 
 > **현재 시점**: 2026년 6월 7일
 > **2026 진행 상태**: Q1 종료 · Q2 진행 중 (5월 말까지 실적 집계)
@@ -120,25 +120,28 @@
 
 ---
 
-## 💰 4. Royalty *(10% rate · Annual Min €1.0M)*
+## 💰 4. Royalty *(10% rate · Annual Min €2.5M)*
+
+> **Royalty Earned = Net Sales × 10%** (전 화면 일괄 · Patch v1.1)
+> Excess Royalty € = Royalty Earned − (Annual Min × prorated factor) · prorated factor = 진행 월수 / 12
 
 ### Period별
 
 | Period | Royalty Earned | Plan | Prior Year | Excess vs Contract Min |
 |---|---|---|---|---|
-| **2026 YTD** *(through May)* | **€493K** | €515K | €482K | **+€103K** *(vs €390K prorated min)* |
-| 2026 Q1 only | €259K | €270K | €248K | +€9K *(vs €250K prorated min)* |
-| 2026 Q2 partial | €234K | — | — | — |
-| 2025 Q1 | €248K | €234K | — | -€2K *(vs €250K prorated)* |
-| 2025 Q2 | €328K | €313K | — | +€78K |
-| 2025 Q3 | €245K | €227K | — | -€5K *(vs €250K prorated)* |
-| 2025 Q4 | €302K | €288K | — | +€52K |
-| **2025 Full Year** | **€1.12M** | €1.06M | €1.01M | **+€120K** *(vs €1.0M Annual Min)* |
-| 2024 Full Year | €1.01M | €960K | — | +€10K |
+| **2026 YTD** *(through May)* | **€1.37M** | €1.43M | €1.34M | **+€330K** *(vs €1.04M prorated min)* |
+| 2026 Q1 only | €720K | €750K | €690K | +€95K *(vs €625K prorated min)* |
+| 2026 Q2 partial | €650K | — | — | — |
+| 2025 Q1 | €690K | €650K | — | +€65K *(vs €625K prorated)* |
+| 2025 Q2 | €910K | €870K | — | +€285K |
+| 2025 Q3 | €680K | €630K | — | +€55K *(vs €625K prorated)* |
+| 2025 Q4 | €840K | €800K | — | +€215K |
+| **2025 Full Year** | **€3.12M** | €2.95M | €2.81M | **+€620K** *(vs €2.5M Annual Min)* |
+| 2024 Full Year | €2.81M | €2.66M | — | +€310K |
 
 ### 2026 Year-End Projection
-- 현재 페이스 기준: **€1.28M** (+28% over Min)
-- Projected Excess: **+€280K** above Annual Minimum
+- 현재 페이스 기준: **€3.30M** (+32% over Min)
+- Projected Excess: **+€800K** above Annual Minimum
 
 ---
 
@@ -282,8 +285,8 @@
   Polo line strong sell-through across France and 
   DACH markets.
 
-• Royalty pace projects +€280K above contract
-  minimum at year-end (€1.28M total).
+• Royalty pace projects +€800K above contract
+  minimum at year-end (€3.30M total).
 
 • DACH region overperforming plan by +€340K
   (mostly Germany +18% YoY). Consider DACH
@@ -308,7 +311,7 @@
 | Card | Value | Secondary |
 |---|---|---|
 | **My Sales** | €13.7M | vs Plan -4.2% / vs YoY +2.0% |
-| **My Royalty** | €493K | vs Plan -4.2% / Excess +€103K |
+| **My Royalty** | €1.37M | vs Plan -4.2% / Excess +€330K |
 | **My Distribution** | 386 / 420 doors | Net Δ +11 / Rev/Door €35.5K |
 | **My Inventory** | €3.9M | Stk/Sales 3.6m / Turn 2.5× / Aged 23% |
 | **My Marketing** | €547K | ROI 3.9× / Issues 0 |
@@ -318,8 +321,8 @@
 | KPI | Value |
 |---|---|
 | Total Net Sales | €13.7M |
-| Total Royalty | €493K |
-| **Excess Royalty €** | **+€103K** |
+| Total Royalty | €1.37M |
+| **Excess Royalty €** | **+€330K** |
 | Design Pass Rate | 91% |
 | Sample Avg Rounds | 2.0 |
 | Active Markets | 2 / 10 *(France, Germany 위주)* |
@@ -356,3 +359,4 @@
 | 버전 | 날짜 | 변경 |
 |---|---|---|
 | v1.0 | 2026-06-07 | 초안 — Period/Season별 종합 mock data 정리 |
+| v1.1 | 2026-06-07 | Royalty rate 정정 (effective 3.6% → Net Sales × 10%), Annual Min €1.0M → €2.5M (Patch v1.1) |

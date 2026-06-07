@@ -152,16 +152,17 @@
   // All other licensees intentionally keep the generated data path.
   const SPEC_FIXTURES = {
     sugifr: {
-      royaltyRate: 493_000 / 13_700_000,
-      annualRoyaltyMin: 1_000_000,
+      // Patch v1.1: royalty = net sales × 10% flat · annual min €2.5M
+      royaltyRate: 0.10,
+      annualRoyaltyMin: 2_500_000,
       sales: {
-        ytd:  { actual: 13_700_000, plan: 14_300_000, prior: 13_400_000, royalty: 493_000, royaltyPlan: 515_000, royaltyPrior: 482_000, royaltyMin: 390_000 },
-        q1:   { actual:  7_200_000, plan:  7_500_000, prior:  6_900_000, royalty: 259_000, royaltyPlan: 270_000, royaltyPrior: 248_000, royaltyMin: 250_000 },
-        q2:   { actual:  6_500_000, plan:  9_500_000, prior:  9_100_000, royalty: 234_000, royaltyPlan: 342_000, royaltyPrior: 328_000, royaltyMin: 250_000 },
+        ytd:  { actual: 13_700_000, plan: 14_300_000, prior: 13_400_000, royalty: 1_370_000, royaltyPlan: 1_430_000, royaltyPrior: 1_340_000, royaltyMin: 1_040_000 },
+        q1:   { actual:  7_200_000, plan:  7_500_000, prior:  6_900_000, royalty: 720_000, royaltyPlan: 750_000, royaltyPrior: 690_000, royaltyMin: 625_000 },
+        q2:   { actual:  6_500_000, plan:  9_500_000, prior:  9_100_000, royalty: 650_000, royaltyPlan: 950_000, royaltyPrior: 910_000, royaltyMin: 625_000 },
         q3:   { actual: null,       plan:  7_100_000, prior:  6_800_000 },
         q4:   { actual: null,       plan:  8_900_000, prior:  8_400_000 },
-        cum1: { actual:  7_200_000, plan:  7_500_000, prior:  6_900_000, royalty: 259_000, royaltyPlan: 270_000, royaltyPrior: 248_000, royaltyMin: 250_000 },
-        cum2: { actual: 13_700_000, plan: 17_000_000, prior: 16_000_000, royalty: 493_000, royaltyPlan: 612_000, royaltyPrior: 576_000, royaltyMin: 500_000 },
+        cum1: { actual:  7_200_000, plan:  7_500_000, prior:  6_900_000, royalty: 720_000, royaltyPlan: 750_000, royaltyPrior: 690_000, royaltyMin: 625_000 },
+        cum2: { actual: 13_700_000, plan: 17_000_000, prior: 16_000_000, royalty: 1_370_000, royaltyPlan: 1_700_000, royaltyPrior: 1_600_000, royaltyMin: 1_250_000 },
         cum3: { actual: null,       plan: 24_100_000, prior: 22_800_000 },
         full: { actual: null,       plan: 33_000_000, prior: 31_200_000 },
       },
@@ -175,10 +176,11 @@
       marketing: { spend: 547_000, spendPlan: 490_000, roi: 3.9, reach: 6_000_000, violations: 0 },
     },
     total: {
-      royaltyRate: 1_970_000 / 54_800_000,
-      annualRoyaltyMin: 4_000_000,
+      // Patch v1.1: royalty = net sales × 10% flat · combined annual min €10.3M
+      royaltyRate: 0.10,
+      annualRoyaltyMin: 10_300_000,
       sales: {
-        ytd:  { actual: 54_800_000, plan: 57_000_000, prior: 52_600_000, royalty: 1_970_000, royaltyPlan: 2_041_000, royaltyPrior: 1_874_000, royaltyMin: 1_558_000 },
+        ytd:  { actual: 54_800_000, plan: 57_000_000, prior: 52_600_000, royalty: 5_480_000, royaltyPlan: 5_700_000, royaltyPrior: 5_260_000, royaltyMin: 4_290_000 },
         q1:   { actual: 28_900_000, plan: 30_100_000, prior: 27_200_000 },
         q2:   { actual: 26_000_000, plan: 36_800_000, prior: 35_400_000 },
         q3:   { actual: null,       plan: 28_400_000, prior: 27_200_000 },
@@ -670,8 +672,8 @@
     const planView = (_ctx.view === 'plan');
     const netVal = planView ? m(d.plan, ent).book : m(d.netSales, ent).book;
     const royVal = planView ? m(d.royaltyPlan, ent).book : m(d.royalty, ent).book;
-    // Excess royalty over prorated contract minimum
-    const annualRoyMin = ent.annual * 0.40 * 0.10;
+    // Excess royalty over prorated contract minimum (spec-pinned entities carry their own annual min)
+    const annualRoyMin = d.annualRoyaltyMin || ent.annual * 0.40 * 0.10;
     const proratedRoyMin = d.royaltyMin; // already prorated by period month-count
     const excess = d.royalty - proratedRoyMin;
     const fraction = annualRoyMin > 0 ? (proratedRoyMin / annualRoyMin) : 1;

@@ -91,7 +91,7 @@
       </div>`;
 
       const planView = s.view === 'plan';
-      const annualRoyMin = ent.annual * 0.40 * 0.10;
+      const annualRoyMin = sales.annualRoyaltyMin || ent.annual * 0.40 * 0.10;
       const royEarned = sales.royalty;
       const royPace = annualRoyMin > 0 ? (royEarned / annualRoyMin * 100) : 0;
       const royProj = royEarned * (12 / 5); // YTD→year-end projection

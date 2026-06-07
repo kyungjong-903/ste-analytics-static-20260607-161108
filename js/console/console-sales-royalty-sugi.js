@@ -47,8 +47,8 @@
   function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2400);}
 
   /* ---------------- fixed dataset (MockData spec) ---------------- */
-  const RR=0.036;                      // effective royalty rate (≈3.6% of net sales — doc §4 numbers)
-  const ANNUAL_MIN=1.0;                // annual royalty minimum €1.0M
+  const RR=0.10;                       // royalty rate — net sales × 10% flat (MockData Patch v1.1)
+  const ANNUAL_MIN=2.5;                // annual royalty minimum €2.5M (Patch v1.1)
   const TOT26=13.7;                    // 2026 YTD-May base for share tables
 
   const YEARS={
@@ -112,7 +112,7 @@
   const TIERS=[['Tier 1',28],['Tier 2',40],['Tier 3',21],['ST Online',3],['Other',8]];
   const TERR={inPct:98.7,outPct:1.3,threshold:5,euShare:120/180,nonEuShare:60/180};
 
-  const ROY_FIX={prorated:{ytd:0.39,q1:0.25,q2:0.25,q3:0.25,q4:0.25,cum1:0.25,cum2:0.50,cum3:0.75,full:1.0},projection26:1.28};
+  const ROY_FIX={prorated:{ytd:0.416,q1:0.25,q2:0.25,q3:0.25,q4:0.25,cum1:0.25,cum2:0.50,cum3:0.75,full:1.0},projection26:3.30};
 
   /* Top 20 SKU — [sku,name,cat,sub,rev€K,qty,margin%] (representative YTD values) */
   const TOP_SKUS=[
@@ -474,7 +474,7 @@
   }
   function rateLine(el){
     const Y=YEARS[st.year];const thru=Y.thru;
-    const rates=MONTHS.map((_,i)=>i<=thru&&Y.actual[i]?3.6:null);
+    const rates=MONTHS.map((_,i)=>i<=thru&&Y.actual[i]?10.0:null);
     mkChart(el,{animation:false,
       tooltip:Object.assign({trigger:'axis',formatter:ps=>{const p=ps.find(x=>x.value!=null);return p?('<b>'+p.axisValue+'</b><br/>Effective rate: <b style="font-family:monospace">'+p.value+'%</b>'):'';}},TT),
       grid:{left:8,right:14,top:14,bottom:6,containLabel:true},
@@ -483,7 +483,7 @@
       series:[{type:'line',data:rates,symbol:'circle',symbolSize:4,lineStyle:{color:'#0891b2',width:2.5},itemStyle:{color:'#0891b2'},areaStyle:{color:fade('#0891b2',.10)}}]});
   }
   function histBars(el){
-    const rows=[['2024',101.2],['2025',112.3],['2026 E',128]];
+    const rows=[['2024',112.4],['2025',124.8],['2026 E',132]];
     mkChart(el,{animation:false,
       tooltip:Object.assign({formatter:p=>'<b>'+p.name+'</b><br/>'+p.value+'% of annual minimum'},TT),
       grid:{left:8,right:14,top:14,bottom:6,containLabel:true},
@@ -709,9 +709,9 @@
       '<div class="card card-pad">'+secHead('Rate Structure','Master Agreement § 4.2')+
         '<div class="grid g-2">'+
         '<div class="card card-pad" style="background:var(--accent-dim);border-color:transparent"><div class="klabel">Effective rate</div><div class="kval" style="font-size:30px">'+ratePct(c)+'<small>%</small></div><div class="muted" style="font-size:11px;margin-top:4px">of net sales — flat, all bands</div></div>'+
-        '<div class="card card-pad" style="background:var(--panel-2);border-color:transparent"><div class="klabel">Annual minimum</div><div class="kval" style="font-size:30px">€1.0<small>M</small></div><div class="muted" style="font-size:11px;margin-top:4px">royalty floor per contract year</div></div>'+
+        '<div class="card card-pad" style="background:var(--panel-2);border-color:transparent"><div class="klabel">Annual minimum</div><div class="kval" style="font-size:30px">€2.5<small>M</small></div><div class="muted" style="font-size:11px;margin-top:4px">royalty floor per contract year</div></div>'+
         '</div>'+
-        '<div class="muted mt-12" style="font-size:11.5px;line-height:1.55">Contract nominal rate 10% applies to the licensed-product royalty base; expressed against total net sales the effective rate is ≈3.6% (doc §4 figures).</div>'+
+        '<div class="muted mt-12" style="font-size:11.5px;line-height:1.55">Contract rate 10% applies flat to total net sales — Royalty Earned = Net Sales × 10% (MockData Patch v1.1).</div>'+
       '</div>'+
     '</div>'+
     '<div class="grid g-3 mt-16">'+
