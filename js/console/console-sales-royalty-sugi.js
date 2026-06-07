@@ -6,9 +6,12 @@
   "use strict";
 
   let mounted = false;
+  let hostState = null;
 
-  function mount(root) {
+  function mount(root, nextState) {
     if (!root) return;
+    hostState = nextState || hostState;
+    syncFromHost();
     root.innerHTML = `
       <div class="sugi-sales-poc">
         <div class="filterwrap"><div class="filterbar" id="filterbar"></div></div>
@@ -37,6 +40,7 @@
   function mulberry(str){let a=2166136261;for(let i=0;i<str.length;i++){a^=str.charCodeAt(i);a=Math.imul(a,16777619);}a=a>>>0;return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=(t+Math.imul(t^t>>>7,61|t))^t;return((t^t>>>14)>>>0)/4294967296;};}
   function sumR(arr,r){if(!arr)return null;let s=0;for(let i=r[0];i<=r[1];i++)s+=arr[i]||0;return s;}
   function eur(v){if(v==null||!isFinite(v))return'—';const a=Math.abs(v);if(a>=0.9995)return'€'+v.toFixed(1)+'M';return'€'+Math.round(v*1000)+'K';}
+  function ratePct(c){return (((c&&c.royRate)||RR)*100).toFixed(1);}
   function pctf(v,d){if(v==null||!isFinite(v))return'—';d=d==null?1:d;return(v>=0?'+':'')+v.toFixed(d)+'%';}
   function delta(v,o){o=o||{};if(v==null||!isFinite(v))return'<span class="delta flat">—</span>';const good=o.invert?v<0:v>=0;const cls=Math.abs(v)<.05?'flat':(good?'up':'down');const arr=v>.05?'▲':(v<-.05?'▼':'—');return '<span class="delta '+cls+'">'+arr+' '+pctf(v)+'</span>';}
   function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2400);}
@@ -189,10 +193,43 @@
   const TABS=[['net','Net Sales'],['royalty','Royalty'],['variance','Variance Analysis'],['min','vs Contract Minimum']];
 
   /* ---------------- compute ---------------- */
+  function syncFromHost(){
+    if(!hostState)return;
+    st.year=hostState.year||st.year;
+    st.period=hostState.period||st.period;
+    st.season=hostState.season||'all';
+    st.view=hostState.view||st.view;
+    st.channel=hostState.channel||'all';
+  }
+  function hostData(){
+    const D=global.STEData;
+    if(!D||!hostState||!hostState.entId)return null;
+    if(D.setContext)D.setContext({season:st.season||'all',year:st.year,view:st.view,axis:st.season==='all'?'calendar':'season'});
+    return D.salesFor(hostState.entId,st.period,st.channel==='all'?null:st.channel);
+  }
+  function hostEntity(){
+    const D=global.STEData;
+    return D&&hostState&&hostState.entId?D.byId(hostState.entId):null;
+  }
+  function toM(v){return v==null?null:v/1000000;}
   function periodRange(p,y){if(p==='ytd')return[0,YEARS[y].thru];return PR[p];}
   function avail(p,y){if(y!=='2026')return'full';if(['q3','q4','cum3','full'].includes(p))return'none';if(p==='q2'||p==='cum2')return'partial';return'full';}
   function ctx(){
     const f=CHF[st.channel]*REG[st.region];
+    const hd=hostData();
+    if(hd){
+      const rf=REG[st.region]||1;
+      const net=toM(hd.netSales)*rf,plan=toM(hd.plan)*rf,prior=toM(hd.prior)*rf,prPlan=toM(hd.priorPlan)*rf;
+      const label=(st.season!=='all'&&SEASONS[st.season]?SEASONS[st.season].label+' · Season axis':PERIOD_LABEL[st.period]+' '+st.year);
+      const netBase=net/rf;
+      return{f,net,plan,prior,prPlan,av:hd.avail,label,netBase,
+        hasActual:hd.hasActual,
+        vsPlan:hd.vsPlan,
+        vsYoY:hd.vsYoY,
+        vsPriorPlan:hd.vsPriorPlan,
+        achieved:hd.achieved,
+        roy:toM(hd.royalty)*rf,royPlan:toM(hd.royaltyPlan)*rf,royPrior:toM(hd.royaltyPrior)*rf,royRate:hd.royaltyRate};
+    }
     let net,plan,prior,prPlan=null,av,label;
     if(st.season!=='all'){
       const s=SEASONS[st.season];
@@ -215,10 +252,21 @@
       vsYoY:prior?(net/prior-1)*100:null,
       vsPriorPlan:(plan&&prPlan)?(plan/prPlan-1)*100:null,
       achieved:(plan&&av!=='none')?net/plan*100:null,
-      roy:net*RR,royPlan:plan!=null?plan*RR:null,royPrior:prior!=null?prior*RR:null};
+      roy:net*RR,royPlan:plan!=null?plan*RR:null,royPrior:prior!=null?prior*RR:null,royRate:RR};
   }
   function mainSeries(){
     const f=CHF[st.channel]*REG[st.region];
+    const hd=hostData();
+    if(hd){
+      const rf=REG[st.region]||1;
+      const toMS=v=>v==null?null:toM(v)*rf;
+      if(['q1','q2','q3','q4'].includes(st.period)&&hd.quarterly){
+        return{labels:hd.quarterly.q,actual:hd.quarterly.actual.map(toMS),plan:hd.quarterly.plan.map(toMS),prior:hd.quarterly.prior.map(toMS),bars:true};
+      }
+      if(hd.monthly){
+        return{labels:hd.monthly.months,actual:hd.monthly.actual.map(toMS),plan:hd.monthly.plan.map(toMS),prior:hd.monthly.prior.map(toMS)};
+      }
+    }
     if(st.season!=='all')return seasonSeries(f);
     const Y=YEARS[st.year];
     if(['q1','q2','q3','q4'].includes(st.period)){
@@ -430,16 +478,39 @@
   }
 
   /* ---------------- filter bar & tabs ---------------- */
+  function licenseeControl(){
+    const D=global.STEData;
+    if(!hostState||hostState.mode!=='licensor'||!D){
+      return '<div class="f-group"><span class="f-lab">Licensee</span><span class="pill pill-gray" style="font-size:11px">SUGI France</span></div>';
+    }
+    const cur=D.byId(hostState.entId)||D.byId('sugifr');
+    return '<div class="filter-group"><span class="f-lab">Licensee</span>'+
+      '<div class="lic-select" id="lic-select">'+
+        '<div class="lic-trigger" id="lic-trigger">'+
+          '<span class="flag '+cur.flag+'"></span>'+
+          '<div class="lt"><b>'+cur.code+'</b><small>'+(cur.aggregate?'5 licensees · consolidated':cur.name)+'</small></div>'+
+          '<span class="chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>'+
+        '</div>'+
+        '<div class="lic-menu" id="lic-menu">'+
+          D.ENTITIES.map(e=>'<div class="lic-opt '+(e.aggregate?'total ':'')+(e.id===cur.id?'active':'')+'" data-ent="'+e.id+'">'+
+            '<span class="flag '+e.flag+'"></span>'+
+            '<div class="lt"><b>'+e.code+'</b><small>'+(e.aggregate?'Portfolio · all 5':e.name+' · '+e.region)+'</small></div>'+
+            '<span class="check"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>'+
+          '</div>').join('')+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }
   function renderFilter(){
     const seasonOn=st.season!=='all';const dis=seasonOn?' disabled':'';
     const sel=(id,opts,cur,dd)=>'<select id="'+id+'"'+(dd||'')+'>'+opts+'</select>';
-    const yearOpts=['2024','2025','2026'].map(y=>'<option value="'+y+'"'+(y===st.year?' selected':'')+'>'+y+'</option>').join('');
+    const yearOpts=['2025','2026','2027'].map(y=>'<option value="'+y+'"'+(y===st.year?' selected':'')+'>'+y+'</option>').join('');
     const perOpts='<option value="ytd"'+(st.period==='ytd'?' selected':'')+'>Year-to-Date</option>'+
       '<optgroup label="Single Quarter">'+['q1','q2','q3','q4'].map(p=>'<option value="'+p+'"'+(p===st.period?' selected':'')+'>'+PERIOD_LABEL[p]+'</option>').join('')+'</optgroup>'+
       '<optgroup label="Cumulative Through">'+['cum1','cum2','cum3','full'].map(p=>'<option value="'+p+'"'+(p===st.period?' selected':'')+'>'+PERIOD_LABEL[p]+'</option>').join('')+'</optgroup>';
     const seaOpts='<option value="all"'+(st.season==='all'?' selected':'')+'>All Seasons</option>'+Object.keys(SEASONS).map(k=>'<option value="'+k+'"'+(k===st.season?' selected':'')+'>'+SEASONS[k].label+'</option>').join('');
     const seg=(attr,items,cur,sm)=>'<div class="seg'+(sm?' seg-sm':'')+'">'+items.map(it=>'<button data-'+attr+'="'+it[0]+'" class="'+(it[0]===cur?'active':'')+'">'+it[1]+'</button>').join('')+'</div>';
-    return '<div class="f-group"><span class="f-lab">Licensee</span><span class="pill pill-gray" style="font-size:11px">🔒 SUGI France</span></div>'+
+    return licenseeControl()+
       '<div class="f-sep"></div>'+
       '<div class="f-group"><span class="f-lab">Calendar</span>'+sel('f-year',yearOpts,st.year,dis)+sel('f-period',perOpts,st.period,dis)+(seasonOn?'<span class="axis-note">Season axis active</span>':'')+'</div>'+
       '<div class="f-sep"></div>'+
@@ -459,14 +530,14 @@
         kpi('Net Sales Plan',eur(c.plan),'<span class="muted">committed plan · '+c.label+'</span>')+
         kpi('Achieved %',c.achieved!=null?c.achieved.toFixed(0)+'<small>%</small>':'—',c.achieved!=null?(c.achieved>=100?'<span class="pill pill-green"><span class="dot"></span>On / ahead of plan</span>':'<span class="pill pill-amber"><span class="dot"></span>Behind plan</span>'):'<span class="muted">no actuals yet</span>')+
         kpi('vs Prior Plan',c.vsPriorPlan!=null?pctf(c.vsPriorPlan):'—','<span class="muted">'+(c.prPlan!=null?eur(c.prPlan)+' prior-year plan':'no prior plan')+'</span>')+
-        kpi('Plan Royalty Rate','3.6<small>%</small>','<span class="muted">'+eur(c.royPlan)+' planned royalty</span>')+
+        kpi('Plan Royalty Rate',ratePct(c)+'<small>%</small>','<span class="muted">'+eur(c.royPlan)+' planned royalty</span>')+
         '</div>';
     }
     return '<div class="grid g-4">'+
       kpi('Net Sales',eur(c.net),delta(c.vsPlan)+'<span class="muted">vs plan</span>'+delta(c.vsYoY)+'<span class="muted">vs YoY</span>')+
       kpi('vs Plan %',c.vsPlan!=null?pctf(c.vsPlan):'—','<span class="muted">plan '+eur(c.plan)+' · attainment '+(c.plan?(c.net/c.plan*100).toFixed(0)+'%':'—')+'</span>')+
       kpi('vs YoY %',c.vsYoY!=null?pctf(c.vsYoY):'—','<span class="muted">prior year '+eur(c.prior)+'</span>')+
-      kpi('Effective Royalty %','3.6<small>%</small>','<span class="muted">'+eur(c.roy)+' royalty earned</span>')+
+      kpi('Effective Royalty %',ratePct(c)+'<small>%</small>','<span class="muted">'+eur(c.roy)+' royalty earned</span>')+
       '</div>';
   }
   function catNodes(){
@@ -572,7 +643,7 @@
   /* ---------------- Royalty tab ---------------- */
   function royaltyView(c){
     const g=gate(c);if(g)return g;
-    const ms=mainSeries();const RRk=RR;
+    const ms=mainSeries();const RRk=c.royRate||RR;
     const scale=d=>({labels:d.labels,bars:d.bars,actual:d.actual.map(v=>v==null?null:+(v*RRk).toFixed(4)),plan:d.plan.map(v=>v==null?null:+(v*RRk).toFixed(4)),prior:d.prior.map(v=>v==null?null:+(v*RRk).toFixed(4))});
     const cr=contractRoy();const prog=cr/ANNUAL_MIN*100;
     const dv=st.view==='plan'?c.royPlan:c.roy;
@@ -581,18 +652,18 @@
     return banner(c)+
     '<div class="grid g-4">'+
       kpi(st.view==='plan'?'Planned Royalty':'Royalty Earned',eur(dv),delta(c.vsPlan)+'<span class="muted">vs plan</span>')+
-      kpi('Effective Royalty %','3.6<small>%</small>','<span class="muted">flat effective · contract §4.2</span>')+
+      kpi('Effective Royalty %',ratePct(c)+'<small>%</small>','<span class="muted">flat effective · contract §4.2</span>')+
       kpi('vs Plan %',c.vsPlan!=null?pctf(c.vsPlan):'—','<span class="muted">plan royalty '+eur(c.royPlan)+'</span>')+
       kpi('YTD Min Progress',prog?prog.toFixed(0)+'<small>%</small>':'—','<span class="muted">of €1.0M annual min · contract level</span>'+(prog>=100?'<span class="pill pill-green"><span class="dot"></span>Cleared</span>':''))+
     '</div>'+
-    '<div class="card card-pad mt-16">'+secHead('Royalty — '+(ms.bars?'monthly':'cumulative'),'Actual vs Plan vs Prior Year · net sales × 3.6%')+
+    '<div class="card card-pad mt-16">'+secHead('Royalty — '+(ms.bars?'monthly':'cumulative'),'Actual vs Plan vs Prior Year · net sales × '+ratePct(c)+'%')+
       chart('roy-main',300,el=>ms.bars?barChart3(el,scale(ms)):lineChart(el,scale(ms)))+
     '</div>'+
     '<div class="grid g-2 mt-16">'+
       '<div class="card card-pad">'+secHead('Effective Rate Trend','Royalty ÷ net sales per month — flat structure')+chart('roy-rate',180,el=>rateLine(el))+'</div>'+
       '<div class="card card-pad">'+secHead('Rate Structure','Master Agreement § 4.2')+
         '<div class="grid g-2">'+
-        '<div class="card card-pad" style="background:var(--accent-dim);border-color:transparent"><div class="klabel">Effective rate</div><div class="kval" style="font-size:30px">3.6<small>%</small></div><div class="muted" style="font-size:11px;margin-top:4px">of net sales — flat, all bands</div></div>'+
+        '<div class="card card-pad" style="background:var(--accent-dim);border-color:transparent"><div class="klabel">Effective rate</div><div class="kval" style="font-size:30px">'+ratePct(c)+'<small>%</small></div><div class="muted" style="font-size:11px;margin-top:4px">of net sales — flat, all bands</div></div>'+
         '<div class="card card-pad" style="background:var(--panel-2);border-color:transparent"><div class="klabel">Annual minimum</div><div class="kval" style="font-size:30px">€1.0<small>M</small></div><div class="muted" style="font-size:11px;margin-top:4px">royalty floor per contract year</div></div>'+
         '</div>'+
         '<div class="muted mt-12" style="font-size:11.5px;line-height:1.55">Contract nominal rate 10% applies to the licensed-product royalty base; expressed against total net sales the effective rate is ≈3.6% (doc §4 figures).</div>'+
@@ -714,7 +785,8 @@
     const c=ctx();
     document.getElementById('main').innerHTML=renderBody(c);
     const sub=document.getElementById('ste-console-sub');
-    if(sub)sub.textContent='SUGI France · Licensee View · '+c.label+' · '+CH_LABEL[st.channel]+' · '+REG_LABEL[st.region]+' · € EUR';
+    const ent=hostEntity();
+    if(sub)sub.textContent=(ent?ent.code:'SUGI France')+' · '+(hostState&&hostState.mode==='licensor'?'Licensor View':'Licensee View')+' · '+c.label+' · '+CH_LABEL[st.channel]+' · '+REG_LABEL[st.region]+' · € EUR';
     const viewPill=document.getElementById('ste-console-view-pill');
     if(viewPill){
       viewPill.className='pill '+(st.view==='plan'?'pill-violet':'pill-blue');

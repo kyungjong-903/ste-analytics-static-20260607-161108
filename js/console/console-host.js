@@ -282,6 +282,7 @@
     const lic = STE.currentLicensee && STE.currentLicensee();
     const isHQ = state.mode === "licensor";
     const navItem = SUBS.find(s => s.screen === state.screen) || SUBS[0];
+    const salesUsesSugiPoc = navItem.sub === "sales";
     document.title = "Analytics · Sergio Tacchini";
     sec.innerHTML = `
       <ste-shell active="analytics-${navItem.sub}" breadcrumb="Analytics"
@@ -299,7 +300,7 @@
           </div>
         </div>
         <div class="ste-console mode-licensee">
-          ${navItem.sub === "sales" ? "" : renderFilter()}
+          ${salesUsesSugiPoc ? "" : renderFilter()}
           <div class="cc-main" id="ste-console-main"></div>
         </div>
       </div>
@@ -332,7 +333,8 @@
       const opt = e.target.closest("[data-ent]");
       if (opt) {
         state.licensorEnt = opt.dataset.ent; save();
-        refreshFilter(); renderScreen();
+        if (state.screen === "a2") render();
+        else { refreshFilter(); renderScreen(); }
         const ls = sec.querySelector("#lic-select"); if (ls) ls.classList.remove("open");
         return;
       }

@@ -224,7 +224,7 @@
     },
     init(s) {
       if (window.STESugiSalesRoyalty) {
-        window.STESugiSalesRoyalty.mount(document.getElementById('ste-sugi-sales-royalty'));
+        window.STESugiSalesRoyalty.mount(document.getElementById('ste-sugi-sales-royalty'), s);
         return;
       }
       const view = s.a2view || 'net';
