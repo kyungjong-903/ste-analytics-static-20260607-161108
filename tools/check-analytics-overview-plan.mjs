@@ -113,6 +113,13 @@ function checkInventoryAndSalesPlanContracts() {
   assert(sales.includes("planMain"), "Sales & Royalty PoC charts should promote plan data in plan view");
 }
 
+function checkSalesRoyaltyUsesSpecCardHeaders() {
+  const sales = fs.readFileSync("js/console/console-sales-royalty-sugi.js", "utf8");
+  assert(sales.includes('class="spec-sec-head"'), "Sales & Royalty cards should use the shared spec card header structure");
+  assert(!sales.includes('class="card-head"'), "Sales & Royalty cards should not use the legacy card-head structure");
+  assert(sales.includes("secHead('Net Sales by Territory'"), "Sales & Royalty territory card title should be Net Sales by Territory");
+}
+
 function checkLegacyOverviewDistributionCardUsesTierShare() {
   const legacyOverview = fs.readFileSync("js/console/console-screens-a12.js", "utf8");
   assert(legacyOverview.includes("tierShareMetrics"), "Legacy overview Distribution card should derive tier share metrics");
@@ -152,6 +159,7 @@ checkDistributionStOnlineHasNoDoors();
 checkInventoryMovementAndAgeLayout();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
+checkSalesRoyaltyUsesSpecCardHeaders();
 checkLegacyOverviewDistributionCardUsesTierShare();
 checkLegacyOverviewRoyaltyCopy();
 checkOverviewWholesaleAndRetailSalesCards();

@@ -484,7 +484,7 @@
 
   /* ---------------- shared render helpers ---------------- */
   function kpi(label,val,foot){return '<div class="card kpi"><div class="klabel">'+label+'</div><div class="kval">'+val+'</div><div class="kfoot">'+(foot||'')+'</div></div>';}
-  function secHead(t,sub,right){return '<div class="card-head"><div><h3>'+t+'</h3>'+(sub?'<div class="sub">'+sub+'</div>':'')+'</div>'+(right||'')+'</div>';}
+  function secHead(t,sub,right){return '<div class="spec-sec-head"><div><h3>'+t+'</h3>'+(sub?'<p>'+sub+'</p>':'')+'</div>'+(right||'')+'</div>';}
   function emptyState(title,desc,action){return '<div class="card empty"><div class="ic">◷</div><h2>'+title+'</h2><p>'+desc+'</p>'+(action||'')+'</div>';}
   function gate(c){
     if(st.view==='actual'&&c.av==='none')return emptyState('No actuals yet','Actual data for <b>'+c.label+'</b> will be available after period close. You can review the committed plan now.','<button class="btn btn-primary" data-view="plan">Switch to Plan view</button>');
@@ -597,10 +597,10 @@
     /* C-1 + C-3 */
     '<div class="grid g-2 mt-16">'+
       '<div class="card card-pad">'+secHead('Season Contribution','Seasons contributing to '+c.label+' net sales')+
-        '<div style="display:flex;gap:20px;align-items:center">'+chart('c1-season',180,el=>donut(el,contrib.map(s=>({name:s[0],value:c.net*s[1]/100})),['#2563eb','#0891b2','#7c3aed','#94a3b8']))+
-        '<div style="flex:1">'+contrib.map((s,i)=>'<div class="between" style="font-size:12.5px;padding:5px 0;border-bottom:1px solid var(--panel-2)"><span class="center gap-8"><span style="width:9px;height:9px;border-radius:2px;background:'+['#2563eb','#0891b2','#7c3aed','#94a3b8'][i]+'"></span><b>'+s[0]+'</b><span class="muted" style="font-size:11px">'+s[2]+'</span></span><span class="mono">'+s[1]+'% · '+eur(c.net*s[1]/100)+'</span></div>').join('')+'</div></div>'+
+        '<div style="display:grid;grid-template-columns:180px minmax(260px,1fr);gap:24px;align-items:center">'+chart('c1-season',180,el=>donut(el,contrib.map(s=>({name:s[0],value:c.net*s[1]/100})),['#2563eb','#0891b2','#7c3aed','#94a3b8']))+
+        '<div style="min-width:0">'+contrib.map((s,i)=>'<div style="display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:14px;align-items:center;font-size:12.5px;padding:6px 0;border-bottom:1px solid var(--panel-2)"><span class="center gap-8" style="min-width:0"><span style="width:9px;height:9px;border-radius:2px;background:'+['#2563eb','#0891b2','#7c3aed','#94a3b8'][i]+'"></span><b>'+s[0]+'</b><span class="muted" style="font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+s[2]+'</span></span><span class="mono" style="white-space:nowrap;text-align:right">'+s[1]+'% · '+eur(c.net*s[1]/100)+'</span></div>').join('')+'</div></div>'+
       '</div>'+
-      '<div class="card card-pad">'+secHead('Region Grouping','Authorized territory · 10 countries in 4 regions')+
+      '<div class="card card-pad">'+secHead('Net Sales by Territory','Authorized territory · 10 countries in 4 regions')+
         '<table class="tbl"><thead><tr><th>Region</th><th class="num">Countries</th><th class="num">Net Sales</th><th class="num">Share</th></tr></thead><tbody>'+
         regs.map(r=>{const v=REG[r]*c.netBase;return '<tr><td><b>'+REGION_META[r].label+'</b></td><td class="num">'+REGION_META[r].n+'</td><td class="num">'+eur(v)+'</td><td class="num">'+(v/c.netBase*100).toFixed(0)+'%</td></tr>';}).join('')+
         '<tr><td><b>Total</b></td><td class="num">'+regs.reduce((s,r)=>s+REGION_META[r].n,0)+'</td><td class="num"><b>'+eur(regs.reduce((s,r)=>s+REG[r]*c.netBase,0))+'</b></td><td class="num">100%</td></tr>'+
