@@ -67,10 +67,10 @@
   // Tier mix — door / revenue weights from spec §4.2
   const TIER_DEF = [
     { name: "Tier 1 (Anchor)", doorW: 0.08, revW: 0.36, pill: "pill-blue" },
-    { name: "Tier 2 (Core)",   doorW: 0.46, revW: 0.39, pill: "pill-violet" },
-    { name: "Tier 3 (Volume)", doorW: 0.42, revW: 0.21, pill: "pill-gray" },
+    { name: "Tier 2 (Core)",   doorW: 0.48, revW: 0.39, pill: "pill-violet" },
+    { name: "Tier 3 (Volume)", doorW: 0.44, revW: 0.21, pill: "pill-gray" },
     { name: "ST Online",       doorW: 0.00, revW: 0.04, pill: "pill-green" },
-    { name: "Other",           doorW: 0.04, revW: 0.00, pill: "pill-amber" },
+    { name: "Other",           doorW: 0.00, revW: 0.00, pill: "pill-amber" },
   ];
 
   // 10 authorized territory countries — baseline shares from MockData §8,
@@ -164,8 +164,9 @@
 
     // Tier mix — doors sum exactly to active, revenue split per spec weights
     let doorsLeft = active;
+    const lastDoorIndex = TIER_DEF.reduce((last, t, i) => t.doorW > 0 ? i : last, -1);
     const tiers = TIER_DEF.map((t, i) => {
-      const doors = i === TIER_DEF.length - 1 ? Math.max(0, doorsLeft) : Math.min(doorsLeft, Math.round(active * t.doorW));
+      const doors = t.doorW <= 0 ? 0 : (i === lastDoorIndex ? Math.max(0, doorsLeft) : Math.min(doorsLeft, Math.round(active * t.doorW)));
       doorsLeft -= doors;
       const value = revenue * t.revW;
       return { name: t.name, pill: t.pill, doors, doorPct: Math.round(doors / active * 100), value, rpd: doors > 0 && t.revW > 0 ? value / doors : 0 };
@@ -444,10 +445,9 @@
           ${W.sec("Door Movement Timeline", "Active doors by season — Actual · Plan · Prior Year (legend toggles)")}
           <div id="dist-door-timeline" class="chart" style="height:330px"></div>
         </div>
-        <div class="card card-pad">
+        <div class="card card-pad" style="min-height:430px">
           ${W.sec("Tier Mix", "Door count and revenue contribution by account tier")}
-          <div id="dist-tier-mix" class="chart" style="height:160px"></div>
-          <table class="tbl spec-table" style="margin-top:10px"><thead><tr><th>Tier</th><th class="num">Doors</th><th class="num">Share</th><th class="num">Net Sales</th><th class="num">€ / Door</th></tr></thead><tbody>${tierRows}</tbody></table>
+          <table class="tbl spec-table" style="margin-top:34px"><thead><tr><th>Tier</th><th class="num">Doors</th><th class="num">Share</th><th class="num">Net Sales</th><th class="num">€ / Door</th></tr></thead><tbody>${tierRows}</tbody></table>
         </div>
       </div>`;
 
@@ -582,9 +582,6 @@
       const Ch = global.Charts;
       const tl = document.getElementById("dist-door-timeline");
       if (tl) threeLine(tl, det.timeline);
-      const tm = document.getElementById("dist-tier-mix");
-      if (tm && Ch) Ch.donut(tm, det.tiers.filter((t) => t.doors > 0).map((t) => ({ label: t.name, value: t.doors })),
-        { palette: [Ch.C.blue, Ch.C.violet, "#64748b", Ch.C.green, Ch.C.amber], sym: "" });
       const geo = document.getElementById("dist-geo");
       if (geo) geoChart(geo, det.geo);
       const wf = document.getElementById("dist-waterfall");

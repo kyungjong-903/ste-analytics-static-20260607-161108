@@ -630,9 +630,9 @@
       chart('c2-geo',Math.max(200,geos.length*30+40),el=>hbars(el,geos.map(gg=>({label:gg.c,value:gg.val,yoy:gg.yoy,color:'#2563eb'}))))+
     '</div>'+
     /* C-4 geography × product */
-    '<div class="card card-pad mt-16">'+secHead('Geography × Product Matrix','WEAR / ACC vs YoY per country','<div class="seg seg-sm"><button data-geoview="table" class="'+(st.geoView==='table'?'active':'')+'">Table</button><button data-geoview="heatmap" class="'+(st.geoView==='heatmap'?'active':'')+'">Heatmap</button></div>')+
+    '<div class="card card-pad mt-16">'+secHead('Geography × Product Matrix','WEAR / ACC amount and vs YoY per country','<div class="seg seg-sm"><button data-geoview="table" class="'+(st.geoView==='table'?'active':'')+'">Table</button><button data-geoview="heatmap" class="'+(st.geoView==='heatmap'?'active':'')+'">Heatmap</button></div>')+
       (st.geoView==='table'
-        ?sortableTable('gp',[{k:'c',l:'Country'},{k:'wy',l:'WEAR vs YoY',num:1,f:r=>delta(r.wy)},{k:'ay',l:'ACC vs YoY',num:1,f:r=>delta(r.ay)},{k:'yoy',l:'Total vs YoY',num:1,f:r=>delta(r.yoy)}],gp)+'<div class="muted mt-12" style="font-size:11px">Click column headers to sort · values show category-level YoY by country</div>'
+        ?sortableTable('gp',[{k:'c',l:'Country'},{k:'w',l:'WEAR',num:1,f:r=>eur(r.w)+' <span style="margin-left:8px">'+delta(r.wy)+'</span>'},{k:'a',l:'ACC',num:1,f:r=>eur(r.a)+' <span style="margin-left:8px">'+delta(r.ay)+'</span>'},{k:'t',l:'Total',num:1,f:r=>eur(r.t)}],gp)+'<div class="muted mt-12" style="font-size:11px">Click column headers to sort · WEAR / ACC cells show net sales plus category YoY</div>'
         :chart('c4-heat',Math.max(220,geos.length*30+60),el=>heatYoy(el,['WEAR vs YoY','ACC vs YoY'],geos.map(gg=>gg.c),gp.map(r=>[r.wy,r.ay]))))+
     '</div>'+
     /* C-5 category drill-down */
@@ -645,26 +645,28 @@
     '</div>'+
     /* C-6 + C-8 */
     '<div class="grid g-2 mt-16">'+
-      '<div class="card card-pad" id="customer-type">'+secHead('Customer Type Mix','Net sales by channel of trade')+
-        '<div style="display:flex;gap:20px;align-items:center">'+chart('c6-cust',170,el=>donut(el,CUSTOMER.map(x=>({name:x[0],value:c.net*x[1]/100})),['#2563eb','#0891b2','#7c3aed','#d97706']))+
-        '<table class="tbl" style="flex:1"><thead><tr><th>Type</th><th class="num">Share</th><th class="num">Net Sales</th></tr></thead><tbody>'+CUSTOMER.map(x=>'<tr><td>'+x[0]+'</td><td class="num">'+x[1]+'%</td><td class="num">'+eur(c.net*x[1]/100)+'</td></tr>').join('')+'</tbody></table></div>'+
+      '<div class="card card-pad sugi-equal-card" id="customer-type">'+secHead('Customer Type Mix','Net sales by channel of trade')+
+        '<div class="sugi-card-body sugi-mix-body">'+chart('c6-cust',170,el=>donut(el,CUSTOMER.map(x=>({name:x[0],value:c.net*x[1]/100})),['#2563eb','#0891b2','#7c3aed','#d97706']))+
+        '<table class="tbl"><thead><tr><th>Type</th><th class="num">Share</th><th class="num">Net Sales</th></tr></thead><tbody>'+CUSTOMER.map(x=>'<tr><td>'+x[0]+'</td><td class="num">'+x[1]+'%</td><td class="num">'+eur(c.net*x[1]/100)+'</td></tr>').join('')+'</tbody></table></div>'+
       '</div>'+
-      '<div class="card card-pad" id="gender-mix">'+secHead('Gender Mix','Net sales split by gender line')+
-        '<div style="display:flex;gap:20px;align-items:center">'+chart('c8-gender',170,el=>donut(el,GENDER.map(x=>({name:x[0],value:c.net*x[1]/100})),['#2563eb','#7c3aed','#059669']))+
-        '<table class="tbl" style="flex:1"><thead><tr><th>Gender</th><th class="num">Share</th><th class="num">Net Sales</th></tr></thead><tbody>'+GENDER.map(x=>'<tr><td>'+x[0]+'</td><td class="num">'+x[1]+'%</td><td class="num">'+eur(c.net*x[1]/100)+'</td></tr>').join('')+'</tbody></table></div>'+
+      '<div class="card card-pad sugi-equal-card" id="gender-mix">'+secHead('Gender Mix','Net sales split by gender line')+
+        '<div class="sugi-card-body sugi-mix-body">'+chart('c8-gender',170,el=>donut(el,GENDER.map(x=>({name:x[0],value:c.net*x[1]/100})),['#2563eb','#7c3aed','#059669']))+
+        '<table class="tbl"><thead><tr><th>Gender</th><th class="num">Share</th><th class="num">Net Sales</th></tr></thead><tbody>'+GENDER.map(x=>'<tr><td>'+x[0]+'</td><td class="num">'+x[1]+'%</td><td class="num">'+eur(c.net*x[1]/100)+'</td></tr>').join('')+'</tbody></table></div>'+
       '</div>'+
     '</div>'+
     /* C-7 + C-9 */
     '<div class="grid g-2 mt-16">'+
-      '<div class="card card-pad">'+secHead('Tier Distribution','Net sales by account tier')+
-        chart('c7-tier',TIERS.length*32+40,el=>hbars(el,TIERS.map(t=>({label:t[0],value:c.net*t[1]/100,color:'#0891b2'}))))+
+      '<div class="card card-pad sugi-equal-card">'+secHead('Tier Distribution','Net sales by account tier')+
+        '<div class="sugi-card-body">'+chart('c7-tier',TIERS.length*32+40,el=>hbars(el,TIERS.map(t=>({label:t[0],value:c.net*t[1]/100,color:'#0891b2'}))))+'</div>'+
         '<div class="muted mt-8" style="font-size:11px">Tier 1 anchors (Galeries Lafayette · KaDeWe · Printemps) = 28% — healthy diversity</div>'+
       '</div>'+
-      '<div class="card card-pad" id="in-territory">'+secHead('In-Territory vs Out-of-Territory','Contractual territory compliance ⚠️ flag')+
+      '<div class="card card-pad sugi-equal-card" id="in-territory">'+secHead('In-Territory vs Out-of-Territory','Contractual territory compliance ⚠️ flag')+
+        '<div class="sugi-card-body sugi-territory-body">'+
         '<div class="between" style="font-size:13px;margin-bottom:6px"><span>In-Territory</span><b class="mono">'+TERR.inPct+'% · '+eur(inOut.inV)+'</b></div>'+
         '<div class="minibar" style="height:10px"><i style="width:'+TERR.inPct+'%;background:var(--green)"></i></div>'+
         '<div class="between" style="font-size:13px;margin:13px 0 6px"><span>Out-of-Territory</span><b class="mono">'+TERR.outPct+'% · '+eur(inOut.outV)+'</b></div>'+
         '<div class="minibar" style="height:10px"><i style="width:'+Math.max(2,TERR.outPct)+'%;background:var(--amber)"></i></div>'+
+        '</div>'+
         '<div class="between mt-16"><span class="pill '+(TERR.outPct<TERR.threshold?'pill-green':'pill-red')+'"><span class="dot"></span>'+(TERR.outPct<TERR.threshold?'Within threshold (&lt;5%)':'⚠️ ABOVE threshold')+'</span>'+
         '<button class="btn" data-investigate>'+(st.invOpen?'Hide':'View')+' Investigation Report →</button></div>'+
         (st.invOpen?'<div class="card card-pad mt-12" style="background:var(--panel-2);border-style:dashed"><div class="klabel">Out-of-Territory breakdown</div>'+
@@ -680,13 +682,6 @@
         {k:'rev',l:'Net Sales',num:1,f:r=>'€'+r.rev+'K'},{k:'qty',l:'Qty',num:1,f:r=>r.qty.toLocaleString()},
         {k:'mgn',l:'Margin %',num:1,f:r=>r.mgn+'%'},{k:'mgnv',l:'Margin €',num:1,f:r=>'€'+Math.round(r.mgnv)+'K'}],
         TOP_SKUS.map((s,i)=>({i:i+1,sku:s[0],name:s[1],cat:s[2],sub:s[3],rev:s[4],qty:s[5],mgn:s[6],mgnv:s[4]*s[6]/100})))+
-    '</div>'+
-    '<div class="card card-pad mt-16">'+secHead('Bottom 20 SKU — Slow Movers','Lowest sellers with aging stock',skuNote)+
-      sortableTable('bsk',[
-        {k:'i',l:'#',num:1},{k:'sku',l:'SKU'},{k:'name',l:'Product Name'},{k:'cat',l:'Category'},{k:'sub',l:'Sub-Cat'},
-        {k:'rev',l:'Net Sales',num:1,f:r=>'€'+r.rev.toFixed(1)+'K'},{k:'qty',l:'Qty',num:1,f:r=>r.qty.toLocaleString()},
-        {k:'aged',l:'Aged Days',num:1,f:r=>'<span style="color:'+(r.aged>200?'var(--red)':r.aged>150?'var(--amber)':'inherit')+'">'+r.aged+'d</span>'}],
-        BOTTOM_SKUS.map((s,i)=>({i:i+1,sku:s[0],name:s[1],cat:s[2],sub:s[3],rev:s[4],qty:s[5],aged:s[6]})))+
     '</div>';
   }
 

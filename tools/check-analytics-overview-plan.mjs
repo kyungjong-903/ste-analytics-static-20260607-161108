@@ -94,6 +94,21 @@ function checkDistributionStOnlineHasNoDoors() {
   assert(/<td class="num">0<\/td>/.test(row[0]), "ST Online should show 0 doors in Distribution Tier Mix");
 }
 
+function checkDistributionOtherHasNoDoors() {
+  const html = Screens.a3.render({ ...baseState, view: "actual" });
+  const row = html.match(/<tr>\s*<td><span class="pill pill-amber">[\s\S]*?Other[\s\S]*?<\/tr>/);
+  assert(row, "Distribution Tier Mix should include Other row");
+  assert(/<td class="num">0<\/td><td class="num">0%<\/td>/.test(row[0]), "Other should show 0 doors and 0% share in Distribution Tier Mix");
+}
+
+function checkDistributionTierMixHasNoChart() {
+  const html = Screens.a3.render({ ...baseState, view: "actual" });
+  assert(!html.includes("dist-tier-mix"), "Distribution Tier Mix card should not render a chart container");
+  const source = fs.readFileSync("js/console/console-screen-distribution-spec.js", "utf8");
+  assert(!source.includes("Ch.donut(tm"), "Distribution Tier Mix should not initialize a donut chart");
+  assert(source.includes("min-height:430px"), "Distribution Tier Mix card should match the timeline card height");
+}
+
 function checkInventoryMovementAndAgeLayout() {
   const html = stripped(Screens.a4.render({ ...baseState, view: "actual" }));
   assert(!html.includes("Country Inventory"), "Inventory screen should not render the Country Inventory card");
@@ -123,9 +138,23 @@ function checkSalesRoyaltyUsesSpecCardHeaders() {
 function checkSalesRoyaltyGeoProductMatrixShowsCategoryYoy() {
   const sales = fs.readFileSync("js/console/console-sales-royalty-sugi.js", "utf8");
   assert(sales.includes("heatYoy"), "Geography x Product Matrix heatmap should render YoY percentages");
-  assert(sales.includes("WEAR vs YoY"), "Geography x Product Matrix should label WEAR as vs YoY");
-  assert(sales.includes("ACC vs YoY"), "Geography x Product Matrix should label ACC as vs YoY");
+  assert(sales.includes("WEAR / ACC amount and vs YoY"), "Geography x Product Matrix should describe category amount and YoY");
+  assert(sales.includes("eur(r.w)") && sales.includes("delta(r.wy)"), "WEAR cell should show amount with YoY");
+  assert(sales.includes("eur(r.a)") && sales.includes("delta(r.ay)"), "ACC cell should show amount with YoY");
+  assert(!sales.includes("Total vs YoY"), "Geography x Product Matrix should not show Total vs YoY");
   assert(!sales.includes("heatMoney(el,['WEAR','ACC']"), "Geography x Product Matrix should not render WEAR/ACC net sales money heatmap");
+}
+
+function checkSalesRoyaltyBottomSkuRemoved() {
+  const sales = fs.readFileSync("js/console/console-sales-royalty-sugi.js", "utf8");
+  assert(!sales.includes("Bottom 20 SKU"), "Sales & Royalty should not render Bottom 20 SKU card");
+  assert(!sales.includes("Slow Movers"), "Sales & Royalty should not render Slow Movers card");
+}
+
+function checkSalesRoyaltyMixCardsUseEqualLayout() {
+  const sales = fs.readFileSync("js/console/console-sales-royalty-sugi.js", "utf8");
+  assert(sales.includes("sugi-equal-card"), "Sales & Royalty mix cards should use an equal card class");
+  assert(sales.includes("sugi-card-body"), "Sales & Royalty mix cards should use an equal body area");
 }
 
 function checkLegacyOverviewDistributionCardUsesTierShare() {
@@ -155,6 +184,14 @@ function checkOverviewWholesaleAndRetailSalesCards() {
   assert(html.includes(retail), `Overview Retail card should show Retail net sales ${retail}`);
 }
 
+function checkOverviewHeadlineKpisExcludeTotalSalesRoyalty() {
+  const html = stripped(Screens.a1.render({ ...baseState, view: "actual" }));
+  const kpiSection = html.match(/Headline KPIs[\s\S]*?<\/div><\/div>/);
+  assert(kpiSection, "Overview should render Headline KPIs section");
+  assert(!kpiSection[0].includes("Total Net Sales"), "Headline KPIs should not include Total Net Sales");
+  assert(!kpiSection[0].includes("Total Royalty"), "Headline KPIs should not include Total Royalty");
+}
+
 function checkOverviewSpecOverrideDisabled() {
   const overviewSpec = fs.readFileSync("js/console/console-screen-overview-spec.js", "utf8");
   assert(overviewSpec.includes("intentionally a no-op"), "Overview spec override should remain disabled");
@@ -164,14 +201,19 @@ function checkOverviewSpecOverrideDisabled() {
 checkOverviewCoversAnalyticsPages();
 checkDistributionPlanUsesPlanDoors();
 checkDistributionStOnlineHasNoDoors();
+checkDistributionOtherHasNoDoors();
+checkDistributionTierMixHasNoChart();
 checkInventoryMovementAndAgeLayout();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
 checkSalesRoyaltyUsesSpecCardHeaders();
 checkSalesRoyaltyGeoProductMatrixShowsCategoryYoy();
+checkSalesRoyaltyBottomSkuRemoved();
+checkSalesRoyaltyMixCardsUseEqualLayout();
 checkLegacyOverviewDistributionCardUsesTierShare();
 checkLegacyOverviewRoyaltyCopy();
 checkOverviewWholesaleAndRetailSalesCards();
+checkOverviewHeadlineKpisExcludeTotalSalesRoyalty();
 checkOverviewSpecOverrideDisabled();
 
 console.log("analytics overview and plan toggles OK");
