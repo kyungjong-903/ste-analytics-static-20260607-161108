@@ -120,6 +120,14 @@ function checkSalesRoyaltyUsesSpecCardHeaders() {
   assert(sales.includes("secHead('Net Sales by Territory'"), "Sales & Royalty territory card title should be Net Sales by Territory");
 }
 
+function checkSalesRoyaltyGeoProductMatrixShowsCategoryYoy() {
+  const sales = fs.readFileSync("js/console/console-sales-royalty-sugi.js", "utf8");
+  assert(sales.includes("heatYoy"), "Geography x Product Matrix heatmap should render YoY percentages");
+  assert(sales.includes("WEAR vs YoY"), "Geography x Product Matrix should label WEAR as vs YoY");
+  assert(sales.includes("ACC vs YoY"), "Geography x Product Matrix should label ACC as vs YoY");
+  assert(!sales.includes("heatMoney(el,['WEAR','ACC']"), "Geography x Product Matrix should not render WEAR/ACC net sales money heatmap");
+}
+
 function checkLegacyOverviewDistributionCardUsesTierShare() {
   const legacyOverview = fs.readFileSync("js/console/console-screens-a12.js", "utf8");
   assert(legacyOverview.includes("tierShareMetrics"), "Legacy overview Distribution card should derive tier share metrics");
@@ -160,6 +168,7 @@ checkInventoryMovementAndAgeLayout();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
 checkSalesRoyaltyUsesSpecCardHeaders();
+checkSalesRoyaltyGeoProductMatrixShowsCategoryYoy();
 checkLegacyOverviewDistributionCardUsesTierShare();
 checkLegacyOverviewRoyaltyCopy();
 checkOverviewWholesaleAndRetailSalesCards();

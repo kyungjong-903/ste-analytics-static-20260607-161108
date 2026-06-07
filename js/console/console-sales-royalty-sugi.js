@@ -411,6 +411,18 @@
       series:[{type:'heatmap',data,label:{show:true,fontSize:10,fontFamily:'ui-monospace,monospace',formatter:p=>eur(p.value[2]),color:'#1e293b'},
         itemStyle:{borderColor:'#ffffff',borderWidth:3,borderRadius:4}}]});
   }
+  function heatYoy(el,xL,yL,matrix){
+    const data=[];for(let y=0;y<yL.length;y++)for(let x=0;x<xL.length;x++)data.push([x,y,+matrix[y][x].toFixed(1)]);
+    mkChart(el,{animation:false,
+      tooltip:Object.assign({formatter:p=>'<b>'+yL[p.value[1]]+' · '+xL[p.value[0]]+'</b><br/>vs YoY: <b style="font-family:monospace">'+pctf(p.value[2])+'</b>'},TT),
+      grid:{left:8,right:14,top:8,bottom:34,containLabel:true},
+      xAxis:{type:'category',data:xL,axisLine:{lineStyle:{color:'rgba(15,23,42,.16)'}},axisTick:{show:false},axisLabel:Object.assign({},AXL,{fontSize:11,interval:0})},
+      yAxis:{type:'category',data:yL,axisLine:{lineStyle:{color:'rgba(15,23,42,.16)'}},axisTick:{show:false},axisLabel:{color:'#475569',fontSize:11}},
+      visualMap:{type:'piecewise',orient:'horizontal',left:'center',bottom:0,itemWidth:11,itemHeight:11,textStyle:{color:'#5b6577',fontSize:10.5},
+        pieces:[{max:-0.1,label:'YoY decline',color:'#f5b0b0'},{min:0,max:9.9,label:'0-10% growth',color:'#fbd98e'},{min:10,label:'10%+ growth',color:'#9fe3bd'}]},
+      series:[{type:'heatmap',data,label:{show:true,fontSize:10,fontFamily:'ui-monospace,monospace',formatter:p=>pctf(p.value[2]),color:'#1e293b'},
+        itemStyle:{borderColor:'#ffffff',borderWidth:3,borderRadius:4}}]});
+  }
   function waterfall(el){
     const cats=['2025 YTD','Growth','Decline','2026 YTD'];
     const base=[0,13.4,13.69,0],vals=[13.4,1.10,0.81,13.7];
@@ -587,7 +599,13 @@
     const nodes=catNodes();const depth=st.drill.length;
     const crumb='<div class="crumbs"><a data-crumb="0">All Categories</a>'+st.drill.map((d,i)=>'<span class="sep">/</span>'+(i===st.drill.length-1?'<span class="cur">'+d+'</span>':'<a data-crumb="'+(i+1)+'">'+d+'</a>')).join('')+'</div>';
     const inOut={inV:c.net*TERR.inPct/100,outV:c.net*TERR.outPct/100};
-    const gp=geos.map(gg=>({c:gg.c,w:+(gg.wv).toFixed(2),a:+(gg.av).toFixed(2),t:+(gg.val).toFixed(2),yoy:gg.yoy}));
+    const gp=geos.map(gg=>{
+      const wearShare=gg.w/Math.max(0.001,gg.v);
+      const accShare=gg.a/Math.max(0.001,gg.v);
+      const wearYoy=+(gg.yoy+(wearShare-0.72)*18).toFixed(1);
+      const accYoy=+(gg.yoy+(accShare-0.28)*18).toFixed(1);
+      return{c:gg.c,w:+(gg.wv).toFixed(2),a:+(gg.av).toFixed(2),t:+(gg.val).toFixed(2),yoy:gg.yoy,wy:wearYoy,ay:accYoy};
+    });
     const skuNote='<span class="pill pill-gray">representative YTD values · not filter-scaled</span>';
     return banner(c)+kpiRowNet(c)+
     /* main chart */
@@ -612,10 +630,10 @@
       chart('c2-geo',Math.max(200,geos.length*30+40),el=>hbars(el,geos.map(gg=>({label:gg.c,value:gg.val,yoy:gg.yoy,color:'#2563eb'}))))+
     '</div>'+
     /* C-4 geography × product */
-    '<div class="card card-pad mt-16">'+secHead('Geography × Product Matrix','WEAR / ACC split per country','<div class="seg seg-sm"><button data-geoview="table" class="'+(st.geoView==='table'?'active':'')+'">Table</button><button data-geoview="heatmap" class="'+(st.geoView==='heatmap'?'active':'')+'">Heatmap</button></div>')+
+    '<div class="card card-pad mt-16">'+secHead('Geography × Product Matrix','WEAR / ACC vs YoY per country','<div class="seg seg-sm"><button data-geoview="table" class="'+(st.geoView==='table'?'active':'')+'">Table</button><button data-geoview="heatmap" class="'+(st.geoView==='heatmap'?'active':'')+'">Heatmap</button></div>')+
       (st.geoView==='table'
-        ?sortableTable('gp',[{k:'c',l:'Country'},{k:'w',l:'WEAR',num:1,f:r=>eur(r.w)},{k:'a',l:'ACC',num:1,f:r=>eur(r.a)},{k:'t',l:'Total',num:1,f:r=>eur(r.t)},{k:'yoy',l:'vs YoY',num:1,f:r=>delta(r.yoy)}],gp)+'<div class="muted mt-12" style="font-size:11px">Click column headers to sort · cell-level SUB_CATEGORY drill-down ships in the full build</div>'
-        :chart('c4-heat',Math.max(220,geos.length*30+60),el=>heatMoney(el,['WEAR','ACC'],geos.map(gg=>gg.c),geos.map(gg=>[gg.wv,gg.av]))))+
+        ?sortableTable('gp',[{k:'c',l:'Country'},{k:'wy',l:'WEAR vs YoY',num:1,f:r=>delta(r.wy)},{k:'ay',l:'ACC vs YoY',num:1,f:r=>delta(r.ay)},{k:'yoy',l:'Total vs YoY',num:1,f:r=>delta(r.yoy)}],gp)+'<div class="muted mt-12" style="font-size:11px">Click column headers to sort · values show category-level YoY by country</div>'
+        :chart('c4-heat',Math.max(220,geos.length*30+60),el=>heatYoy(el,['WEAR vs YoY','ACC vs YoY'],geos.map(gg=>gg.c),gp.map(r=>[r.wy,r.ay]))))+
     '</div>'+
     /* C-5 category drill-down */
     '<div class="card card-pad mt-16">'+secHead('Category Drill-Down','Level '+(depth+1)+' — '+LEVEL_NAME[depth]+' · click a bar to drill in',crumb)+
