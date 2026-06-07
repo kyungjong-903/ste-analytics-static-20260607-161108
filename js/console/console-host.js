@@ -169,7 +169,7 @@
     </div>`;
   }
   function refreshFilter() {
-    const fb = sec && sec.querySelector(".filterbar");
+    const fb = sec && sec.querySelector(".ste-console > .filterbar");
     if (fb) fb.outerHTML = renderFilter();
   }
 
@@ -250,8 +250,8 @@
         <div class="head-actions">
           <button class="btn btn-ghost btn-sm" id="exp-pdf"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF</button>
           <button class="btn btn-ghost btn-sm" id="exp-xls"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Excel</button>
-          <span class="pill ${state.view === "plan" ? "pill-violet" : "pill-blue"}" style="font-family:var(--mono)">${state.view === "plan" ? "PLAN" : "ACTUAL"}</span>
-          <span class="pill ${state.mode === "licensee" ? "pill-blue" : "pill-gray"}" style="font-family:var(--mono)">${state.mode === "licensee" ? "LICENSEE" : "LICENSOR"} · ${navItem.tag}</span>
+          <span id="ste-console-view-pill" class="pill ${state.view === "plan" ? "pill-violet" : "pill-blue"}" style="font-family:var(--mono)">${state.view === "plan" ? "PLAN" : "ACTUAL"}</span>
+          <span id="ste-console-role-pill" class="pill ${state.mode === "licensee" ? "pill-blue" : "pill-gray"}" style="font-family:var(--mono)">${state.mode === "licensee" ? "LICENSEE" : "LICENSOR"} · ${navItem.tag}</span>
         </div>
       </div>
       <div id="screen-body">${bodyHtml}</div>`;
@@ -299,7 +299,7 @@
           </div>
         </div>
         <div class="ste-console mode-licensee">
-          ${renderFilter()}
+          ${navItem.sub === "sales" ? "" : renderFilter()}
           <div class="cc-main" id="ste-console-main"></div>
         </div>
       </div>

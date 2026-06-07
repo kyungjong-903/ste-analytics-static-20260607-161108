@@ -187,6 +187,9 @@
     title: 'Sales & Royalty',
     sub: (s) => `${UI.dispCode(s)} · ${periodLabel(s.period)} · ${s.channel ? s.channel[0].toUpperCase()+s.channel.slice(1) : 'All channels'}`,
     render(s) {
+      if (window.STESugiSalesRoyalty) {
+        return `<div id="ste-sugi-sales-royalty"></div>`;
+      }
       const ent = D().byId(s.entId);
       const view = s.a2view || 'net';
       const channel = s.channel || null;
@@ -220,6 +223,10 @@
       </div>`;
     },
     init(s) {
+      if (window.STESugiSalesRoyalty) {
+        window.STESugiSalesRoyalty.mount(document.getElementById('ste-sugi-sales-royalty'));
+        return;
+      }
       const view = s.a2view || 'net';
       const ent = D().byId(s.entId);
       const sym = UI.curSym(ent);
