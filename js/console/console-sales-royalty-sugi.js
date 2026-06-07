@@ -90,7 +90,6 @@
   const REG={all:1,france:6.8/GEOSUM,dach:3.6/GEOSUM,benelux:2.7/GEOSUM,na:0.8/GEOSUM};
   const CHF={all:1,wholesale:0.72,retail:0.18};
   const CH_LABEL={all:'All channels',wholesale:'Wholesale',retail:'Retail'};
-  const REG_LABEL={all:'All regions',france:'France',dach:'DACH',benelux:'Benelux',na:'North Africa'};
 
   /* 3-level category hierarchy — values = 2026 YTD €M (share base TOT26) */
   const CATTREE=[
@@ -525,8 +524,7 @@
       '<span style="flex:1"></span>'+
       '<div class="f-group"><span class="f-lab">View</span>'+seg('view',[['actual','Actual'],['plan','Plan']],st.view)+'</div>'+
       '<div class="filter-row-break"></div>'+
-      '<div class="f-group"><span class="f-lab">Distribution Channel</span>'+seg('channel',[['all','All'],['wholesale','Wholesale'],['retail','Retail']],st.channel,1)+'</div>'+
-      '<div class="f-group"><span class="f-lab">Region</span>'+seg('region',[['all','All'],['france','France'],['dach','DACH'],['benelux','Benelux'],['na','N. Africa']],st.region,1)+'</div>';
+      '<div class="f-group"><span class="f-lab">Distribution Channel</span>'+seg('channel',[['all','All'],['wholesale','Wholesale'],['retail','Retail']],st.channel,1)+'</div>';
   }
   function renderTabs(){return TABS.map(t=>'<button data-tab="'+t[0]+'" class="'+(t[0]===st.tab?'active':'')+'">'+t[1]+'</button>').join('');}
 
@@ -747,7 +745,7 @@
     const monthsLeft=isCur?12-(Y.thru+1):0;
     const reqPace=isCur?Math.max(0,(ANNUAL_MIN-earned))/monthsLeft:0;
     const curPace=earned/(Y.thru+1);
-    const filterNote=(st.channel!=='all'||st.region!=='all'||st.season!=='all')?'<span class="pill pill-amber"><span class="dot"></span>Contract level — price band / region / season filters not applied</span>':'<span class="pill pill-gray">Contract level · calendar year '+st.year+'</span>';
+    const filterNote=(st.channel!=='all'||st.season!=='all')?'<span class="pill pill-amber"><span class="dot"></span>Contract level — price band / season filters not applied</span>':'<span class="pill pill-gray">Contract level · calendar year '+st.year+'</span>';
     return '<div class="between" style="margin-bottom:14px"><div class="sec-h" style="margin:0"><div><h2>Royalty vs Annual Contract Minimum</h2><div class="sub">€1.0M royalty floor per contract year · 10% nominal / 3.6% effective</div></div></div>'+filterNote+'</div>'+
     '<div class="grid g-3">'+
       kpi('Annual Minimum','€1.0<small>M</small>','<span class="muted">contract year '+st.year+'</span>')+
@@ -794,7 +792,7 @@
     document.getElementById('main').innerHTML=renderBody(c);
     const sub=document.getElementById('ste-console-sub');
     const ent=hostEntity();
-    if(sub)sub.textContent=(ent?ent.code:'SUGI France')+' · '+(hostState&&hostState.mode==='licensor'?'Licensor View':'Licensee View')+' · '+c.label+' · '+CH_LABEL[st.channel]+' · '+REG_LABEL[st.region]+' · € EUR';
+    if(sub)sub.textContent=(ent?ent.code:'SUGI France')+' · '+(hostState&&hostState.mode==='licensor'?'Licensor View':'Licensee View')+' · '+c.label+' · '+CH_LABEL[st.channel]+' · € EUR';
     const viewPill=document.getElementById('ste-console-view-pill');
     if(viewPill){
       viewPill.className='pill '+(st.view==='plan'?'pill-violet':'pill-blue');
@@ -807,12 +805,11 @@
   document.addEventListener('click',e=>{
     const scope = e.target.closest('.sugi-sales-poc,.sugi-sales-filterbar');
     if (!scope) return;
-    const t=e.target.closest('[data-view],[data-channel],[data-region],[data-tab],[data-export],[data-crumb],[data-geoview],[data-vardim],[data-investigate],[data-sortk]');
+    const t=e.target.closest('[data-view],[data-channel],[data-tab],[data-export],[data-crumb],[data-geoview],[data-vardim],[data-investigate],[data-sortk]');
     if(!t)return;
     const d=t.dataset;
     if(d.view){st.view=d.view;paint();return;}
     if(d.channel){st.channel=d.channel;paint();return;}
-    if(d.region){st.region=d.region;paint();return;}
     if(d.tab){st.tab=d.tab;paint();window.scrollTo({top:0,behavior:'smooth'});return;}
     if(d.crumb!==undefined){st.drill=st.drill.slice(0,+d.crumb);paint();return;}
     if(d.geoview){st.geoView=d.geoview;paint();return;}
