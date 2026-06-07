@@ -131,6 +131,11 @@
       // 8 headline KPIs
       const kpis = D().operationalKPIs(eid, s.period, s.mode)
         .filter(k => !['Total Net Sales', 'Total Royalty', 'Planned Net Sales', 'Planned Royalty'].includes(k.label));
+      kpis.push({
+        label: 'Distribution Doors',
+        value: planView ? dist.planDoors.toLocaleString() : dist.active.toLocaleString(),
+        sub: planView ? 'season door plan' : 'active doors',
+      });
       const kpiHtml = `<div class="ov-sec"><div><h2>Headline KPIs</h2><div class="ov-sub">${isLicensee?'My operational state':'Portfolio operational state'} · ${periodLabel(s.period)} · ${SEASON_LABELS[s.season||'all']}</div></div></div>
         <div class="kpi-grid-8">${kpis.map(k=>`
           <div class="card kpi kpi-mini" ${k.tip?`data-tip="${encodeURIComponent(JSON.stringify(k.tip))}"`:''}>

@@ -902,8 +902,9 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 0; }
 .kpi-mini .kval { font-size:20px; }
 .kpi-mini .kval small { font-size:12px; }
 .kpi-mini .ksub { font-size:10.5px; color:var(--ink-3); font-family:var(--mono); }
-.kpi-grid-8 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-@media (max-width: 1320px) { .kpi-grid-8 { grid-template-columns:repeat(2,1fr); } }
+.kpi-grid-8 { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+@media (max-width: 1320px) { .kpi-grid-8 { grid-template-columns:repeat(3,1fr); } }
+@media (max-width: 980px) { .kpi-grid-8 { grid-template-columns:repeat(2,1fr); } }
 
 /* Peer benchmark badge */
 .peer-badge { display:inline-flex; align-items:center; gap:5px; font-size:10px; font-weight:700; padding:3px 8px; border-radius:999px; background:rgba(148,163,184,0.12); color:var(--ink-2); font-family:var(--mono); }

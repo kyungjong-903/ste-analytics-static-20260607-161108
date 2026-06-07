@@ -190,10 +190,23 @@ function checkOverviewWholesaleAndRetailSalesCards() {
 
 function checkOverviewHeadlineKpisExcludeTotalSalesRoyalty() {
   const html = stripped(Screens.a1.render({ ...baseState, view: "actual" }));
-  const kpiSection = html.match(/Headline KPIs[\s\S]*?<\/div><\/div>/);
+  const kpiSection = html.match(/Headline KPIs[\s\S]*?<div class="kpi-grid-8">([\s\S]*?)<\/div><\/div>/);
   assert(kpiSection, "Overview should render Headline KPIs section");
   assert(!kpiSection[0].includes("Total Net Sales"), "Headline KPIs should not include Total Net Sales");
   assert(!kpiSection[0].includes("Total Royalty"), "Headline KPIs should not include Total Royalty");
+}
+
+function checkOverviewHeadlineKpisIncludeDistributionDoorsInFiveCards() {
+  const html = stripped(Screens.a1.render({ ...baseState, view: "actual" }));
+  const dist = STEData.distributionFor("sugifr", "ytd");
+  const kpiGrid = html.match(/<div class="kpi-grid-8">([\s\S]*?)<\/div><\/div>/);
+  assert(kpiGrid, "Overview should render a KPI grid");
+  assert(kpiGrid[0].includes("Distribution Doors"), "Headline KPIs should include Distribution Doors");
+  assert(kpiGrid[0].includes(String(dist.active)), `Distribution Doors KPI should show active doors ${dist.active}`);
+  assert((kpiGrid[0].match(/class="card kpi kpi-mini"/g) || []).length === 5, "Headline KPIs should render five cards");
+
+  const cssSource = fs.readFileSync("tools/console-template.html", "utf8");
+  assert(cssSource.includes(".kpi-grid-8 { display:grid; grid-template-columns:repeat(5,1fr);"), "KPI grid should render five cards on one row");
 }
 
 function checkOverviewSpecOverrideDisabled() {
@@ -218,6 +231,7 @@ checkLegacyOverviewDistributionCardUsesTierDonut();
 checkLegacyOverviewRoyaltyCopy();
 checkOverviewWholesaleAndRetailSalesCards();
 checkOverviewHeadlineKpisExcludeTotalSalesRoyalty();
+checkOverviewHeadlineKpisIncludeDistributionDoorsInFiveCards();
 checkOverviewSpecOverrideDisabled();
 
 console.log("analytics overview and plan toggles OK");
