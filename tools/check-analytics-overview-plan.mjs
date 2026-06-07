@@ -188,10 +188,11 @@ function checkOverviewWholesaleAndRetailSalesCards() {
   assert(html.includes("Net sales all"), "Overview Net Sales card should describe all-channel net sales");
   assert(html.includes(all), `Overview Net Sales card should show all-channel net sales ${all}`);
   assert(!html.includes("Wholesale net sales"), "Overview Sales card should not be scoped to Wholesale net sales");
-  assert(html.includes(">Retail<") || html.includes(">Retail Sales<"), "Overview should render a Retail sales card");
-  assert(html.includes("Retail net sales"), "Overview Retail card should describe Retail net sales");
-  assert(html.includes(retail), `Overview Retail card should show Wholesale x 1.9 retail net sales ${retail}`);
-  assert(planHtml.includes(retailPlan), `Overview Retail plan card should show Wholesale plan x 1.9 ${retailPlan}`);
+  assert(html.includes('<span class="h-name">MSRP</span>'), "Overview should render an MSRP sales card");
+  assert(!html.includes('<span class="h-name">Retail</span>') && !html.includes('<span class="h-name">Retail Sales</span>'), "Overview should not title the MSRP card as Retail");
+  assert(html.includes("MSRP net sales"), "Overview MSRP card should describe MSRP net sales");
+  assert(html.includes(retail), `Overview MSRP card should show Wholesale x 1.9 net sales ${retail}`);
+  assert(planHtml.includes(retailPlan), `Overview MSRP plan card should show Wholesale plan x 1.9 ${retailPlan}`);
 }
 
 function checkOverviewHeadlineKpisExcludeTotalSalesRoyalty() {

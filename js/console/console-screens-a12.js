@@ -119,8 +119,8 @@
         ${hero({ go:'a2', name:own+'Net Sales', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
           val: (planView ? m(sales.plan, ent) : m(sales.netSales, ent)).book, cur: (planView?'Net sales all plan · ':'Net sales all · ')+periodLabel(s.period),
           metrics: salesMetrics(sales) })}
-        ${hero({ go:'a2', name:'Retail', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
-          val: (planView ? m(retailOverviewSales.plan, ent) : m(retailOverviewSales.netSales, ent)).book, cur: (planView?'Retail planned net sales · ':'Retail net sales · ')+periodLabel(s.period),
+        ${hero({ go:'a2', name:'MSRP', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
+          val: (planView ? m(retailOverviewSales.plan, ent) : m(retailOverviewSales.netSales, ent)).book, cur: (planView?'MSRP planned net sales · ':'MSRP net sales · ')+periodLabel(s.period),
           metrics: salesMetrics(retailOverviewSales) })}
         ${hero({ go:'a2', gotab:'royalty', name:own+'Royalty', icon:ICN.roy, color:'#fbbf24', glow:'rgba(251,191,36,0.14)',
           val: (planView ? m(sales.royaltyPlan, ent) : m(sales.royalty, ent)).book, cur: (planView?'Planned royalty · ':'Royalty · ')+periodLabel(s.period),
