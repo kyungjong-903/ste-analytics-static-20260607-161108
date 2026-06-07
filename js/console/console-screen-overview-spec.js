@@ -142,7 +142,7 @@
         <div class="card card-pad">
           ${W().sec("Sales & Royalty Snapshot", planView ? "Committed plan summary" : "Actual performance versus plan")}
           ${row(planView ? "Net Sales Plan" : "Net Sales", money(net, entity), planView ? `vs prior plan ${pct(sales.vsPriorPlan, 1)}` : `plan ${money(sales.plan, entity)}`)}
-          ${row(planView ? "Royalty Plan" : "Royalty Earned", money(royalty, entity), `minimum base ${money(sales.minForPeriod, entity)}`)}
+          ${row(planView ? "Royalty Plan" : "Royalty", money(royalty, entity), `minimum base ${money(sales.minForPeriod, entity)}`)}
           ${row("Plan Attainment", sales.achieved == null ? "-" : `${sales.achieved.toFixed(0)}%`, sales.hasActual ? `${pct(sales.vsPlan, 1)} vs plan` : "actuals not closed")}
         </div>
         <div class="card card-pad">

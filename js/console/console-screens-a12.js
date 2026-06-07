@@ -67,7 +67,6 @@
         return rows.map((r) => ({ label: r.label, pct: Math.round(r.count / total * 100) }));
       };
       const distTierShare = tierShareMetrics(dist.tiers);
-      const distTierValue = distTierShare.map((r) => r.pct + '%').join(' · ');
       const distTierMetrics = distTierShare.map((r) => metric(r.label + ' Share', r.pct + '%')).join('');
 
       const planView = s.view === 'plan';
@@ -91,10 +90,10 @@
           val: (planView ? m(sales.plan, ent) : m(sales.netSales, ent)).book, cur: (planView?'Planned net sales · ':'Net sales · ')+periodLabel(s.period),
           metrics: salesMetrics })}
         ${hero({ go:'a2', gotab:'royalty', name:own+'Royalty', icon:ICN.roy, color:'#fbbf24', glow:'rgba(251,191,36,0.14)',
-          val: (planView ? m(sales.royaltyPlan, ent) : m(sales.royalty, ent)).book, cur: (planView?'Planned royalty · ':'Royalty earned · ')+periodLabel(s.period),
+          val: (planView ? m(sales.royaltyPlan, ent) : m(sales.royalty, ent)).book, cur: (planView?'Planned royalty · ':'Royalty · ')+periodLabel(s.period),
           metrics: royMetrics })}
         ${hero({ go:'a3', name:own+'Distribution', icon:ICN.dist, color:'var(--cyan)', glow:'rgba(34,211,238,0.14)',
-          val: distTierValue, cur: 'Tier share · '+dist.active.toLocaleString()+' active doors',
+          val: 'Tier Share', cur: dist.active.toLocaleString()+' active doors',
           metrics: distTierMetrics })}
         ${planView
           ? `<div class="card hero" style="opacity:.6"><div class="h-top"><div class="center gap-12"><span class="h-ic" style="background:var(--violet-dim);color:var(--violet)">${ICN.inv}</span><span class="h-name">${own}Inventory</span></div></div><div style="padding:14px 0 6px;color:var(--ink-3);font-size:13px;line-height:1.5">Plan data not applicable for Inventory</div><div class="muted" style="font-size:11px">No committed plan model</div></div>`

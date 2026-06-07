@@ -90,8 +90,15 @@ function checkInventoryAndSalesPlanContracts() {
 function checkLegacyOverviewDistributionCardUsesTierShare() {
   const legacyOverview = fs.readFileSync("js/console/console-screens-a12.js", "utf8");
   assert(legacyOverview.includes("tierShareMetrics"), "Legacy overview Distribution card should derive tier share metrics");
+  assert(legacyOverview.includes("val: 'Tier Share'"), "Legacy overview Distribution card should keep the original single-value card shape");
   assert(!legacyOverview.includes("metric('Net Δ'"), "Legacy overview Distribution card should not show Net Delta metrics");
   assert(!legacyOverview.includes("metric('Rev/Door'"), "Legacy overview Distribution card should not show Rev/Door metrics");
+}
+
+function checkLegacyOverviewRoyaltyCopy() {
+  const legacyOverview = fs.readFileSync("js/console/console-screens-a12.js", "utf8");
+  assert(legacyOverview.includes("'Royalty · '"), "Legacy overview Royalty card should label the subtitle as Royalty");
+  assert(!legacyOverview.includes("'Royalty earned · '"), "Legacy overview Royalty card should not say Royalty earned");
 }
 
 checkOverviewCoversAnalyticsPages();
@@ -99,5 +106,6 @@ checkDistributionPlanUsesPlanDoors();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
 checkLegacyOverviewDistributionCardUsesTierShare();
+checkLegacyOverviewRoyaltyCopy();
 
 console.log("analytics overview and plan toggles OK");
