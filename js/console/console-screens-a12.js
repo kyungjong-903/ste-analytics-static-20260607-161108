@@ -57,7 +57,7 @@
       </div>`;
 
       const metric = (l, v, cls) => `<div class="h-metric"><div class="ml">${l}</div><div class="mv ${cls||''}" style="${cls==='g'?'color:var(--green)':cls==='r'?'color:var(--red)':''}">${v}</div></div>`;
-      const own = isLicensee ? 'My ' : '';
+      const own = '';
 
       const planView = s.view === 'plan';
       const annualRoyMin = ent.annual * 0.40 * 0.10;
