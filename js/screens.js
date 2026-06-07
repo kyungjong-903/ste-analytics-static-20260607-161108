@@ -6436,6 +6436,29 @@
   // Season Plan — the licensee-submitted set (Sales · Marketing · Distribution).
   // HQ default view = list of every licensee's submissions; click a row to
   // open detail. Licensee view = their own three plan cards directly.
+  function operationPlanSeasonNumber(seasonCode) {
+    const m = String(seasonCode || "").match(/\d{2}/);
+    return m ? parseInt(m[0], 10) : null;
+  }
+  function isPre26OperationPlanSeason(seasonCode) {
+    const n = operationPlanSeasonNumber(seasonCode);
+    return Number.isFinite(n) && n < 26;
+  }
+  function normalizeOperationPlanForDisplay(plan, seasonCode) {
+    const code = seasonCode || (plan && plan.season);
+    if (!isPre26OperationPlanSeason(code)) return plan;
+    return {
+      ...(plan || { season: code }),
+      season: code,
+      status: "Approved",
+      _displayApprovedPastSeason: true,
+    };
+  }
+  global.STEScreensTestHooks = {
+    ...(global.STEScreensTestHooks || {}),
+    normalizeOperationPlanForDisplay,
+  };
+
   function distribution() {
     let sec = document.querySelector('section[data-page="operation-plans"]');
     if (!sec) {
@@ -6495,9 +6518,12 @@
     });
 
     const rows = seasonsInScope.map(seasonObj => {
-      const sales = sel.seasonPlan(myLicId, seasonObj.code, "3-C");
-      const marketing = sel.seasonPlan(myLicId, seasonObj.code, "3-A");
-      const distrib = sel.seasonPlan(myLicId, seasonObj.code, "3-B");
+      const rawSales = sel.seasonPlan(myLicId, seasonObj.code, "3-C");
+      const rawMarketing = sel.seasonPlan(myLicId, seasonObj.code, "3-A");
+      const rawDistrib = sel.seasonPlan(myLicId, seasonObj.code, "3-B");
+      const sales = normalizeOperationPlanForDisplay(rawSales, seasonObj.code);
+      const marketing = normalizeOperationPlanForDisplay(rawMarketing, seasonObj.code);
+      const distrib = normalizeOperationPlanForDisplay(rawDistrib, seasonObj.code);
       const present = [sales, marketing, distrib].filter(Boolean);
       const allApproved = present.length === 3 && present.every(p => p.status === "Approved");
       const anyPending = present.some(p => p.status === "Pending Review");
@@ -6510,7 +6536,7 @@
         : "In Progress";
       const stillOwedBase = baseOverall === "Not Started" || baseOverall === "In Progress";
       const overall = (stillOwedBase && dDays != null && dDays < 0) ? "Overdue" : baseOverall;
-      const lastAt = present.map(p => p.submittedAt || p.approvedAt).filter(Boolean).sort().slice(-1)[0] || null;
+      const lastAt = [rawSales, rawMarketing, rawDistrib].filter(Boolean).map(p => p.submittedAt || p.approvedAt).filter(Boolean).sort().slice(-1)[0] || null;
       return { seasonObj, sales, marketing, distrib, overall, lastAt, deadline: licDeadline, deadlineDays: dDays };
     });
 
@@ -6544,7 +6570,10 @@
           // Licensee alert — drafts / rejected plans that still need to
           // be submitted. Surfaces here so the user sees the workload
           // without having to click into each season.
-          const draftLike = plans.filter(p => p.status === "Draft" || p.status === "Rejected");
+          const draftLike = plans.filter(p => {
+            const shown = normalizeOperationPlanForDisplay(p, p.season);
+            return shown.status === "Draft" || shown.status === "Rejected";
+          });
           if (!draftLike.length) return '';
           return `
             <button class="ste-overdue-banner ste-overdue-banner-warn" data-act="open-plans-licensee" type="button">
@@ -6619,7 +6648,10 @@
     });
     // Drafts banner → open the first season that still has work outstanding.
     sec.querySelector('[data-act="open-plans-licensee"]')?.addEventListener("click", () => {
-      const firstDraft = plans.find(p => p.status === "Draft" || p.status === "Rejected");
+      const firstDraft = plans.find(p => {
+        const shown = normalizeOperationPlanForDisplay(p, p.season);
+        return shown.status === "Draft" || shown.status === "Rejected";
+      });
       if (firstDraft) location.hash = `#/operation-plans/details/view/${encodeURIComponent(firstDraft.season)}`;
     });
   }
@@ -6643,9 +6675,12 @@
     // back to the season's base milestone.
     const overrides = (seasonObj.licenseeMilestones || {});
     const rows = lics.map(l => {
-      const sales = sel.seasonPlan(l.id, seasonObj.code, "3-C");
-      const marketing = sel.seasonPlan(l.id, seasonObj.code, "3-A");
-      const distrib = sel.seasonPlan(l.id, seasonObj.code, "3-B");
+      const rawSales = sel.seasonPlan(l.id, seasonObj.code, "3-C");
+      const rawMarketing = sel.seasonPlan(l.id, seasonObj.code, "3-A");
+      const rawDistrib = sel.seasonPlan(l.id, seasonObj.code, "3-B");
+      const sales = normalizeOperationPlanForDisplay(rawSales, seasonObj.code);
+      const marketing = normalizeOperationPlanForDisplay(rawMarketing, seasonObj.code);
+      const distrib = normalizeOperationPlanForDisplay(rawDistrib, seasonObj.code);
       const present = [sales, marketing, distrib].filter(Boolean);
       const allApproved = present.length === 3 && present.every(p => p.status === "Approved");
       const anyPending = present.some(p => p.status === "Pending Review");
@@ -6657,7 +6692,7 @@
         : "In Progress";
       const stillOwedBase = baseOverall === "Not Started" || baseOverall === "In Progress";
       const overall = (stillOwedBase && dDays != null && dDays < 0) ? "Overdue" : baseOverall;
-      const lastAt = present.map(p => p.submittedAt || p.approvedAt).filter(Boolean).sort().slice(-1)[0] || null;
+      const lastAt = [rawSales, rawMarketing, rawDistrib].filter(Boolean).map(p => p.submittedAt || p.approvedAt).filter(Boolean).sort().slice(-1)[0] || null;
       return {
         licensee: l, season: seasonObj.code,
         sales, marketing, distrib, overall, lastAt,
@@ -7002,9 +7037,12 @@
     // record (render3CEntry / render3ADraft / render3BDraft fall through
     // to empty defaults), so the seed step is gone — a real plan record
     // only materialises when the licensee actually submits one.
-    const plan3c = sel.seasonPlan(lic.id, seasonObj.code, "3-C");
-    const plan3a = sel.seasonPlan(lic.id, seasonObj.code, "3-A");
-    const plan3b = sel.seasonPlan(lic.id, seasonObj.code, "3-B");
+    const rawPlan3c = sel.seasonPlan(lic.id, seasonObj.code, "3-C");
+    const rawPlan3a = sel.seasonPlan(lic.id, seasonObj.code, "3-A");
+    const rawPlan3b = sel.seasonPlan(lic.id, seasonObj.code, "3-B");
+    const plan3c = normalizeOperationPlanForDisplay(rawPlan3c, seasonObj.code);
+    const plan3a = normalizeOperationPlanForDisplay(rawPlan3a, seasonObj.code);
+    const plan3b = normalizeOperationPlanForDisplay(rawPlan3b, seasonObj.code);
 
     const today = new Date();
     const planDeadlineDate = seasonObj.milestones?.planSubmitDeadline ? new Date(seasonObj.milestones.planSubmitDeadline) : null;
@@ -7116,7 +7154,8 @@
     if (form3b) wire3BEntry(form3b, lic, seasonObj);
   }
 
-  function planStatusPill(p) {
+  function planStatusPill(p, seasonCode) {
+    p = normalizeOperationPlanForDisplay(p, seasonCode);
     // Plans are eagerly seeded in Draft when a licensee opens the season,
     // so a missing record means "they haven't touched this yet" — render
     // as Draft (gray) rather than the legacy "Not started" sub-text so the
@@ -8174,6 +8213,7 @@
   function renderPlanActions(subplan, p) {
     const u = STE.currentUser();
     const isHQ = u && STE.isHQ(u);
+    if (p && p._displayApprovedPastSeason) return "";
     const st = p && p.status;
     if (!isHQ) {
       // Editable while in flight (Pending Review / Rejected). Approved
