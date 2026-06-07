@@ -58,17 +58,28 @@ result += transform(css);
 // Integration overrides: container is a panel inside the shell, not a page.
 result += `
 /* --- integration overrides (hand-written, keep at end) --- */
+.ste-analytics-console-pad .ste-section-hd { padding-left: 22px; padding-right: 22px; }
+.ste-analytics-console-pad .ste-page-hd-row { align-items: flex-start; gap: 24px; }
+.ste-analytics-console-pad .ste-page-hd-row > div:first-child { min-width: 0; }
+.ste-console-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 2px; }
+.ste-console-actions .btn { display: inline-flex; align-items: center; gap: 7px; height: 30px; border: 1px solid #cbd5e1; border-radius: 7px; background: #fff; color: #263348; padding: 0 11px; font: 700 12px Inter, sans-serif; cursor: pointer; }
+.ste-console-actions .btn:hover { border-color: #94a3b8; background: #f8fafc; }
+.ste-console-actions .pill { display: inline-flex; align-items: center; gap: 6px; height: 22px; border-radius: 999px; padding: 0 9px; font: 700 10.5px var(--mono, ui-monospace, monospace); letter-spacing: .02em; }
+.ste-console-actions .pill-blue { background: #dbeafe; color: #60a5fa; }
+.ste-console-actions .pill-violet { background: #ede9fe; color: #7c3aed; }
+.ste-console-actions .pill-gray { background: #e5e7eb; color: #64748b; }
 .ste-console { border-radius: 14px; padding: 0 0 24px; }
-.ste-console .filterbar { position: sticky; top: 0; z-index: 5; border-radius: 14px 14px 0 0; }
-.ste-console .cc-main { padding: 18px 22px; }
+.ste-console > .filterbar { position: relative; top: auto; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; align-content: flex-start; gap: 10px 12px; height: auto; min-height: 58px; overflow: visible; margin: 18px 22px 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
+.ste-console > .filterbar + .cc-main { padding-top: 14px; }
+.ste-console .cc-main { padding: 18px 22px 24px; }
 .ste-console .sugi-sales-poc { --sugi-sticky-top: 0; }
 .ste-console .sugi-topline { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 14px; }
 .ste-console .sugi-page-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
 .ste-console .sugi-page-head h2 { margin: 0; color: var(--ink); font-size: 24px; line-height: 1.1; letter-spacing: -.02em; }
 .ste-console .head-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .ste-console .filterwrap { position: relative; z-index: 4; margin-bottom: 12px; }
-.ste-console .sugi-sales-poc .filterbar { display: flex; flex-wrap: wrap; align-items: center; align-content: flex-start; gap: 10px; height: auto; min-height: 0; overflow: visible; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
-.ste-console .f-group { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.ste-console .sugi-sales-poc .filterbar { display: flex; flex-wrap: wrap; align-items: center; align-content: flex-start; gap: 10px 12px; height: auto; min-height: 58px; overflow: visible; padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
+.ste-console .f-group, .ste-console .filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
 .ste-console .f-lab { color: var(--ink-3); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
 .ste-console .f-sep { width: 1px; min-height: 26px; align-self: stretch; background: var(--border); }
 .ste-console select { border: 1px solid var(--border); border-radius: 8px; background: var(--panel-3); color: var(--ink); padding: 6px 8px; font: 600 12px Inter, sans-serif; }
@@ -101,6 +112,9 @@ result += `
 .ste-console .toast { position: fixed; right: 22px; bottom: 22px; z-index: 1000; border-radius: 10px; background: #111827; color: #fff; padding: 10px 13px; box-shadow: var(--shadow-lg); font-size: 12px; opacity: 0; pointer-events: none; transform: translateY(8px); transition: .16s; }
 .ste-console .toast.show { opacity: 1; transform: translateY(0); }
 @media (max-width: 980px) {
+  .ste-analytics-console-pad .ste-section-hd { padding-left: 0; padding-right: 0; }
+  .ste-analytics-console-pad .ste-page-hd-row { flex-direction: column; }
+  .ste-console-actions { justify-content: flex-start; }
   .ste-console .sugi-page-head { flex-direction: column; }
   .ste-console .f-sep { display: none; }
 }

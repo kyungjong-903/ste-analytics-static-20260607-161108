@@ -244,17 +244,7 @@
     if (titleEl) titleEl.textContent = title;
     const subEl = sec.querySelector("#ste-console-sub");
     if (subEl) subEl.textContent = sc.sub(state);
-    main.innerHTML = `
-      <div class="page-head">
-        <div></div>
-        <div class="head-actions">
-          <button class="btn btn-ghost btn-sm" id="exp-pdf"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF</button>
-          <button class="btn btn-ghost btn-sm" id="exp-xls"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Excel</button>
-          <span id="ste-console-view-pill" class="pill ${state.view === "plan" ? "pill-violet" : "pill-blue"}" style="font-family:var(--mono)">${state.view === "plan" ? "PLAN" : "ACTUAL"}</span>
-          <span id="ste-console-role-pill" class="pill ${state.mode === "licensee" ? "pill-blue" : "pill-gray"}" style="font-family:var(--mono)">${state.mode === "licensee" ? "LICENSEE" : "LICENSOR"} · ${navItem.tag}</span>
-        </div>
-      </div>
-      <div id="screen-body">${bodyHtml}</div>`;
+    main.innerHTML = `<div id="screen-body">${bodyHtml}</div>`;
     if (!futureActual && !invNoPlan) {
       try { sc.init(state); } catch (e) { console.error("console screen init error", e); }
     }
@@ -289,13 +279,19 @@
         user-name="${esc(u.name)}" user-role="${esc(u.title || "")}"
         user-initials="${esc((u.name || "?").split(/\s+/).map(s => s[0]).slice(0, 2).join("").toUpperCase())}"
         licensee-code="${lic ? esc(lic.id) : "HQ HQ"}" licensee-name="${lic ? esc(lic.legalName) : "Global Admin View"}">
-      <div class="ste-screen-pad">
+      <div class="ste-screen-pad ste-analytics-console-pad">
         <div class="ste-section-hd">
           <div class="ste-page-crumbs"><a href="${isHQ ? "#/hq" : "#/home"}">Home</a><span class="sep">/</span><span class="cur">Analytics · ${esc(navItem.label)}</span></div>
           <div class="ste-page-hd-row">
             <div>
               <h1 id="ste-console-title"></h1>
               <p id="ste-console-sub"></p>
+            </div>
+            <div class="ste-console-actions head-actions">
+              <button class="btn btn-ghost btn-sm" id="exp-pdf"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>PDF</button>
+              <button class="btn btn-ghost btn-sm" id="exp-xls"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Excel</button>
+              <span id="ste-console-view-pill" class="pill ${state.view === "plan" ? "pill-violet" : "pill-blue"}" style="font-family:var(--mono)">${state.view === "plan" ? "PLAN" : "ACTUAL"}</span>
+              <span id="ste-console-role-pill" class="pill ${state.mode === "licensee" ? "pill-blue" : "pill-gray"}" style="font-family:var(--mono)">${state.mode === "licensee" ? "LICENSEE" : "LICENSOR"} · ${navItem.tag}</span>
             </div>
           </div>
         </div>
@@ -315,7 +311,7 @@
     if (document._steConsoleWired) return;
     document._steConsoleWired = true;
     document.addEventListener("click", (e) => {
-      const inside = e.target.closest(".ste-console");
+      const inside = e.target.closest(".ste-console, .ste-console-actions");
       if (!inside) {
         document.querySelectorAll(".ste-console .dd.open").forEach(x => x.classList.remove("open"));
         const ls0 = document.querySelector(".ste-console #lic-select");
