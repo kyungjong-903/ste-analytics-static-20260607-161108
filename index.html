@@ -5270,15 +5270,14 @@ section[data-page="agreements"] .audit-content .doc {
     // Analytics — collapsible tree: the parent row toggles its five Console
     // sub-screens open/closed (and jumps to Overview when used as an entry
     // point). The parent itself is never shown as the selected item. The
-    // legacy single-page Analytics screen is unrouted; see js/app.js.
+    // legacy single-page Analytics screen remains routed in js/app.js but is
+    // not exposed in the sidebar.
     { id: 'analytics',              label: 'Analytics',       href: '#/analytics',              icon: 'analytics',     section: 'Operations', treeParent: 'analytics' },
     { id: 'analytics-overview',     label: 'Overview',        href: '#/analytics/overview',     icon: 'cOverview',     section: 'Operations', treeChild: 'analytics' },
     { id: 'analytics-sales',        label: 'Sales & Royalty', href: '#/analytics/sales',        icon: 'cSales',        section: 'Operations', treeChild: 'analytics' },
     { id: 'analytics-distribution', label: 'Distribution',    href: '#/analytics/distribution', icon: 'cDistribution', section: 'Operations', treeChild: 'analytics' },
     { id: 'analytics-inventory',    label: 'Inventory',       href: '#/analytics/inventory',    icon: 'cInventory',    section: 'Operations', treeChild: 'analytics' },
     { id: 'analytics-marketing',    label: 'Marketing',       href: '#/analytics/marketing',    icon: 'cMarketing',    section: 'Operations', treeChild: 'analytics' },
-    // Legacy single-page Analytics, kept reachable as "v2" below the tree.
-    { id: 'analytics-v2',           label: 'Analytics v2',    href: '#/analytics-v2',           icon: 'analytics',     section: 'Operations' },
     { id: 'agreements',label: 'Agreements',     href: '#/agreements',              icon: 'contract',  section: 'Agreements' },
     { id: 'admin',    label: 'Administration',  href: '#/admin/licensees',         icon: 'gear', bottom: true, adminOnly: true },
     { id: 'support',  label: 'Help Center',     href: '#/support',                 icon: 'help', bottom: true },

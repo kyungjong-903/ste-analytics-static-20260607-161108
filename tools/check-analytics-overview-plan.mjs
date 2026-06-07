@@ -215,6 +215,14 @@ function checkOverviewSpecOverrideDisabled() {
   assert(!overviewSpec.includes("global.Screens.a1"), "Overview spec file must not override Screens.a1");
 }
 
+function checkAnalyticsV2MenuHidden() {
+  const index = fs.readFileSync("index.html", "utf8");
+  const navBlock = index.match(/const NAV = \[[\s\S]*?\n  \];/);
+  assert(navBlock, "Global sidebar NAV block should exist");
+  assert(!navBlock[0].includes("Analytics v2"), "Analytics v2 should not be shown in the sidebar menu");
+  assert(!navBlock[0].includes("#/analytics-v2"), "Analytics v2 sidebar menu href should be removed");
+}
+
 checkOverviewCoversAnalyticsPages();
 checkDistributionPlanUsesPlanDoors();
 checkDistributionStOnlineHasNoDoors();
@@ -233,5 +241,6 @@ checkOverviewWholesaleAndRetailSalesCards();
 checkOverviewHeadlineKpisExcludeTotalSalesRoyalty();
 checkOverviewHeadlineKpisIncludeDistributionDoorsInFiveCards();
 checkOverviewSpecOverrideDisabled();
+checkAnalyticsV2MenuHidden();
 
 console.log("analytics overview and plan toggles OK");
