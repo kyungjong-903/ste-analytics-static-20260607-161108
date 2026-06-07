@@ -145,8 +145,138 @@
   }
   function pct(n, digits = 1) { return (n >= 0 ? '+' : '') + n.toFixed(digits) + '%'; }
 
+  // ---- Document-backed mock fixtures ----
+  // Only these two contexts are pinned to delivered specs:
+  // - SUGI France licensee view: STE_Analytics_MockData_SUGI_France.md
+  // - Licensor aggregate view: STE_Analytics_MockData_Licensor_Console.md
+  // All other licensees intentionally keep the generated data path.
+  const SPEC_FIXTURES = {
+    sugifr: {
+      royaltyRate: 493_000 / 13_700_000,
+      annualRoyaltyMin: 1_000_000,
+      sales: {
+        ytd:  { actual: 13_700_000, plan: 14_300_000, prior: 13_400_000, royalty: 493_000, royaltyPlan: 515_000, royaltyPrior: 482_000, royaltyMin: 390_000 },
+        q1:   { actual:  7_200_000, plan:  7_500_000, prior:  6_900_000, royalty: 259_000, royaltyPlan: 270_000, royaltyPrior: 248_000, royaltyMin: 250_000 },
+        q2:   { actual:  6_500_000, plan:  9_500_000, prior:  9_100_000, royalty: 234_000, royaltyPlan: 342_000, royaltyPrior: 328_000, royaltyMin: 250_000 },
+        q3:   { actual: null,       plan:  7_100_000, prior:  6_800_000 },
+        q4:   { actual: null,       plan:  8_900_000, prior:  8_400_000 },
+        cum1: { actual:  7_200_000, plan:  7_500_000, prior:  6_900_000, royalty: 259_000, royaltyPlan: 270_000, royaltyPrior: 248_000, royaltyMin: 250_000 },
+        cum2: { actual: 13_700_000, plan: 17_000_000, prior: 16_000_000, royalty: 493_000, royaltyPlan: 612_000, royaltyPrior: 576_000, royaltyMin: 500_000 },
+        cum3: { actual: null,       plan: 24_100_000, prior: 22_800_000 },
+        full: { actual: null,       plan: 33_000_000, prior: 31_200_000 },
+      },
+      monthly: {
+        actual: [1_900_000, 2_400_000, 2_900_000, 3_400_000, 3_100_000, null, null, null, null, null, null, null],
+        plan:   [2_000_000, 2_500_000, 3_000_000, 3_500_000, 3_300_000, 2_700_000, 2_000_000, 2_300_000, 2_800_000, 3_200_000, 3_000_000, 2_500_000],
+        prior:  [1_800_000, 2_300_000, 2_800_000, 3_400_000, 3_100_000, 2_600_000, 1_900_000, 2_200_000, 2_700_000, 3_100_000, 2_900_000, 2_400_000],
+      },
+      distribution: { active: 386, planDoors: 420, newD: 28, closeD: 17, top5: 42 },
+      inventory: { stockValue: 3_900_000, stockToSales: 3.6, turn: 2.5, aged: 23, stockout: 4, markdown: 6 },
+      marketing: { spend: 547_000, spendPlan: 490_000, roi: 3.9, reach: 6_000_000, violations: 0 },
+    },
+    total: {
+      royaltyRate: 1_970_000 / 54_800_000,
+      annualRoyaltyMin: 4_000_000,
+      sales: {
+        ytd:  { actual: 54_800_000, plan: 57_000_000, prior: 52_600_000, royalty: 1_970_000, royaltyPlan: 2_041_000, royaltyPrior: 1_874_000, royaltyMin: 1_558_000 },
+        q1:   { actual: 28_900_000, plan: 30_100_000, prior: 27_200_000 },
+        q2:   { actual: 26_000_000, plan: 36_800_000, prior: 35_400_000 },
+        q3:   { actual: null,       plan: 28_400_000, prior: 27_200_000 },
+        q4:   { actual: null,       plan: 35_600_000, prior: 33_600_000 },
+        cum1: { actual: 28_900_000, plan: 30_100_000, prior: 27_200_000 },
+        cum2: { actual: 54_800_000, plan: 66_900_000, prior: 62_600_000 },
+        cum3: { actual: null,       plan: 95_300_000, prior: 89_800_000 },
+        full: { actual: null,       plan:130_900_000, prior:122_500_000 },
+      },
+      monthly: {
+        actual: [7_600_000, 9_600_000, 11_700_000, 13_500_000, 12_400_000, null, null, null, null, null, null, null],
+        plan:   [8_000_000,10_000_000, 12_100_000, 14_000_000, 12_900_000, 11_900_000, 8_000_000, 9_200_000, 11_200_000, 12_800_000, 12_000_000, 10_000_000],
+        prior:  [7_200_000, 9_200_000, 10_800_000, 13_600_000, 11_800_000, 10_000_000, 7_600_000, 8_800_000, 10_800_000, 12_400_000, 11_600_000, 9_600_000],
+      },
+      distribution: { active: 1_544, planDoors: 1_645, newD: 112, closeD: 68, top5: 32 },
+      inventory: { stockValue: 15_600_000, stockToSales: 3.6, turn: 2.6, aged: 21, stockout: 12, markdown: 18 },
+      marketing: { spend: 2_190_000, spendPlan: 2_010_000, roi: 3.8, reach: 24_000_000, violations: 2 },
+    },
+  };
+
+  function specFixture(entId) {
+    return SPEC_FIXTURES[entId] || null;
+  }
+  function channelFactor(channel) {
+    if (channel === 'retail') return 0.18;
+    if (channel === 'wholesale') return 0.72;
+    return 1;
+  }
+  function scaleNullable(v, factor) {
+    return v == null ? null : Math.round(v * factor);
+  }
+  function cumulativeFromMonthly(arr, factor) {
+    const out = [];
+    let acc = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] == null) out.push(null);
+      else { acc += arr[i] * factor; out.push(Math.round(acc)); }
+    }
+    return out;
+  }
+  function quarterlyFromMonthly(monthly, factor) {
+    return [
+      scaleNullable(monthly[0] + monthly[1] + monthly[2], factor),
+      monthly[3] == null || monthly[4] == null ? null : scaleNullable(monthly[3] + monthly[4] + (monthly[5] || 0), factor),
+      monthly[6] == null ? null : scaleNullable(monthly[6] + monthly[7] + monthly[8], factor),
+      monthly[9] == null ? null : scaleNullable(monthly[9] + monthly[10] + monthly[11], factor),
+    ];
+  }
+  function specSalesFor(entId, period, channel) {
+    const fx = specFixture(entId);
+    if (!fx) return null;
+    const row = fx.sales[period] || fx.sales.ytd;
+    const ent = byId(entId);
+    const factor = channelFactor(channel);
+    const actual = scaleNullable(row.actual, factor);
+    const plan = scaleNullable(row.plan, factor);
+    const prior = scaleNullable(row.prior, factor);
+    const royaltyRate = fx.royaltyRate;
+    const royalty = scaleNullable(row.royalty != null ? row.royalty : (row.actual == null ? null : row.actual * royaltyRate), factor) || 0;
+    const royaltyPlan = scaleNullable(row.royaltyPlan != null ? row.royaltyPlan : row.plan * royaltyRate, factor);
+    const royaltyPrior = scaleNullable(row.royaltyPrior != null ? row.royaltyPrior : row.prior * royaltyRate, factor);
+    const royaltyMin = scaleNullable(row.royaltyMin != null ? row.royaltyMin : fx.annualRoyaltyMin * ((periodMonths(period)[1] - periodMonths(period)[0] + 1) / 12), factor);
+    const minForPeriod = royaltyMin / royaltyRate;
+    const priorPlan = plan / 1.08;
+    const avail = availability(period);
+    return {
+      ent, period, channel,
+      netSales: actual || 0, plan, prior, priorPlan,
+      hasActual: actual != null && avail !== 'none', avail, partial: avail === 'partial',
+      achieved: actual != null ? actual / plan * 100 : null,
+      vsPriorPlan: (plan / priorPlan - 1) * 100,
+      vsPlan: actual != null ? (actual / plan - 1) * 100 : null,
+      vsYoY: actual != null ? (actual / prior - 1) * 100 : null,
+      vsMin: actual != null ? (actual / minForPeriod) * 100 : null,
+      minForPeriod,
+      royalty, royaltyPlan, royaltyPrior, royaltyMin, royaltyRate,
+      annualRoyaltyMin: fx.annualRoyaltyMin,
+      marketing: actual ? actual * 0.02 : 0,
+      advertising: actual ? actual * 0.02 : 0,
+      monthly: {
+        months: MONTHS,
+        actual: cumulativeFromMonthly(fx.monthly.actual, factor),
+        plan: cumulativeFromMonthly(fx.monthly.plan, factor),
+        prior: cumulativeFromMonthly(fx.monthly.prior, factor),
+      },
+      quarterly: {
+        q: ['Q1','Q2','Q3','Q4'],
+        actual: quarterlyFromMonthly(fx.monthly.actual, factor),
+        plan: quarterlyFromMonthly(fx.monthly.plan, factor),
+        prior: quarterlyFromMonthly(fx.monthly.prior, factor),
+      },
+    };
+  }
+
   // ---- Domain: Sales & Royalty ----
   function salesFor(entId, period, channel) {
+    const fixed = specSalesFor(entId, period, channel);
+    if (fixed) return fixed;
     const ent = byId(entId);
     if (ent.aggregate) return aggregateSales(period, channel);
     const s = SERIES[entId];
@@ -299,6 +429,37 @@
   // ---- Domain: Distribution ----
   function distributionFor(entId, period) {
     const ent = byId(entId);
+    const fx = specFixture(entId);
+    if (fx) {
+      const sales = salesFor(entId, period);
+      const d = fx.distribution;
+      const priorActive = d.active - (d.newD - d.closeD);
+      const tiers = [
+        { tier: 'Tier 1', existing: Math.round(priorActive * 0.08), nw: Math.round(d.newD * 0.18), closing: Math.round(d.closeD * 0.12) },
+        { tier: 'Tier 2', existing: Math.round(priorActive * 0.41), nw: Math.round(d.newD * 0.34), closing: Math.round(d.closeD * 0.29) },
+        { tier: 'Tier 3', existing: priorActive - Math.round(priorActive * 0.08) - Math.round(priorActive * 0.41), nw: d.newD - Math.round(d.newD * 0.18) - Math.round(d.newD * 0.34), closing: d.closeD - Math.round(d.closeD * 0.12) - Math.round(d.closeD * 0.29) },
+      ];
+      const doorCum = []; let acc = d.active - d.netDelta;
+      for (let m = 0; m < 12; m++) {
+        if (m <= ACTUAL_THRU) {
+          acc += Math.round(d.netDelta / (ACTUAL_THRU + 1));
+          doorCum.push(m === ACTUAL_THRU ? d.active : acc);
+        } else doorCum.push(null);
+      }
+      return {
+        ent, period, tiers, active: d.active, planDoors: d.planDoors,
+        newD: d.newD, closeD: d.closeD, netDelta: d.newD - d.closeD,
+        revPerDoor: sales.netSales / d.active, top5: d.top5,
+        channels: [
+          { label: 'Wholesale', share: 72 },
+          { label: 'Retail', share: 18 },
+          { label: 'Marketplace', share: 7 },
+          { label: 'ST Online', share: 3 },
+        ],
+        doorCum, months: MONTHS, quarterly: sales.quarterly,
+        countries: COUNTRIES[entId] || COUNTRIES.total,
+      };
+    }
     const rng = mulberry32(seedFrom(entId + 'dist' + period));
     const scale = ent.aggregate ? 5 : 1;
     const base = ent.aggregate ? 75 : Math.round(40 + rng() * 50);
@@ -330,6 +491,29 @@
   const SEASONS = ['SS25','FW25','SS26','FW26'];
   function inventoryFor(entId, period) {
     const ent = byId(entId);
+    const fx = specFixture(entId);
+    if (fx) {
+      const inv = fx.inventory;
+      const sales = salesFor(entId, period);
+      const matrix = [
+        [60, 9, 97, 90],
+        [36, 50, 12, 57],
+      ];
+      const stockValue = inv.stockValue;
+      const movement = { inbound: stockValue * 0.4, sold: sales.netSales * 0.55, returns: sales.netSales * 0.04, markdownVal: stockValue * 0.12 };
+      const snap = [
+        Math.round(stockValue * 1.10),
+        Math.round(stockValue),
+        Math.round(stockValue * 0.95),
+        Math.round(stockValue * 1.04),
+      ];
+      const snapPrior = snap.map((v, i) => Math.round(v * ([0.93, 0.95, 0.91, 0.88][i])));
+      return {
+        ent, period, stockValue, stockToSales: inv.stockToSales, turn: inv.turn, aged: inv.aged,
+        matrix, categories: CATEGORIES, seasons: SEASONS,
+        stockout: inv.stockout, markdown: inv.markdown, movement, snap, snapPrior, q: ['Q1','Q2','Q3','Q4'],
+      };
+    }
     const rng = mulberry32(seedFrom(entId + 'inv' + period));
     const sales = salesFor(entId, period);
     const stockValue = sales.netSales * (0.28 + rng()*0.1);
@@ -359,6 +543,48 @@
   };
   function marketingFor(entId, period) {
     const ent = byId(entId);
+    const fx = specFixture(entId);
+    if (fx) {
+      const m = fx.marketing;
+      const sales = salesFor(entId, period);
+      const spend = m.spend;
+      const spendPlan = m.spendPlan;
+      const camps = (CAMPAIGNS[entId] || CAMPAIGNS.total).map((name, i) => {
+        const roi = [5.1, 4.2, 3.5, 3.0, 2.6][i] || m.roi;
+        const cs = spend * ([0.15, 0.12, 0.10, 0.08, 0.06][i] || 0.08);
+        return { name, spend: cs, roi };
+      });
+      const channelMix = [
+        { label: 'Instagram', val: 32 },
+        { label: 'TikTok', val: 23 },
+        { label: 'X', val: 12 },
+        { label: 'OOH', val: 14 },
+        { label: 'Print', val: 8 },
+        { label: 'Event', val: 12 },
+      ];
+      function sns(goal, pace) {
+        const planC = [], actC = [];
+        let p = 0, a = 0;
+        for (let month = 0; month < 12; month++) {
+          p += goal / 12;
+          a += (goal / 12) * pace;
+          planC.push(Math.round(p));
+          actC.push(month <= ACTUAL_THRU ? Math.round(a) : null);
+        }
+        return { goal, plan: planC, actual: actC };
+      }
+      const mult = ent.aggregate ? 5 : 1;
+      return {
+        ent, period, spend, spendPlan, roi: m.roi, reach: m.reach, violations: m.violations,
+        camps, channelMix, months: MONTHS,
+        sns: { Instagram: sns(150000 * mult, 0.42), TikTok: sns(110000 * mult, 0.52), X: sns(48000 * mult, 0.35) },
+        spendQ: {
+          q: ['Q1','Q2','Q3','Q4'],
+          actual: sales.quarterly.actual.map((v) => v == null ? null : Math.round(v * spend / Math.max(1, sales.netSales))),
+          plan: sales.quarterly.plan.map((v) => Math.round(v * spendPlan / Math.max(1, sales.plan))),
+        },
+      };
+    }
     const rng = mulberry32(seedFrom(entId + 'mkt' + period));
     const sales = salesFor(entId, period);
     const spend = sales.netSales * 0.04;

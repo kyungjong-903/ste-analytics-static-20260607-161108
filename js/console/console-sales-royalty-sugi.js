@@ -207,6 +207,12 @@
     if(D.setContext)D.setContext({season:st.season||'all',year:st.year,view:st.view,axis:st.season==='all'?'calendar':'season'});
     return D.salesFor(hostState.entId,st.period,st.channel==='all'?null:st.channel);
   }
+  function contractData(period){
+    const D=global.STEData;
+    if(!D||!hostState||!hostState.entId)return null;
+    if(D.setContext)D.setContext({season:st.season||'all',year:st.year,view:st.view,axis:st.season==='all'?'calendar':'season'});
+    return D.salesFor(hostState.entId,period||st.period,null);
+  }
   function hostEntity(){
     const D=global.STEData;
     return D&&hostState&&hostState.entId?D.byId(hostState.entId):null;
@@ -303,6 +309,8 @@
   }
   /* contract-level royalty cumulative through selected period end (filters NOT applied) */
   function contractRoy(){
+    const hd=contractData();
+    if(hd&&hd.annualRoyaltyMin)return toM(hd.royalty);
     const Y=YEARS[st.year];
     const end=st.period==='ytd'?Y.thru:Math.min(CUM_END[st.period]==null?Y.thru:CUM_END[st.period],Y.thru);
     return (sumR(Y.actual,[0,Math.max(0,end)])||0)*RR;
@@ -418,6 +426,25 @@
          label:{show:true,position:'top',fontSize:10,fontFamily:'ui-monospace,monospace',color:'#5b6577',formatter:p=>(p.dataIndex===1?'+':p.dataIndex===2?'−':'')+eur(vals[p.dataIndex])}}]});
   }
   function paceChart(el){
+    const hd=contractData();
+    if(hd&&hd.annualRoyaltyMin&&hd.monthly){
+      const annualMin=toM(hd.annualRoyaltyMin);
+      const rate=hd.royaltyRate||RR;
+      const act=hd.monthly.actual.map(v=>v==null?null:+(toM(v)*rate).toFixed(3));
+      const planLine=hd.monthly.plan.map(v=>v==null?null:+(toM(v)*rate).toFixed(3));
+      const minLine=MONTHS.map((_,i)=>+(annualMin*(i+1)/12).toFixed(3));
+      mkChart(el,{animation:false,
+        legend:{top:0,right:0,itemWidth:18,itemHeight:2,icon:'rect',textStyle:{color:'#5b6577',fontSize:11}},
+        tooltip:Object.assign({trigger:'axis',formatter:ps=>{let s='<div style="font-weight:700;margin-bottom:5px">'+ps[0].axisValue+'</div>';ps.forEach(p=>{if(p.value==null)return;s+='<div style="display:flex;justify-content:space-between;gap:18px"><span>'+p.marker+' '+p.seriesName+'</span><b style="font-family:monospace">'+eur(p.value)+'</b></div>';});return s;}},TT),
+        grid:GRID,
+        xAxis:{type:'category',data:MONTHS,boundaryGap:false,axisLine:{lineStyle:{color:'rgba(15,23,42,.16)'}},axisTick:{show:false},axisLabel:AXL},
+        yAxis:{type:'value',splitLine:{lineStyle:{color:'rgba(15,23,42,.06)'}},axisLabel:Object.assign({},AXL,{formatter:v=>eur(v)})},
+        series:[
+          {name:'Royalty earned (cum.)',type:'line',data:act,smooth:true,symbol:'none',lineStyle:{color:'#16233b',width:3},areaStyle:{color:fade('#16233b',.12)},z:3},
+          {name:'Plan royalty',type:'line',data:planLine,smooth:true,symbol:'none',lineStyle:{color:'#94a3b8',width:2,type:[6,5]},z:2},
+          {name:'Min pace (€'+annualMin.toFixed(1)+'M / yr)',type:'line',data:minLine,symbol:'none',lineStyle:{color:'#dc2626',width:1.5,type:[3,4]},z:1}]});
+      return;
+    }
     const Y=YEARS[st.year];const thru=Y.thru;
     let acc=0;const act=MONTHS.map((_,i)=>{if(i>thru)return null;acc+=(Y.actual[i]||0)*RR;return +acc.toFixed(3);});
     const minLine=MONTHS.map((_,i)=>+(ANNUAL_MIN*(i+1)/12).toFixed(3));
@@ -736,26 +763,29 @@
   /* ---------------- vs Contract Minimum tab ---------------- */
   function minView(){
     const Y=YEARS[st.year];
-    const earned=(sumR(Y.actual,[0,Y.thru])||0)*RR;
-    const prog=earned/ANNUAL_MIN*100;
+    const hd=contractData();
+    const annualMin=hd&&hd.annualRoyaltyMin?toM(hd.annualRoyaltyMin):ANNUAL_MIN;
+    const earned=hd&&hd.annualRoyaltyMin?toM(hd.royalty):(sumR(Y.actual,[0,Y.thru])||0)*RR;
+    const royaltyMin=hd&&hd.annualRoyaltyMin?toM(hd.royaltyMin):null;
+    const prog=earned/annualMin*100;
     const isCur=st.year==='2026';
-    const proj=isCur?ROY_FIX.projection26:earned;
-    const projPct=proj/ANNUAL_MIN*100;
+    const proj=isCur?(royaltyMin?earned/(royaltyMin/annualMin):ROY_FIX.projection26):earned;
+    const projPct=proj/annualMin*100;
     const scaleMax=Math.max(115,projPct+8);
     const monthsLeft=isCur?12-(Y.thru+1):0;
-    const reqPace=isCur?Math.max(0,(ANNUAL_MIN-earned))/monthsLeft:0;
+    const reqPace=isCur?Math.max(0,(annualMin-earned))/monthsLeft:0;
     const curPace=earned/(Y.thru+1);
     const filterNote=(st.channel!=='all'||st.season!=='all')?'<span class="pill pill-amber"><span class="dot"></span>Contract level — price band / season filters not applied</span>':'<span class="pill pill-gray">Contract level · calendar year '+st.year+'</span>';
-    return '<div class="between" style="margin-bottom:14px"><div class="sec-h" style="margin:0"><div><h2>Royalty vs Annual Contract Minimum</h2><div class="sub">€1.0M royalty floor per contract year · 10% nominal / 3.6% effective</div></div></div>'+filterNote+'</div>'+
+    return '<div class="between" style="margin-bottom:14px"><div class="sec-h" style="margin:0"><div><h2>Royalty vs Annual Contract Minimum</h2><div class="sub">'+eur(annualMin)+' royalty floor per contract year · effective rate '+ratePct({royRate:(hd&&hd.royaltyRate)||RR})+'%</div></div></div>'+filterNote+'</div>'+
     '<div class="grid g-3">'+
-      kpi('Annual Minimum','€1.0<small>M</small>','<span class="muted">contract year '+st.year+'</span>')+
+      kpi('Annual Minimum',eur(annualMin),'<span class="muted">contract year '+st.year+'</span>')+
       kpi('Royalty Earned'+(isCur?' · YTD':''),eur(earned),'<span class="muted">'+prog.toFixed(0)+'% of minimum</span>'+(prog>=100?'<span class="pill pill-green"><span class="dot"></span>Min cleared</span>':''))+
-      kpi(isCur?'Year-End Projection':'Final Attainment',eur(proj),(projPct>=100?'<span class="pill pill-green"><span class="dot"></span>'+projPct.toFixed(0)+'% · +'+eur(proj-ANNUAL_MIN)+' excess</span>':'<span class="pill pill-red"><span class="dot"></span>'+projPct.toFixed(0)+'% · shortfall '+eur(ANNUAL_MIN-proj)+'</span>'))+
+      kpi(isCur?'Year-End Projection':'Final Attainment',eur(proj),(projPct>=100?'<span class="pill pill-green"><span class="dot"></span>'+projPct.toFixed(0)+'% · +'+eur(proj-annualMin)+' excess</span>':'<span class="pill pill-red"><span class="dot"></span>'+projPct.toFixed(0)+'% · shortfall '+eur(annualMin-proj)+'</span>'))+
     '</div>'+
     '<div class="card card-pad mt-16">'+secHead('Year-to-Date Progress','0–100% = annual minimum · markers: current + year-end projection')+
       '<div class="progress-xl mt-24" style="margin-top:34px">'+
         '<div class="fill'+(prog>=100?' over':'')+'" style="width:'+Math.min(100,prog/scaleMax*100)+'%"></div>'+
-        '<div class="marker" style="left:'+(100/scaleMax*100)+'%"></div><div class="mlabel" style="left:'+(100/scaleMax*100)+'%">Min €1.0M</div>'+
+        '<div class="marker" style="left:'+(100/scaleMax*100)+'%"></div><div class="mlabel" style="left:'+(100/scaleMax*100)+'%">Min '+eur(annualMin)+'</div>'+
         (isCur?'<div class="marker" style="left:'+(projPct/scaleMax*100)+'%;background:var(--green)"></div><div class="mlabel" style="left:'+(projPct/scaleMax*100)+'%;color:var(--green)">Projection '+projPct.toFixed(0)+'%</div>':'')+
       '</div>'+
       '<div class="between mt-12" style="font-size:12px"><span class="mono" style="color:var(--ink-2)">Earned '+eur(earned)+' · '+prog.toFixed(1)+'%</span><span class="muted mono">scale 0–'+scaleMax.toFixed(0)+'%</span></div>'+
@@ -766,11 +796,11 @@
           ?'<div class="grid g-2"><div><div class="klabel">Required / month</div><div class="kval" style="font-size:24px">'+eur(reqPace)+'</div><div class="muted" style="font-size:11px;margin-top:4px">'+monthsLeft+' months remaining</div></div>'+
            '<div><div class="klabel">Current run-rate</div><div class="kval" style="font-size:24px">'+eur(curPace)+'</div><div class="muted" style="font-size:11px;margin-top:4px">avg / month · Jan–May</div></div></div>'+
            '<div class="mt-16">'+(curPace>=reqPace?'<span class="pill pill-green"><span class="dot"></span>Pace sufficient — '+Math.round((curPace/reqPace-1)*100)+'% headroom</span>':'<span class="pill pill-red"><span class="dot"></span>⚠️ Pace short — need +'+eur(reqPace-curPace)+'/mo</span>')+'</div>'
-          :'<div class="muted" style="font-size:13px">Closed year — final attainment '+prog.toFixed(0)+'% ('+eur(earned)+' vs €1.0M minimum).</div>')+
+          :'<div class="muted" style="font-size:13px">Closed year — final attainment '+prog.toFixed(0)+'% ('+eur(earned)+' vs '+eur(annualMin)+' minimum).</div>')+
       '</div>'+
       '<div class="card card-pad">'+secHead('Historic Comparison','Final attainment % vs annual minimum · last 3 years')+chart('min-hist',190,el=>histBars(el))+'</div>'+
     '</div>'+
-    '<div class="card card-pad mt-16">'+secHead('Cumulative Royalty vs Minimum Pace','Earned royalty vs €1.0M straight-line pace · '+st.year)+
+    '<div class="card card-pad mt-16">'+secHead('Cumulative Royalty vs Minimum Pace','Earned royalty vs '+eur(annualMin)+' straight-line pace · '+st.year)+
       chart('min-pace',280,el=>paceChart(el))+
     '</div>';
   }
