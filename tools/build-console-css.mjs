@@ -124,6 +124,12 @@ result += `
 .ste-console .spec-sec-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
 .ste-console .spec-sec-head h3 { margin: 0; font-size: 14px; font-weight: 760; color: var(--ink); }
 .ste-console .spec-sec-head p { margin: 4px 0 0; font-size: 12px; color: var(--ink-3); }
+.ste-console .ov-dist-hero { min-height: 208px; }
+.ste-console .ov-dist-tier-body { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; align-items: center; padding-top: 2px; }
+.ste-console .ov-dist-tier-donut { width: 104px; height: 104px; }
+.ste-console .ov-dist-tier-legend { min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+.ste-console .ov-dist-tier-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--ink-2); font-size: 12px; }
+.ste-console .ov-dist-tier-row b { color: var(--ink); font-size: 12px; }
 .ste-console .sugi-equal-card { min-height: 320px; display: flex; flex-direction: column; }
 .ste-console .sugi-equal-card .sugi-card-body { flex: 1; min-height: 190px; display: flex; align-items: center; }
 .ste-console .sugi-equal-card .sugi-mix-body { display: grid; grid-template-columns: minmax(170px, 1fr) minmax(250px, 1.35fr); gap: 22px; align-items: center; }

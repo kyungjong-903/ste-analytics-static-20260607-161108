@@ -59,7 +59,9 @@ function checkOverviewCoversAnalyticsPages() {
   ["data-go=\"a2\"", "data-go=\"a3\"", "data-go=\"a4\"", "data-go=\"a5\""].forEach((target) => {
     assert(html.includes(target), `Overview is missing navigation target ${target}`);
   });
-  assert(html.includes("Tier Share"), "Overview should keep the hero-card UI and show Distribution as Tier Share");
+  assert(html.includes('id="ov-dist-tier-donut"'), "Overview Distribution card should render a tier share donut container");
+  assert(html.includes("Tier 1") && html.includes("Tier 2") && html.includes("Tier 3"), "Overview Distribution card should label tier shares");
+  assert(!html.includes("Tier Share"), "Overview Distribution card should not use the placeholder Tier Share text");
   assert(!html.includes("full analytics summary"), "Overview should not render the simplified spec-card override");
 }
 
@@ -157,10 +159,12 @@ function checkSalesRoyaltyMixCardsUseEqualLayout() {
   assert(sales.includes("sugi-card-body"), "Sales & Royalty mix cards should use an equal body area");
 }
 
-function checkLegacyOverviewDistributionCardUsesTierShare() {
+function checkLegacyOverviewDistributionCardUsesTierDonut() {
   const legacyOverview = fs.readFileSync("js/console/console-screens-a12.js", "utf8");
   assert(legacyOverview.includes("tierShareMetrics"), "Legacy overview Distribution card should derive tier share metrics");
-  assert(legacyOverview.includes("val: 'Tier Share'"), "Legacy overview Distribution card should keep the original single-value card shape");
+  assert(legacyOverview.includes("ov-dist-tier-donut"), "Legacy overview Distribution card should render a tier share donut");
+  assert(legacyOverview.includes("Charts.donut(de"), "Legacy overview Distribution card should initialize the tier share donut");
+  assert(!legacyOverview.includes("val: 'Tier Share'"), "Legacy overview Distribution card should not keep the placeholder single-value label");
   assert(!legacyOverview.includes("metric('Net Δ'"), "Legacy overview Distribution card should not show Net Delta metrics");
   assert(!legacyOverview.includes("metric('Rev/Door'"), "Legacy overview Distribution card should not show Rev/Door metrics");
 }
@@ -210,7 +214,7 @@ checkSalesRoyaltyUsesSpecCardHeaders();
 checkSalesRoyaltyGeoProductMatrixShowsCategoryYoy();
 checkSalesRoyaltyBottomSkuRemoved();
 checkSalesRoyaltyMixCardsUseEqualLayout();
-checkLegacyOverviewDistributionCardUsesTierShare();
+checkLegacyOverviewDistributionCardUsesTierDonut();
 checkLegacyOverviewRoyaltyCopy();
 checkOverviewWholesaleAndRetailSalesCards();
 checkOverviewHeadlineKpisExcludeTotalSalesRoyalty();

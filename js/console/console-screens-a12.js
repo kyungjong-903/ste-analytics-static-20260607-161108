@@ -62,14 +62,33 @@
       const own = '';
       const tierShareMetrics = (tiers) => {
         const rows = (tiers || []).map((t) => ({
-          label: String(t.tier || '').replace('Tier ', 'T'),
+          label: String(t.tier || ''),
           count: (t.existing || 0) + (t.nw || 0) - (t.closing || 0),
         }));
         const total = rows.reduce((a, r) => a + r.count, 0) || 1;
         return rows.map((r) => ({ label: r.label, pct: Math.round(r.count / total * 100) }));
       };
       const distTierShare = tierShareMetrics(dist.tiers);
-      const distTierMetrics = distTierShare.map((r) => metric(r.label + ' Share', r.pct + '%')).join('');
+      const distTierPalette = ['#4f8ff7', '#7c3aed', '#94a3b8', '#10b981', '#f59e0b'];
+      const distTierLegend = distTierShare.map((r, i) => `
+        <div class="ov-dist-tier-row">
+          <span class="center gap-8"><span style="width:9px;height:9px;border-radius:999px;background:${distTierPalette[i % distTierPalette.length]}"></span>${r.label}</span>
+          <b class="mono">${r.pct}%</b>
+        </div>`).join('');
+      const distHero = `<div class="card hero ov-dist-hero" data-go="a3" style="--glow:rgba(34,211,238,0.14)">
+        <div class="h-top">
+          <div class="center gap-12">
+            <span class="h-ic" style="background:rgba(34,211,238,0.14);color:var(--cyan)">${ICN.dist}</span>
+            <span class="h-name">${own}Distribution</span>
+          </div>
+          <span class="h-arrow">${ICN.arrow}</span>
+        </div>
+        <div class="ov-dist-tier-body">
+          <div id="ov-dist-tier-donut" class="ov-dist-tier-donut"></div>
+          <div class="ov-dist-tier-legend">${distTierLegend}</div>
+        </div>
+        <div class="h-cur">${dist.active.toLocaleString()} active doors</div>
+      </div>`;
 
       const planView = s.view === 'plan';
       const annualRoyMin = ent.annual * 0.40 * 0.10;
@@ -96,9 +115,7 @@
         ${hero({ go:'a2', gotab:'royalty', name:own+'Royalty', icon:ICN.roy, color:'#fbbf24', glow:'rgba(251,191,36,0.14)',
           val: (planView ? m(sales.royaltyPlan, ent) : m(sales.royalty, ent)).book, cur: (planView?'Planned royalty · ':'Royalty · ')+periodLabel(s.period),
           metrics: royMetrics })}
-        ${hero({ go:'a3', name:own+'Distribution', icon:ICN.dist, color:'var(--cyan)', glow:'rgba(34,211,238,0.14)',
-          val: 'Tier Share', cur: dist.active.toLocaleString()+' active doors',
-          metrics: distTierMetrics })}
+        ${distHero}
         ${planView
           ? `<div class="card hero" style="opacity:.6"><div class="h-top"><div class="center gap-12"><span class="h-ic" style="background:var(--violet-dim);color:var(--violet)">${ICN.inv}</span><span class="h-name">${own}Inventory</span></div></div><div style="padding:14px 0 6px;color:var(--ink-3);font-size:13px;line-height:1.5">Plan data not applicable for Inventory</div><div class="muted" style="font-size:11px">No committed plan model</div></div>`
           : hero({ go:'a4', name:own+'Inventory', icon:ICN.inv, color:'var(--violet)', glow:'var(--violet-dim)',
@@ -182,7 +199,12 @@
     },
     init(s) {
       const eid = s.mode === 'licensee' ? (s.licenseeSelf || 'bbuk') : s.entId;
-      const gm = D().genderMix(eid, s.period), cm = D().customerMix(eid, s.period);
+      const gm = D().genderMix(eid, s.period), cm = D().customerMix(eid, s.period), dist = D().distributionFor(eid, s.period);
+      const tierRows = (dist.tiers || []).map((t) => ({
+        label: String(t.tier || ''),
+        value: (t.existing || 0) + (t.nw || 0) - (t.closing || 0),
+      })).filter((t) => t.value > 0);
+      const de = document.getElementById('ov-dist-tier-donut'); if (de) Charts.donut(de, tierRows, { palette:['#4f8ff7','#7c3aed','#94a3b8','#10b981','#f59e0b'] });
       const ge = document.getElementById('qm-gender'); if (ge) Charts.donut(ge, gm.map(x=>({label:x.label,value:x.val})), { palette:['#4f8ff7','#a78bfa','#34d399'] });
       const ce = document.getElementById('qm-cust'); if (ce) Charts.donut(ce, cm.map(x=>({label:x.label,value:x.val})), { palette:['#4f8ff7','#22d3ee','#a78bfa','#fbbf24'] });
     },
