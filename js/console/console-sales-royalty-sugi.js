@@ -509,8 +509,8 @@
     '</div>';
   }
   function renderFilter(){
-    const seasonOn=st.season!=='all';const dis=seasonOn?' disabled':'';
-    const sel=(id,opts,cur,dd)=>'<select id="'+id+'"'+(dd||'')+'>'+opts+'</select>';
+    const seasonOn=st.season!=='all';
+    const sel=(id,opts,cur)=>'<select id="'+id+'">'+opts+'</select>';
     const yearOpts=['2025','2026','2027'].map(y=>'<option value="'+y+'"'+(y===st.year?' selected':'')+'>'+y+'</option>').join('');
     const perOpts='<option value="ytd"'+(st.period==='ytd'?' selected':'')+'>Year-to-Date</option>'+
       '<optgroup label="Single Quarter">'+['q1','q2','q3','q4'].map(p=>'<option value="'+p+'"'+(p===st.period?' selected':'')+'>'+PERIOD_LABEL[p]+'</option>').join('')+'</optgroup>'+
@@ -519,7 +519,7 @@
     const seg=(attr,items,cur,sm)=>'<div class="seg'+(sm?' seg-sm':'')+'">'+items.map(it=>'<button data-'+attr+'="'+it[0]+'" class="'+(it[0]===cur?'active':'')+'">'+it[1]+'</button>').join('')+'</div>';
     return licenseeControl()+
       '<div class="f-sep"></div>'+
-      '<div class="f-group"><span class="f-lab">Calendar</span>'+sel('f-year',yearOpts,st.year,dis)+sel('f-period',perOpts,st.period,dis)+(seasonOn?'<span class="axis-note">Season axis active</span>':'')+'</div>'+
+      '<div class="f-group"><span class="f-lab">Calendar</span>'+sel('f-year',yearOpts,st.year)+sel('f-period',perOpts,st.period)+(seasonOn?'<span class="axis-note">Select calendar to clear season</span>':'')+'</div>'+
       '<div class="f-sep"></div>'+
       '<div class="f-group"><span class="f-lab">Season</span>'+sel('f-season',seaOpts,st.season)+'</div>'+
       '<span style="flex:1"></span>'+
@@ -823,8 +823,8 @@
   });
   document.addEventListener('change',e=>{
     if (!e.target.closest('.sugi-sales-poc,.sugi-sales-filterbar')) return;
-    if(e.target.id==='f-year'){st.year=e.target.value;paint();}
-    else if(e.target.id==='f-period'){st.period=e.target.value;paint();}
+    if(e.target.id==='f-year'){st.year=e.target.value;st.season='all';paint();}
+    else if(e.target.id==='f-period'){st.period=e.target.value;st.season='all';paint();}
     else if(e.target.id==='f-season'){st.season=e.target.value;if(st.season!=='all')st.period='ytd';paint();}
   });
 
