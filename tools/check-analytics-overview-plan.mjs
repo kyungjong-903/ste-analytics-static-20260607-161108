@@ -177,9 +177,12 @@ function checkLegacyOverviewRoyaltyCopy() {
 
 function checkOverviewWholesaleAndRetailSalesCards() {
   const html = stripped(Screens.a1.render({ ...baseState, view: "actual" }));
+  const planHtml = stripped(Screens.a1.render({ ...baseState, view: "plan" }));
   const ent = STEData.byId("sugifr");
   const all = STEData.money(STEData.salesFor("sugifr", "ytd").netSales, ent).book;
-  const retail = STEData.money(STEData.salesFor("sugifr", "ytd", "retail").netSales, ent).book;
+  const wholesale = STEData.salesFor("sugifr", "ytd", "wholesale");
+  const retail = STEData.money(wholesale.netSales * 1.9, ent).book;
+  const retailPlan = STEData.money(wholesale.plan * 1.9, ent).book;
 
   assert(html.includes(">Net Sales<"), "Overview Sales card should be labeled Net Sales");
   assert(html.includes("Net sales all"), "Overview Net Sales card should describe all-channel net sales");
@@ -187,7 +190,8 @@ function checkOverviewWholesaleAndRetailSalesCards() {
   assert(!html.includes("Wholesale net sales"), "Overview Sales card should not be scoped to Wholesale net sales");
   assert(html.includes(">Retail<") || html.includes(">Retail Sales<"), "Overview should render a Retail sales card");
   assert(html.includes("Retail net sales"), "Overview Retail card should describe Retail net sales");
-  assert(html.includes(retail), `Overview Retail card should show Retail net sales ${retail}`);
+  assert(html.includes(retail), `Overview Retail card should show Wholesale x 1.9 retail net sales ${retail}`);
+  assert(planHtml.includes(retailPlan), `Overview Retail plan card should show Wholesale plan x 1.9 ${retailPlan}`);
 }
 
 function checkOverviewHeadlineKpisExcludeTotalSalesRoyalty() {

@@ -21,8 +21,8 @@ function checkSugiFrance() {
   near(sales.netSales, 13_700_000, 1, "SUGI France YTD net sales");
   near(sales.plan, 14_300_000, 1, "SUGI France YTD plan");
   near(sales.prior, 13_400_000, 1, "SUGI France prior year");
-  near(sales.royalty, 493_000, 1, "SUGI France royalty");
-  near(sales.minForPeriod, 390_000 / sales.royaltyRate, 1, "SUGI France prorated minimum sales base");
+  near(sales.royalty, 1_370_000, 1, "SUGI France royalty");
+  near(sales.minForPeriod, 1_040_000 / sales.royaltyRate, 1, "SUGI France prorated minimum sales base");
   near(dist.active, 386, 0, "SUGI France active doors");
   near(inv.stockValue, 3_900_000, 1, "SUGI France stock value");
   near(inv.stockToSales, 3.6, 0.01, "SUGI France stock-to-sales");
@@ -42,7 +42,7 @@ function checkLicensorTotal() {
   near(sales.netSales, 54_800_000, 1, "Licensor total YTD net sales");
   near(sales.plan, 57_000_000, 1, "Licensor total YTD plan");
   near(sales.prior, 52_600_000, 1, "Licensor total prior year");
-  near(sales.royalty, 1_970_000, 1, "Licensor total royalty");
+  near(sales.royalty, 5_480_000, 1, "Licensor total royalty");
   near(dist.active, 1_544, 0, "Licensor total active doors");
   near(inv.stockValue, 15_600_000, 1, "Licensor total stock value");
   near(mkt.spend, 2_190_000, 1, "Licensor total marketing spend");

@@ -35,6 +35,16 @@
       const sales = D().salesFor(eid, s.period);
       const wholesaleSales = D().salesFor(eid, s.period, 'wholesale');
       const retailSales = D().salesFor(eid, s.period, 'retail');
+      const retailOverviewSales = {
+        ...retailSales,
+        netSales: wholesaleSales.netSales * 1.9,
+        plan: wholesaleSales.plan * 1.9,
+        prior: wholesaleSales.prior * 1.9,
+        priorPlan: wholesaleSales.priorPlan * 1.9,
+        royalty: wholesaleSales.royalty * 1.9,
+        royaltyPlan: wholesaleSales.royaltyPlan * 1.9,
+        royaltyPrior: wholesaleSales.royaltyPrior * 1.9,
+      };
       const dist = D().distributionFor(eid, s.period);
       const inv = D().inventoryFor(eid, s.period);
       const mkt = D().marketingFor(eid, s.period);
@@ -110,8 +120,8 @@
           val: (planView ? m(sales.plan, ent) : m(sales.netSales, ent)).book, cur: (planView?'Net sales all plan · ':'Net sales all · ')+periodLabel(s.period),
           metrics: salesMetrics(sales) })}
         ${hero({ go:'a2', name:'Retail', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
-          val: (planView ? m(retailSales.plan, ent) : m(retailSales.netSales, ent)).book, cur: (planView?'Retail planned net sales · ':'Retail net sales · ')+periodLabel(s.period),
-          metrics: salesMetrics(retailSales) })}
+          val: (planView ? m(retailOverviewSales.plan, ent) : m(retailOverviewSales.netSales, ent)).book, cur: (planView?'Retail planned net sales · ':'Retail net sales · ')+periodLabel(s.period),
+          metrics: salesMetrics(retailOverviewSales) })}
         ${hero({ go:'a2', gotab:'royalty', name:own+'Royalty', icon:ICN.roy, color:'#fbbf24', glow:'rgba(251,191,36,0.14)',
           val: (planView ? m(sales.royaltyPlan, ent) : m(sales.royalty, ent)).book, cur: (planView?'Planned royalty · ':'Royalty · ')+periodLabel(s.period),
           metrics: royMetrics })}
