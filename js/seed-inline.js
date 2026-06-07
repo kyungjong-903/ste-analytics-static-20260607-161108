@@ -1,0 +1,6158 @@
+window.STE_SEED = {
+  "currentSeason": "26SS",
+  "today": "2026-05-07",
+  "users": [
+    {
+      "id": "usr_06e0bea9",
+      "name": "James Smith",
+      "role": "administrator",
+      "licenseeId": "lic_75f7462d",
+      "title": "CEO",
+      "email": "james@bestofbritain.co.uk",
+      "tz": "Europe/London"
+    },
+    {
+      "id": "usr_5db4c9f8",
+      "name": "Marie Laurent",
+      "role": "administrator",
+      "licenseeId": "lic_c2a5c666",
+      "title": "Director",
+      "email": "marie@sugi.fr",
+      "tz": "Europe/Paris"
+    },
+    {
+      "id": "usr_6bc7b45b",
+      "name": "Min Jung",
+      "role": "administrator",
+      "title": "ST BU License Lead",
+      "email": "minjung@fnfcorp.com",
+      "tz": "Asia/Seoul"
+    }
+  ],
+  "licensees": [
+    {
+      "id": "lic_75f7462d",
+      "code": "BBUK",
+      "legalName": "BBUK",
+      "country": "GB",
+      "currency": "GBP",
+      "address": {
+        "street1": "38 Old Bond Street",
+        "street2": "",
+        "city": "London",
+        "state": "",
+        "postalCode": "W1S 4QW",
+        "country": "GB",
+        "vatId": "GB 123 4567 89"
+      },
+      "categories": [
+        "Backpacks",
+        "Bandanas",
+        "Cosmetics & Perfumes",
+        "Dress",
+        "Fleece",
+        "Glass Cases",
+        "Headbands",
+        "Headwear",
+        "Home Textile Products",
+        "Jackets",
+        "Knitwear",
+        "Leather Goods",
+        "Leggings",
+        "Luggage",
+        "Optical Frames",
+        "Other Sports Accessories",
+        "Pants",
+        "Polo",
+        "Pyjamas",
+        "Shoe Bags",
+        "Shorts",
+        "Skirts",
+        "Skiwear",
+        "Socks",
+        "Sports/Tennis Bags",
+        "Sunglasses",
+        "Swimwear",
+        "T Shirt",
+        "Towels",
+        "Trackpants",
+        "Tracksuit",
+        "Tracktop",
+        "Underwear",
+        "Watches",
+        "Wristbands"
+      ],
+      "compliance": 92,
+      "status": "Healthy",
+      "cumulativeMinPct": 191,
+      "yoyGrowthPct": 18,
+      "deadlineCompliancePct": 100,
+      "designPassRate": 87,
+      "trend": "+12%",
+      "trendDirection": "up",
+      "contactName": "James Smith",
+      "contactTitle": "CEO",
+      "contactEmail": "james@bestofbritain.co.uk",
+      "primaryUserId": "usr_06e0bea9"
+    },
+    {
+      "id": "lic_c2a5c666",
+      "code": "SSAS",
+      "legalName": "SUGI FRANCE",
+      "country": "FR",
+      "currency": "EUR",
+      "address": {
+        "street1": "14 Rue Saint-Honoré",
+        "street2": "",
+        "city": "Paris",
+        "state": "",
+        "postalCode": "75001",
+        "country": "FR",
+        "vatId": "FR12345678901"
+      },
+      "categories": [
+        "Backpacks",
+        "Bandanas",
+        "Cosmetics & Perfumes",
+        "Dress",
+        "Fleece",
+        "Glass Cases",
+        "Headbands",
+        "Headwear",
+        "Home Textile Products",
+        "Jackets",
+        "Knitwear",
+        "Leather Goods",
+        "Leggings",
+        "Luggage",
+        "Optical Frames",
+        "Other Sports Accessories",
+        "Pants",
+        "Polo",
+        "Pyjamas",
+        "Shoe Bags",
+        "Shorts",
+        "Skirts",
+        "Skiwear",
+        "Socks",
+        "Sports/Tennis Bags",
+        "Sunglasses",
+        "Swimwear",
+        "T Shirt",
+        "Towels",
+        "Trackpants",
+        "Tracksuit",
+        "Tracktop",
+        "Underwear",
+        "Watches",
+        "Wristbands"
+      ],
+      "compliance": 95,
+      "status": "Healthy",
+      "cumulativeMinPct": 78,
+      "yoyGrowthPct": 14,
+      "deadlineCompliancePct": 100,
+      "designPassRate": 91,
+      "trend": "+14%",
+      "trendDirection": "up",
+      "contactName": "Marie Laurent",
+      "contactTitle": "Director",
+      "contactEmail": "marie@sugi.fr",
+      "primaryUserId": "usr_5db4c9f8"
+    },
+    {
+      "id": "lic_000025e9",
+      "code": "SFOO",
+      "legalName": "SUGI INTERNATIONAL",
+      "country": "IT",
+      "currency": "EUR",
+      "address": {
+        "street1": "Via Montenapoleone 8",
+        "street2": "",
+        "city": "Milano",
+        "state": "MI",
+        "postalCode": "20121",
+        "country": "IT",
+        "vatId": "IT12345678903"
+      },
+      "categories": [
+        "Footwear"
+      ],
+      "compliance": 75,
+      "status": "Review",
+      "cumulativeMinPct": 32,
+      "yoyGrowthPct": -2,
+      "deadlineCompliancePct": 92,
+      "designPassRate": 81,
+      "trend": "-2%",
+      "trendDirection": "down",
+      "contactName": "Lorenzo Conti",
+      "contactTitle": "Managing Director",
+      "contactEmail": "lorenzo@sugifootwear.it"
+    },
+    {
+      "id": "lic_b56a4e2c",
+      "code": "BEN",
+      "legalName": "BENJAMIN",
+      "country": "DE",
+      "currency": "EUR",
+      "address": {
+        "street1": "Maximilianstraße 12",
+        "street2": "",
+        "city": "München",
+        "state": "BY",
+        "postalCode": "80539",
+        "country": "DE",
+        "vatId": "DE123456789"
+      },
+      "categories": [
+        "Dress",
+        "Fleece",
+        "Jackets",
+        "Knitwear",
+        "Leggings",
+        "Pants",
+        "Polo",
+        "Shorts",
+        "Skirts",
+        "Skiwear",
+        "T Shirt",
+        "Trackpants",
+        "Tracksuit",
+        "Tracktop"
+      ],
+      "compliance": 95,
+      "status": "Healthy",
+      "cumulativeMinPct": 145,
+      "yoyGrowthPct": 8,
+      "deadlineCompliancePct": 100,
+      "designPassRate": 93,
+      "trend": "+8%",
+      "trendDirection": "up",
+      "contactName": "Klaus Wagner",
+      "contactTitle": "CEO",
+      "contactEmail": "klaus@benjamin.de"
+    },
+    {
+      "id": "lic_05056c4c",
+      "code": "BDS",
+      "legalName": "BDS",
+      "country": "FR",
+      "currency": "EUR",
+      "address": {
+        "street1": "25 Rue du Faubourg Saint-Honoré",
+        "street2": "",
+        "city": "Paris",
+        "state": "",
+        "postalCode": "75008",
+        "country": "FR",
+        "vatId": "FR98765432109"
+      },
+      "categories": [
+        "Backpacks",
+        "Bandanas",
+        "Cosmetics & Perfumes",
+        "Dress",
+        "Fleece",
+        "Glass Cases",
+        "Headbands",
+        "Headwear",
+        "Home Textile Products",
+        "Jackets",
+        "Knitwear",
+        "Leather Goods",
+        "Leggings",
+        "Luggage",
+        "Optical Frames",
+        "Other Sports Accessories",
+        "Pants",
+        "Polo",
+        "Pyjamas",
+        "Shoe Bags",
+        "Shorts",
+        "Skirts",
+        "Skiwear",
+        "Socks",
+        "Sports/Tennis Bags",
+        "Sunglasses",
+        "Swimwear",
+        "T Shirt",
+        "Towels",
+        "Trackpants",
+        "Tracksuit",
+        "Tracktop",
+        "Underwear",
+        "Watches",
+        "Wristbands"
+      ],
+      "compliance": 74,
+      "status": "Attention",
+      "cumulativeMinPct": 64,
+      "yoyGrowthPct": -9,
+      "deadlineCompliancePct": 83,
+      "designPassRate": 72,
+      "trend": "-9%",
+      "trendDirection": "down",
+      "contactName": "Hugo Bernard",
+      "contactTitle": "Operations Director",
+      "contactEmail": "hugo@bds-dist.fr"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "AGR-2026-003",
+      "licenseeId": "lic_000025e9",
+      "type": "Master License",
+      "signedAt": "2026-05-14",
+      "termStart": "2026-07-01",
+      "termEnd": "2031-06-30",
+      "renewalOption": "5+5y",
+      "royaltyPct": 11.0,
+      "marketingPct": 2.0,
+      "advertisingPct": 2.0,
+      "minQuarterlyEur": 380000,
+      "minAnnualEur": 1520000,
+      "paymentTerms": "Net 30 · Quarterly",
+      "paymentNet": "Net 30",
+      "paymentFrequency": "Quarterly",
+      "counterpartyName": "Lorenzo Conti",
+      "counterpartyTitle": "Managing Director",
+      "status": "Terms Sent",
+      "exclusivity": "Exclusive in territory",
+      "territories": [
+        "Italy",
+        "San Marino"
+      ],
+      "productCategories": [
+        "Footwear"
+      ],
+      "distributionChannels": [
+        "Wholesale",
+        "DTC",
+        "Marketplace"
+      ],
+      "subLicensing": "Not permitted",
+      "rightOfFirstRefusal": true,
+      "sellOffPeriodDays": 180,
+      "amendments": []
+    },
+    {
+      "id": "AGR-2026-002",
+      "licenseeId": "lic_05056c4c",
+      "type": "Master License",
+      "signedAt": "2026-04-22",
+      "termStart": "2026-06-01",
+      "termEnd": "2031-05-31",
+      "renewalOption": "5y",
+      "royaltyPct": 11.5,
+      "marketingPct": 2.5,
+      "advertisingPct": 2.0,
+      "minQuarterlyEur": 350000,
+      "minAnnualEur": 1400000,
+      "paymentTerms": "Net 30 · Quarterly",
+      "paymentNet": "Net 30",
+      "paymentFrequency": "Quarterly",
+      "counterpartyName": "Hugo Bernard",
+      "counterpartyTitle": "Operations Director",
+      "status": "Terms Updated",
+      "exclusivity": "Exclusive in territory",
+      "territories": [
+        "France",
+        "Belgium",
+        "Luxembourg"
+      ],
+      "productCategories": [
+        "Apparel",
+        "Accessory"
+      ],
+      "distributionChannels": [
+        "Wholesale",
+        "DTC"
+      ],
+      "subLicensing": "Not permitted",
+      "rightOfFirstRefusal": true,
+      "sellOffPeriodDays": 180,
+      "amendments": []
+    },
+    {
+      "id": "AGR-DRAFT-001",
+      "licenseeId": "lic_75f7462d",
+      "type": "Master License",
+      "succeedsContractId": "AGR-2022-001",
+      "signedAt": "",
+      "termStart": "2026-11-01",
+      "termEnd": "2031-10-31",
+      "renewalOption": "5+5y",
+      "royaltyPct": 11.0,
+      "marketingPct": 2.0,
+      "advertisingPct": 2.0,
+      "minQuarterlyGbp": 600000,
+      "minAnnualGbp": 2400000,
+      "paymentTerms": "Net 45 · Quarterly",
+      "paymentNet": "Net 45",
+      "paymentFrequency": "Quarterly",
+      "counterpartyName": "James Smith",
+      "counterpartyTitle": "CEO",
+      "status": "Terms Sent",
+      "description": "Renewal of the 2022 master ahead of expiry — minimum bumped 20% and royalty raised from 10% to 11%.",
+      "exclusivity": "Exclusive in territory",
+      "territories": [
+        "United Kingdom",
+        "Ireland"
+      ],
+      "productCategories": [
+        "Apparel",
+        "Accessory"
+      ],
+      "distributionChannels": [
+        "Wholesale",
+        "DTC"
+      ],
+      "subLicensing": "Not permitted",
+      "rightOfFirstRefusal": true,
+      "sellOffPeriodDays": 180,
+      "amendments": []
+    },
+    {
+      "id": "AGR-2016-001",
+      "licenseeId": "lic_75f7462d",
+      "signedAt": "2016-12-01",
+      "termStart": "2017-01-01",
+      "termEnd": "2021-12-31",
+      "renewalOption": "5y",
+      "royaltyPct": 9.5,
+      "marketingPct": 2.0,
+      "advertisingPct": 2.0,
+      "minQuarterlyGbp": 400000,
+      "minAnnualGbp": 1600000,
+      "paymentTerms": "Net 30 · Quarterly",
+      "counterpartyName": "James Smith",
+      "counterpartyTitle": "CEO",
+      "amendments": [],
+      "status": "Renewed"
+    },
+    {
+      "id": "AGR-2019-001",
+      "licenseeId": "lic_05056c4c",
+      "signedAt": "2019-03-12",
+      "termStart": "2019-04-01",
+      "termEnd": "2024-03-31",
+      "renewalOption": "—",
+      "royaltyPct": 10.0,
+      "marketingPct": 2.0,
+      "advertisingPct": 2.0,
+      "minQuarterlyEur": 320000,
+      "minAnnualEur": 1280000,
+      "paymentTerms": "Net 30 · Quarterly",
+      "counterpartyName": "Hugo Bernard",
+      "counterpartyTitle": "Operations Director",
+      "amendments": [],
+      "status": "Expired"
+    },
+    {
+      "id": "AGR-2022-001",
+      "licenseeId": "lic_75f7462d",
+      "signedAt": "2021-07-01",
+      "termStart": "2021-07-01",
+      "termEnd": "2026-12-31",
+      "renewalOption": "Renewal Term, if any (negotiated)",
+      "royaltyPct": 10.0,
+      "marketingPct": 0,
+      "advertisingPct": 2.0,
+      "currency": "EUR",
+      "minQuarterlyEur": 75000,
+      "minAnnualEur": 300000,
+      "paymentTerms": "Net 30 · Quarterly",
+      "paymentNet": "Net 30",
+      "paymentFrequency": "Quarterly",
+      "counterpartyName": "Rajiv Batra",
+      "counterpartyTitle": "Executive Chairman / Director",
+      "status": "Active",
+      "annualPeriods": [
+        {
+          "year": 1,
+          "from": "2021-07-01",
+          "to": "2022-12-31",
+          "gmnsEur": 2000000,
+          "gmrEur": 200000,
+          "terminationThresholdPct": null,
+          "quarterly": [
+            {
+              "due": "2021-07-11",
+              "amountEur": 50000
+            },
+            {
+              "due": "2021-10-01",
+              "amountEur": 50000
+            },
+            {
+              "due": "2022-01-01",
+              "amountEur": 50000
+            },
+            {
+              "due": "2022-04-01",
+              "amountEur": 50000
+            }
+          ]
+        },
+        {
+          "year": 2,
+          "from": "2023-01-01",
+          "to": "2023-12-31",
+          "gmnsEur": 2250000,
+          "gmrEur": 225000,
+          "terminationThresholdPct": 85,
+          "quarterly": [
+            {
+              "due": "2023-01-01",
+              "amountEur": 56250
+            },
+            {
+              "due": "2023-04-01",
+              "amountEur": 56250
+            },
+            {
+              "due": "2023-07-01",
+              "amountEur": 56250
+            },
+            {
+              "due": "2023-10-01",
+              "amountEur": 56250
+            }
+          ]
+        },
+        {
+          "year": 3,
+          "from": "2024-01-01",
+          "to": "2024-12-31",
+          "gmnsEur": 2500000,
+          "gmrEur": 250000,
+          "terminationThresholdPct": 90,
+          "quarterly": [
+            {
+              "due": "2024-01-01",
+              "amountEur": 62500
+            },
+            {
+              "due": "2024-04-01",
+              "amountEur": 62500
+            },
+            {
+              "due": "2024-07-01",
+              "amountEur": 62500
+            },
+            {
+              "due": "2024-10-01",
+              "amountEur": 62500
+            }
+          ]
+        },
+        {
+          "year": 4,
+          "from": "2025-01-01",
+          "to": "2025-12-31",
+          "gmnsEur": 2750000,
+          "gmrEur": 275000,
+          "terminationThresholdPct": 90,
+          "quarterly": [
+            {
+              "due": "2025-01-01",
+              "amountEur": 68750
+            },
+            {
+              "due": "2025-04-01",
+              "amountEur": 68750
+            },
+            {
+              "due": "2025-07-01",
+              "amountEur": 68750
+            },
+            {
+              "due": "2025-10-01",
+              "amountEur": 68750
+            }
+          ]
+        },
+        {
+          "year": 5,
+          "from": "2026-01-01",
+          "to": "2026-12-31",
+          "gmnsEur": 3000000,
+          "gmrEur": 300000,
+          "terminationThresholdPct": 90,
+          "quarterly": [
+            {
+              "due": "2026-01-01",
+              "amountEur": 75000
+            },
+            {
+              "due": "2026-04-01",
+              "amountEur": 75000
+            },
+            {
+              "due": "2026-07-01",
+              "amountEur": 75000
+            },
+            {
+              "due": "2026-10-01",
+              "amountEur": 75000
+            }
+          ]
+        }
+      ],
+      "totalGmnsEur": 12500000,
+      "totalGmrEur": 1250000,
+      "territoryZones": [
+        {
+          "name": "UK",
+          "countries": [
+            "United Kingdom"
+          ],
+          "exclusivity": "Exclusive"
+        },
+        {
+          "name": "Ireland",
+          "countries": [
+            "Ireland"
+          ],
+          "exclusivity": "Exclusive"
+        }
+      ],
+      "productCategories": [
+        {
+          "name": "Apparel",
+          "exclusivity": "Exclusive",
+          "scope": "Men/Women/Kids sportswear: t-shirts, polos, sweatshirts, jackets, fleece, knitwear, hooded shirts, leggings, pants, shorts, skirts, track suits, knitted sweaters, dresses, body suits (pre-approved styles + fabrics)"
+        },
+        {
+          "name": "Accessories",
+          "exclusivity": "Non-Exclusive",
+          "scope": "Underwear, socks, pajamas, loungewear, swimwear, headwear, sweatbands, bags, back packs, gloves, scarf — seasonal pre-approval required"
+        }
+      ],
+      "excludedCategories": [
+        "Watches",
+        "Sunglasses",
+        "Fragrance",
+        "Sports equipment"
+      ],
+      "approvedChannels": [
+        {
+          "category": "Independents",
+          "names": [
+            "Cruise",
+            "Henry George",
+            "Stuarts London",
+            "Modfather",
+            "Oi Polloi",
+            "Richmond Classics",
+            "Terraces",
+            "Trend Clothing",
+            "V-Sports"
+          ]
+        },
+        {
+          "category": "Key Accounts",
+          "names": [
+            "80's Casual",
+            "Footasylum",
+            "Next Generation",
+            "Pro Direct",
+            "Scotts",
+            "Selfridges",
+            "Harvey Nichols",
+            "Urban Outfitters"
+          ]
+        },
+        {
+          "category": "E-Commerce",
+          "names": [
+            "ASOS",
+            "Brown Bag",
+            "M&M Direct",
+            "Mainline",
+            "Shop Direct",
+            "Stand-out"
+          ]
+        },
+        {
+          "category": "Off-Price (cap 15%/season)",
+          "names": [
+            "TJX UK Ltd"
+          ]
+        },
+        {
+          "category": "Other",
+          "names": [
+            "JD Sports (separate 8% royalty per Amendment #1)"
+          ]
+        }
+      ],
+      "excludedChannels": [
+        "Walmart",
+        "Tesco",
+        "Kmart",
+        "Target",
+        "Dollar Store",
+        "jobbers",
+        "street vendors"
+      ],
+      "channelTiers": [],
+      "ecommerce": {
+        "ownSiteAllowed": false,
+        "approvedThirdParty": [],
+        "marketplacesAllowed": false,
+        "socialMediaAllowed": true,
+        "socialMediaNotes": "Facebook/Instagram only — Licensor pre-approval required; no sales, promo only"
+      },
+      "closeoutCap": {
+        "unitsPct": 15,
+        "scope": "season",
+        "listPriceDiscountThresholdPct": 25,
+        "approvedChannels": [
+          "TJX UK Ltd"
+        ]
+      },
+      "whiteLabelCarveouts": [
+        "Harrods",
+        "Barneys",
+        "Neiman Marcus",
+        "Dover Street Market",
+        "Net-a-Porter"
+      ],
+      "exclusivity": "Apparel = Exclusive; Accessories = Non-Exclusive",
+      "subLicensing": "Not permitted",
+      "rightOfFirstRefusal": false,
+      "coBranding": "Not permitted (requires Licensor written consent, sole discretion)",
+      "renewalTerm": {
+        "optionYears": null,
+        "deadlineToSign": null,
+        "stepUps": [],
+        "conditions": [
+          "Negotiated — no automatic renewal clause in contract",
+          "\"Renewal Term, if any\" mentioned in §2.1(b)"
+        ],
+        "notes": "Initial Term expires 2026-12-31. New license requires separate negotiation."
+      },
+      "rollout": {
+        "firstSubmissionDate": null,
+        "firstDistributionDate": null,
+        "transitionPeriod": null
+      },
+      "bankGuarantee": null,
+      "latePaymentInterestPctMonthly": 1.25,
+      "liquidatedDamagesMultiple": 3,
+      "licenseContractFeeEur": 0,
+      "advertisingContributionPct": 0,
+      "fxBasis": "Net Sales: HSBC Bank UK quarter-end rate; Payments: FT prior-quarter average",
+      "parties": {
+        "licensee": [
+          {
+            "name": "Rajiv Batra",
+            "role": "Executive Chairman / Director",
+            "email": "rajiv@batragroup.eu"
+          },
+          {
+            "name": "Rudy P Rudran",
+            "role": "—",
+            "email": "rudy@batragroup.eu"
+          }
+        ],
+        "licensor": [
+          {
+            "name": "William Jacques",
+            "role": "CFO, Sergio Tacchini Operations",
+            "email": "wjacques@sergiotacchini.com"
+          },
+          {
+            "name": "Howard Cohen",
+            "role": "Sergio Tacchini IP Holdings",
+            "email": "hcohen@sergiotacchini.com"
+          }
+        ],
+        "guarantor": null,
+        "owners": []
+      },
+      "governingLaw": "England and Wales",
+      "arbitration": "LCIA · sole arbitrator · UK · English",
+      "insuranceMinUsd": 3000000,
+      "insuranceRatingMin": "A.M. Best A",
+      "liabilityCapMonths": 12,
+      "reportingRequirements": [
+        "Per-Product (category/style/SKU/description) Net Sales",
+        "Per-Channel Sales",
+        "Per-Customer Sales",
+        "Purchases from other Licensor licensees",
+        "Full SKU sold/purchased list",
+        "Customer list",
+        "Insurance proceeds received",
+        "Sales Royalty calculation incl. FX conversion",
+        "Advertising Spend",
+        "Per-region (within territory) breakdown"
+      ],
+      "auditRights": {
+        "bookRetentionYears": 3,
+        "shortfallTriggers": [
+          {
+            "pct": 5,
+            "action": "Licensee bears audit cost"
+          },
+          {
+            "pct": 10,
+            "action": "Immediate termination right"
+          }
+        ]
+      },
+      "sellOffPeriodDays": 150,
+      "inventoryBuyoutOption": {
+        "days": 30,
+        "basis": "FOB cost"
+      },
+      "crossDefault": true,
+      "accelerationOnTerminationDays": 10,
+      "nonCompete": null,
+      "specialClauses": [
+        {
+          "title": "JD Royalty 8%",
+          "detail": "JD Sports sales carry a separate 8% royalty (Amendment #1, on top of base 10%)"
+        },
+        {
+          "title": "Hologram requirement",
+          "detail": "Consul Plus hologram mandatory on Products (16×21mm or 25×45mm woven label, licensee cost)"
+        },
+        {
+          "title": "Flagship Store ROFN",
+          "detail": "If Licensor receives third-party mono-brand store offer, Licensee gets 30-day right of first negotiation + 60-day exclusive negotiation window"
+        }
+      ],
+      "renewalWindowOpens": "2026-07-04",
+      "amendments": [
+        {
+          "id": "AMD-1",
+          "date": "2023-02-27",
+          "title": "Amendment No.1",
+          "summary": "JD Royalty 8% added (separate from base 10%); mutual early termination at Year 2 end removed",
+          "actor": "Chan Ju Ko (Alex)",
+          "file": "Amendment_1_signed.pdf",
+          "changes": [
+            {
+              "field": "jdRoyaltyPct",
+              "from": null,
+              "to": 8,
+              "note": "New separate royalty on JD Sports sales"
+            },
+            {
+              "field": "mutualEarlyTermination",
+              "from": "2023-12-31 termination option (Y2)",
+              "to": null,
+              "note": "Removed"
+            }
+          ]
+        }
+      ],
+      "sideLetters": [],
+      "outstandingGmrEur": 0
+    },
+    {
+      "id": "AGR-2026-001",
+      "licenseeId": "lic_c2a5c666",
+      "signedAt": "2026-01-08",
+      "termStart": "2026-01-08",
+      "termEnd": "2031-01-07",
+      "renewalOption": "5y",
+      "royaltyPct": 10.0,
+      "marketingPct": 2.0,
+      "advertisingPct": 2.0,
+      "minQuarterlyEur": 600000,
+      "minAnnualEur": 2400000,
+      "paymentTerms": "Net 30 · Quarterly",
+      "counterpartyName": "Marie Laurent",
+      "counterpartyTitle": "Director",
+      "amendments": [],
+      "status": "Active"
+    },
+    {
+      "id": "AGR-2022-002",
+      "licenseeId": "lic_b56a4e2c",
+      "signedAt": "2022-04-12",
+      "termStart": "2023-01-01",
+      "termEnd": "2027-12-31",
+      "renewalOption": "3y option (2028-2030) · sign by 2027-06-01",
+      "royaltyPct": 10.0,
+      "marketingPct": 2.0,
+      "advertisingPct": 3.0,
+      "currency": "EUR",
+      "minQuarterlyEur": 250000,
+      "minAnnualEur": 1000000,
+      "paymentTerms": "Net 30 · Quarterly",
+      "paymentNet": "Net 30",
+      "paymentFrequency": "Quarterly",
+      "counterpartyName": "Benjamin SAS Direction",
+      "counterpartyTitle": "Director",
+      "status": "Active",
+      "annualPeriods": [
+        {
+          "year": 1,
+          "from": "2023-01-01",
+          "to": "2023-12-31",
+          "gmnsEur": 12000000,
+          "gmrEur": 1200000,
+          "terminationThresholdPct": null,
+          "quarterly": [
+            {
+              "due": "2023-01-01",
+              "amountEur": 300000
+            },
+            {
+              "due": "2023-04-01",
+              "amountEur": 300000
+            },
+            {
+              "due": "2023-07-01",
+              "amountEur": 300000
+            },
+            {
+              "due": "2023-10-01",
+              "amountEur": 300000
+            }
+          ]
+        },
+        {
+          "year": 2,
+          "from": "2024-01-01",
+          "to": "2024-12-31",
+          "gmnsEur": 9506000,
+          "gmrEur": 950600,
+          "terminationThresholdPct": 85,
+          "quarterly": [
+            {
+              "due": "2024-01-01",
+              "amountEur": 237650
+            },
+            {
+              "due": "2024-04-01",
+              "amountEur": 237650
+            },
+            {
+              "due": "2024-07-01",
+              "amountEur": 237650
+            },
+            {
+              "due": "2024-10-01",
+              "amountEur": 237650
+            }
+          ]
+        },
+        {
+          "year": 3,
+          "from": "2025-01-01",
+          "to": "2025-12-31",
+          "gmnsEur": 8500000,
+          "gmrEur": 850000,
+          "terminationThresholdPct": 90,
+          "quarterly": [
+            {
+              "due": "2025-01-01",
+              "amountEur": 212500
+            },
+            {
+              "due": "2025-04-01",
+              "amountEur": 212500
+            },
+            {
+              "due": "2025-07-01",
+              "amountEur": 212500
+            },
+            {
+              "due": "2025-10-01",
+              "amountEur": 212500
+            }
+          ]
+        },
+        {
+          "year": 4,
+          "from": "2026-01-01",
+          "to": "2026-12-31",
+          "gmnsEur": 10000000,
+          "gmrEur": 1000000,
+          "terminationThresholdPct": 90,
+          "quarterly": [
+            {
+              "due": "2026-01-01",
+              "amountEur": 250000
+            },
+            {
+              "due": "2026-04-01",
+              "amountEur": 250000
+            },
+            {
+              "due": "2026-07-01",
+              "amountEur": 250000
+            },
+            {
+              "due": "2026-10-01",
+              "amountEur": 250000
+            }
+          ]
+        },
+        {
+          "year": 5,
+          "from": "2027-01-01",
+          "to": "2027-12-31",
+          "gmnsEur": 12000000,
+          "gmrEur": 1200000,
+          "terminationThresholdPct": 90,
+          "quarterly": [
+            {
+              "due": "2027-01-01",
+              "amountEur": 300000
+            },
+            {
+              "due": "2027-04-01",
+              "amountEur": 300000
+            },
+            {
+              "due": "2027-07-01",
+              "amountEur": 300000
+            },
+            {
+              "due": "2027-10-01",
+              "amountEur": 300000
+            }
+          ]
+        }
+      ],
+      "totalGmnsEur": 52006000,
+      "totalGmrEur": 5200600,
+      "territoryZones": [
+        {
+          "name": "Europe (exclusive)",
+          "countries": [
+            "Andorra",
+            "Armenia",
+            "Austria",
+            "Azerbaijan",
+            "Belgium",
+            "Cyprus",
+            "Denmark",
+            "Estonia",
+            "Finland",
+            "France",
+            "Georgia",
+            "Germany",
+            "Iceland",
+            "Italy",
+            "Kazakhstan",
+            "Latvia",
+            "Liechtenstein",
+            "Lithuania",
+            "Luxembourg",
+            "Malta",
+            "Moldova",
+            "Monaco",
+            "Netherlands",
+            "Norway",
+            "Portugal",
+            "Russia",
+            "San Marino",
+            "Spain",
+            "Sweden",
+            "Switzerland",
+            "Turkey",
+            "Vatican"
+          ],
+          "exclusivity": "Exclusive"
+        },
+        {
+          "name": "Europe (non-exclusive)",
+          "countries": [
+            "Greece",
+            "Ireland",
+            "United Kingdom"
+          ],
+          "exclusivity": "Non-Exclusive"
+        },
+        {
+          "name": "North Africa",
+          "countries": [
+            "Algeria",
+            "Libya",
+            "Morocco",
+            "Tunisia"
+          ],
+          "exclusivity": "Exclusive"
+        },
+        {
+          "name": "Middle East",
+          "countries": [
+            "Bahrain",
+            "Egypt",
+            "Iraq",
+            "Israel",
+            "Jordan",
+            "Kuwait",
+            "Lebanon",
+            "Oman",
+            "Palestinian Territories",
+            "Qatar",
+            "Saudi Arabia",
+            "Syria",
+            "UAE",
+            "Yemen"
+          ],
+          "exclusivity": "Exclusive"
+        }
+      ],
+      "productCategories": [
+        {
+          "name": "Socks",
+          "exclusivity": "Exclusive",
+          "scope": "Knee high (terry/plain/computer/technic) · Sport (tennis/short leg/ankle/terry/technic/display) · City (plain/stripes/pack/intarsia)"
+        },
+        {
+          "name": "Underwear",
+          "exclusivity": "Exclusive",
+          "scope": "Boxer shorts, briefs, boxer briefs, slips, undershirts, bras — M/F/Kids"
+        },
+        {
+          "name": "Sleepwear",
+          "exclusivity": "Exclusive (max 15% of season volume)",
+          "scope": "Pajamas — M/F/Kids"
+        }
+      ],
+      "excludedCategories": [
+        "All other apparel/footwear/accessory categories",
+        "Styles confusable with ST general apparel"
+      ],
+      "approvedChannels": [
+        {
+          "category": "Specialty multi-brand",
+          "names": [
+            "TBD per Annex 1 — to be filed per market"
+          ]
+        },
+        {
+          "category": "Hypermarkets",
+          "names": [
+            "TBD (capped at 15% of channel mix)"
+          ]
+        },
+        {
+          "category": "Large Specialty Chains",
+          "names": [
+            "TBD (Sports/Footwear/Apparel)"
+          ]
+        }
+      ],
+      "excludedChannels": [
+        "Walmart",
+        "Tesco",
+        "Kmart",
+        "Target",
+        "Dollar Store",
+        "jobbers",
+        "street vendors",
+        "off-price (general)",
+        "close-out (general)"
+      ],
+      "channelTiers": [
+        {
+          "year": 1,
+          "label": "2023",
+          "t1MinPct": 4,
+          "t2MinPct": 29,
+          "t3MaxPct": 67,
+          "hypermarketMaxPct": 15
+        },
+        {
+          "year": 2,
+          "label": "2024",
+          "t1MinPct": 6,
+          "t2MinPct": 32,
+          "t3MaxPct": 62,
+          "hypermarketMaxPct": 15
+        },
+        {
+          "year": 3,
+          "label": "2025",
+          "t1MinPct": 8,
+          "t2MinPct": 36,
+          "t3MaxPct": 56,
+          "hypermarketMaxPct": 15
+        },
+        {
+          "year": 4,
+          "label": "2026",
+          "t1MinPct": 11,
+          "t2MinPct": 40,
+          "t3MaxPct": 49,
+          "hypermarketMaxPct": 15
+        },
+        {
+          "year": 5,
+          "label": "2027",
+          "t1MinPct": 15,
+          "t2MinPct": 48,
+          "t3MaxPct": 37,
+          "hypermarketMaxPct": 15
+        }
+      ],
+      "ecommerce": {
+        "ownSiteAllowed": false,
+        "approvedThirdParty": [],
+        "marketplacesAllowed": false,
+        "socialMediaAllowed": true,
+        "socialMediaNotes": "Facebook/Instagram only — Licensor pre-approval; 24h takedown obligation"
+      },
+      "closeoutCap": {
+        "unitsPct": 0,
+        "scope": "Off-price/close-out channels not permitted",
+        "listPriceDiscountThresholdPct": null,
+        "approvedChannels": []
+      },
+      "whiteLabelCarveouts": [],
+      "exclusivity": "Exclusive in territory (UK/Greece/Ireland Non-Exclusive)",
+      "subLicensing": "Not permitted",
+      "rightOfFirstRefusal": false,
+      "coBranding": "Not permitted (requires Licensor written consent, sole discretion)",
+      "renewalTerm": {
+        "optionYears": 3,
+        "deadlineToSign": "2027-06-01",
+        "stepUps": [
+          {
+            "year": 6,
+            "pctIncrease": 20,
+            "vs": "year 5"
+          },
+          {
+            "year": 7,
+            "pctIncrease": 10,
+            "vs": "year 6"
+          },
+          {
+            "year": 8,
+            "pctIncrease": 10,
+            "vs": "year 7"
+          }
+        ],
+        "conditions": [
+          "All licensee obligations performed on time and in full",
+          "Licensor reasonable-discretion performance threshold met",
+          "Renewal calc on greater of actual Net Sales vs GMNS"
+        ],
+        "notes": "Definitive specific agreement must be signed by 2027-06-01; not just intent notice."
+      },
+      "rollout": {
+        "firstSubmissionDate": "2022-08-01",
+        "firstDistributionDate": "2023-01-01",
+        "transitionPeriod": null
+      },
+      "bankGuarantee": {
+        "pctOfGmr": 75,
+        "issuedAnnually": true,
+        "validityMonths": 14,
+        "firstTierBankRequired": true
+      },
+      "latePaymentInterestPctMonthly": 1.25,
+      "liquidatedDamagesMultiple": 3,
+      "licenseContractFeeEur": 0,
+      "advertisingContributionPct": 2.0,
+      "fxBasis": "FT prior-quarter average",
+      "parties": {
+        "licensee": [
+          {
+            "name": "Direction (Benjamin SAS)",
+            "role": "Director — 41 rue Poissonnière, 75002 Paris",
+            "email": "—"
+          }
+        ],
+        "licensor": [
+          {
+            "name": "William Jacques",
+            "role": "CFO, Sergio Tacchini Operations",
+            "email": "wjacques@sergiotacchini.com"
+          }
+        ],
+        "guarantor": null,
+        "owners": []
+      },
+      "governingLaw": "England and Wales",
+      "arbitration": "LCIA · sole arbitrator · UK · English",
+      "insuranceMinUsd": 3000000,
+      "insuranceRatingMin": "A.M. Best A",
+      "liabilityCapMonths": 12,
+      "reportingRequirements": [
+        "Per-Product (category/style/SKU/description) Net Sales",
+        "Per-Channel Sales",
+        "Per-Customer Sales",
+        "Per-region within territory breakdown",
+        "Forecast (monthly/quarterly/annual)",
+        "Advertising Spend evidence"
+      ],
+      "auditRights": {
+        "bookRetentionYears": 3,
+        "shortfallTriggers": [
+          {
+            "pct": 5,
+            "action": "Licensee bears audit cost"
+          },
+          {
+            "pct": 10,
+            "action": "Immediate termination right"
+          }
+        ]
+      },
+      "sellOffPeriodDays": 150,
+      "inventoryBuyoutOption": {
+        "days": 30,
+        "basis": "FOB cost"
+      },
+      "crossDefault": true,
+      "accelerationOnTerminationDays": 10,
+      "nonCompete": null,
+      "specialClauses": [
+        {
+          "title": "Sleepwear 15% cap",
+          "detail": "Pajama category capped at 15% of total season sales volume/value"
+        },
+        {
+          "title": "Sanction territories",
+          "detail": "U.S./U.K./E.U. sanction-list countries excluded — but GMR/GMNS minimums not reduced without written amendment"
+        }
+      ],
+      "extensionRequest": {
+        "submittedAt": "2026-05-03",
+        "term": "Renewal Term: 2028-2030 (option)"
+      },
+      "amendments": [
+        {
+          "id": "AMD-2",
+          "date": "2025-11-20",
+          "title": "Amendment Agreement No.2",
+          "summary": "GMR/GMNS fully restructured · Outstanding GMR €1,820,500 settlement gate (paid by 2025-12-31)",
+          "actor": "Benjamin SAS · Sergio Tacchini Europe",
+          "file": "Amendment_Agreement_Benjamin_STE_251120_SIGNED.pdf",
+          "changes": [
+            {
+              "field": "annualPeriods",
+              "from": "Original GMNS schedule",
+              "to": "Year 1 €12M / Y2 €9.5M / Y3 €8.5M / Y4 €10M / Y5 €12M",
+              "note": "Full restructure"
+            },
+            {
+              "field": "outstandingGmrEur",
+              "from": 1820500,
+              "to": 0,
+              "note": "Settled by 2025-12-31 — confirmed 2026-05"
+            }
+          ]
+        }
+      ],
+      "sideLetters": [],
+      "outstandingGmrEur": 0
+    }
+  ],
+  "seasons": [
+    {
+      "code": "26SS",
+      "year": 2026,
+      "season": "SS",
+      "directionTheme": "Damarindo Refined",
+      "directionPrinciples": [
+        "Refined Active — no oversized silhouettes",
+        "Elegant palette — max chroma 60",
+        "Damarindo signature — minimum 2 cues per silhouette"
+      ],
+      "paletteRules": {
+        "maxChroma": 60,
+        "allowedTones": [
+          "Tone-on-Tone (charcoal on black)",
+          "Refined Point Color (sand, off-white, dust rose)"
+        ],
+        "forbidden": [
+          "#84CC16 (neon green)",
+          "#F97316 (neon orange)",
+          "any chroma > 60"
+        ]
+      },
+      "milestones": {
+        "designSubmitClose": "2026-02-15",
+        "designApprovalClose": "2026-02-28",
+        "planSubmitDeadline": "2026-05-19",
+        "sampleReview": "2026-06-08",
+        "launch": "2026-08-15",
+        "settlementClose": "2026-09-14"
+      },
+      "phase": "Plan Submission",
+      "nextDeadline": {
+        "date": "2026-05-19T18:00:00+01:00",
+        "label": "Season Plan Submission (D-90)"
+      },
+      "licenseeMilestones": {
+        "lic_75f7462d": {
+          "sampleReview": "2026-06-15",
+          "settlementClose": "2026-09-30"
+        },
+        "lic_c2a5c666": {
+          "planSubmitDeadline": "2026-05-22"
+        }
+      },
+      "licenseePublished": {
+        "lic_75f7462d": true,
+        "lic_c2a5c666": true,
+        "lic_000025e9": true,
+        "lic_b56a4e2c": true,
+        "lic_05056c4c": true
+      }
+    },
+    {
+      "code": "25FW",
+      "year": 2025,
+      "season": "FW",
+      "directionTheme": "Mountain Lounge",
+      "directionPrinciples": [
+        "Warm tones, technical comfort",
+        "Saturation max 65",
+        "Heritage cues — minimum 1 archive reference"
+      ],
+      "milestones": {
+        "designSubmitClose": "2025-06-15",
+        "designApprovalClose": "2025-06-30",
+        "planSubmitDeadline": "2025-07-10",
+        "sampleReview": "2025-08-01",
+        "launch": "2025-09-15",
+        "settlementClose": "2025-10-15"
+      },
+      "phase": "Closed",
+      "licenseeMilestones": {},
+      "licenseePublished": {
+        "lic_75f7462d": true,
+        "lic_c2a5c666": true,
+        "lic_000025e9": true,
+        "lic_b56a4e2c": true,
+        "lic_05056c4c": true
+      }
+    },
+    {
+      "code": "25SS",
+      "year": 2025,
+      "season": "SS",
+      "directionTheme": "Riviera Sport",
+      "directionPrinciples": [
+        "Light tailoring, breathable fabrics",
+        "Saturation max 70",
+        "Mediterranean palette"
+      ],
+      "milestones": {
+        "designSubmitClose": "2024-12-01",
+        "designApprovalClose": "2024-12-15",
+        "planSubmitDeadline": "2025-01-20",
+        "sampleReview": "2025-02-10",
+        "launch": "2025-03-20",
+        "settlementClose": "2025-04-20"
+      },
+      "phase": "Closed",
+      "licenseeMilestones": {},
+      "licenseePublished": {
+        "lic_75f7462d": true,
+        "lic_c2a5c666": true,
+        "lic_000025e9": true,
+        "lic_b56a4e2c": true,
+        "lic_05056c4c": true
+      }
+    },
+    {
+      "code": "26FW",
+      "year": 2026,
+      "season": "FW",
+      "directionTheme": "Alpine Quiet",
+      "directionPrinciples": [
+        "Muted palette — max chroma 50",
+        "Heritage outerwear cues",
+        "Sustainable yarn preference"
+      ],
+      "milestones": {
+        "designSubmitClose": "2026-06-01",
+        "designApprovalClose": "2026-06-20",
+        "planSubmitDeadline": "2026-07-05",
+        "sampleReview": "2026-08-10",
+        "launch": "2026-09-25",
+        "settlementClose": "2026-10-30"
+      },
+      "phase": "Planning",
+      "licenseeMilestones": {
+        "lic_b56a4e2c": {
+          "designSubmitClose": "2026-06-08"
+        }
+      },
+      "licenseePublished": {
+        "lic_75f7462d": true,
+        "lic_b56a4e2c": true,
+        "lic_c2a5c666": false,
+        "lic_000025e9": false,
+        "lic_05056c4c": false
+      }
+    },
+    {
+      "code": "27SS",
+      "year": 2027,
+      "season": "SS",
+      "directionTheme": "TBD",
+      "directionPrinciples": [],
+      "milestones": {
+        "designSubmitClose": "",
+        "designApprovalClose": "",
+        "planSubmitDeadline": "",
+        "sampleReview": "",
+        "launch": "2027-03-20",
+        "settlementClose": ""
+      },
+      "phase": "Planning",
+      "licenseeMilestones": {},
+      "licenseePublished": {
+        "lic_75f7462d": false,
+        "lic_c2a5c666": false,
+        "lic_000025e9": false,
+        "lic_b56a4e2c": false,
+        "lic_05056c4c": false
+      }
+    }
+  ],
+  "brandDirections": [],
+  "designs": [
+    {
+      "id": "des_84dfccf8",
+      "submissionId": "DES-26SS-001",
+      "licenseeId": "lic_75f7462d",
+      "season": "26SS",
+      "category": "Track Top",
+      "name": "Mens Track Top Premium",
+      "version": "v3",
+      "uploadedAt": "2026-05-06T14:22:00+01:00",
+      "uploadedBy": "usr_06e0bea9",
+      "stage": "F&F Review",
+      "aiGrade": "B",
+      "aiScore": 80,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": [
+        {
+          "id": 1,
+          "type": "fit",
+          "title": "Oversized Fit Violation",
+          "detail": "Shoulder drop +6 cm beyond spec. Violates 26SS principle \"No Oversized — Refined Active\".",
+          "suggestion": "Reduce shoulder width by 2 cm and apply Fit Level 2 block. Reference STM25TT-008 (approved).",
+          "anchor": {
+            "x": 50,
+            "y": 30
+          }
+        },
+        {
+          "id": 2,
+          "type": "palette",
+          "title": "Color — Palette Deviation",
+          "detail": "Neon green (#84CC16) outside 26SS Elegant Active palette (max chroma 60).",
+          "suggestion": "Use Tone-on-Tone (charcoal on black) or Refined Point Color from approved swatches.",
+          "anchor": {
+            "x": 65,
+            "y": 55
+          }
+        },
+        {
+          "id": 3,
+          "type": "signature",
+          "title": "Insufficient Signature Usage",
+          "detail": "Only 1 brand cue detected. 26SS minimum is 2 Damarindo signature details per silhouette.",
+          "suggestion": "Add at least 1 Damarindo signature detail — collar piping, cuff stripe, or back-yoke embroidery.",
+          "anchor": {
+            "x": 35,
+            "y": 70
+          }
+        }
+      ]
+    },
+    {
+      "id": "des_ee259e7e",
+      "submissionId": "DES-26SS-002",
+      "licenseeId": "lic_75f7462d",
+      "season": "26SS",
+      "category": "Track Top",
+      "name": "Track Top Mono",
+      "version": "v2",
+      "uploadedAt": "2026-05-06T14:24:00+01:00",
+      "uploadedBy": "usr_06e0bea9",
+      "stage": "Sample Inspection",
+      "aiGrade": "A",
+      "aiScore": 94,
+      "image": "assets/cads/STM26TT-002.svg",
+      "violations": [],
+      "sampleStage": {
+        "status": "AI inspection complete · awaiting human review",
+        "shipment": {
+          "shippedAt": "2026-05-08",
+          "carrier": "DHL Express",
+          "tracking": "JD014600009842156",
+          "receivedAt": "2026-05-10"
+        },
+        "photos": 6,
+        "aiInspection": [
+          {
+            "name": "Delta-E colour match",
+            "status": "pass",
+            "detail": "ΔE 1.8 vs approved CAD palette (threshold 3.0)"
+          },
+          {
+            "name": "Silhouette match",
+            "status": "pass",
+            "detail": "Shoulder drop, sleeve length, hem within ±0.5cm of spec"
+          },
+          {
+            "name": "Material label",
+            "status": "warn",
+            "detail": "Care label printing slightly off-centre — cosmetic; verify against carton batch"
+          },
+          {
+            "name": "Trim & signature cues",
+            "status": "pass",
+            "detail": "Damarindo embroidery + cuff stripe both present and correctly placed"
+          }
+        ],
+        "humanCheck": {
+          "required": [
+            "Stitching density (12 SPI)",
+            "Hand-feel · drape",
+            "Wash test 30°C colour-fastness"
+          ],
+          "completedBy": null,
+          "completedAt": null
+        }
+      }
+    },
+    {
+      "id": "des_1a845211",
+      "submissionId": "DES-26SS-003",
+      "licenseeId": "lic_75f7462d",
+      "season": "26SS",
+      "category": "Track Pant",
+      "name": "Wide Track Pant",
+      "version": "v1",
+      "uploadedAt": "2026-05-06T14:26:00+01:00",
+      "uploadedBy": "usr_06e0bea9",
+      "stage": "Production Cleared",
+      "aiGrade": "A",
+      "aiScore": 91,
+      "image": "assets/cads/STM26TP-003.svg",
+      "violations": [],
+      "sampleStage": {
+        "status": "Production code issued",
+        "shipment": {
+          "shippedAt": "2026-05-02",
+          "carrier": "DHL Express",
+          "tracking": "JD014600009811072",
+          "receivedAt": "2026-05-04"
+        },
+        "photos": 8,
+        "aiInspection": [
+          {
+            "name": "Delta-E colour match",
+            "status": "pass",
+            "detail": "ΔE 0.9 — excellent"
+          },
+          {
+            "name": "Silhouette match",
+            "status": "pass",
+            "detail": "All measurements within ±0.3cm"
+          },
+          {
+            "name": "Material label",
+            "status": "pass",
+            "detail": "Composition, care, country-of-origin all compliant"
+          },
+          {
+            "name": "Trim & signature cues",
+            "status": "pass",
+            "detail": "All required Damarindo cues correctly placed"
+          }
+        ],
+        "humanCheck": {
+          "required": [
+            "Stitching density",
+            "Hand-feel",
+            "Wash test"
+          ],
+          "completedBy": "Donghyuk Jang",
+          "completedAt": "2026-05-11T15:42:00+09:00",
+          "verdict": "pass"
+        },
+        "productionCode": {
+          "code": "PROD-26SS-TP-003-R1",
+          "issuedAt": "2026-05-11T15:55:00+09:00",
+          "issuedBy": "Donghyuk Jang"
+        }
+      }
+    },
+    {
+      "id": "des_19efa3a1",
+      "submissionId": "DES-26SS-004",
+      "licenseeId": "lic_75f7462d",
+      "season": "26SS",
+      "category": "Polo",
+      "name": "Womens Polo Refined",
+      "version": "v1",
+      "uploadedAt": "2026-05-06T14:28:00+01:00",
+      "uploadedBy": "usr_06e0bea9",
+      "stage": "F&F Review",
+      "aiGrade": "B",
+      "aiScore": 78,
+      "image": "assets/cads/STW26PL-004.svg",
+      "violations": [
+        {
+          "id": 1,
+          "type": "signature",
+          "title": "Signature Cue Borderline",
+          "detail": "Detected 1.5 Damarindo cues. 26SS requires 2 distinct signatures.",
+          "suggestion": "Add visible cuff striping or back-yoke embroidery.",
+          "anchor": {
+            "x": 50,
+            "y": 45
+          }
+        }
+      ]
+    },
+    {
+      "id": "des_ss27_001",
+      "submissionId": "DES-27SS-005",
+      "licenseeId": "lic_c2a5c666",
+      "season": "27SS",
+      "category": "Polo",
+      "name": "Riviera Polo · Womens",
+      "version": "v1",
+      "uploadedAt": "2026-03-18T10:14:00+02:00",
+      "uploadedBy": "usr_5db4c9f8",
+      "stage": "Production Cleared",
+      "aiGrade": "A",
+      "aiScore": 92,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": []
+    },
+    {
+      "id": "des_ss27_002",
+      "submissionId": "DES-27SS-006",
+      "licenseeId": "lic_c2a5c666",
+      "season": "27SS",
+      "category": "Scarf",
+      "name": "Tennis Club Silk Scarf",
+      "version": "v2",
+      "uploadedAt": "2026-04-02T11:48:00+02:00",
+      "uploadedBy": "usr_5db4c9f8",
+      "stage": "Sample Inspection",
+      "aiGrade": "B",
+      "aiScore": 84,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": []
+    },
+    {
+      "id": "des_sfoo_001",
+      "submissionId": "DES-27SS-007",
+      "licenseeId": "lic_000025e9",
+      "season": "27SS",
+      "category": "Sneaker",
+      "name": "Court Sneaker Heritage",
+      "version": "v3",
+      "uploadedAt": "2026-03-22T09:30:00+02:00",
+      "uploadedBy": "usr_5db4c9f8",
+      "stage": "Production Cleared",
+      "aiGrade": "A",
+      "aiScore": 90,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": []
+    },
+    {
+      "id": "des_sfoo_002",
+      "submissionId": "DES-27FW-008",
+      "licenseeId": "lic_000025e9",
+      "season": "27FW",
+      "category": "Sneaker",
+      "name": "Court Trainer Active",
+      "version": "v1",
+      "uploadedAt": "2026-04-30T15:20:00+02:00",
+      "uploadedBy": "usr_5db4c9f8",
+      "stage": "F&F Review",
+      "aiGrade": "B",
+      "aiScore": 78,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": []
+    },
+    {
+      "id": "des_ben_001",
+      "submissionId": "DES-27SS-009",
+      "licenseeId": "lic_b56a4e2c",
+      "season": "27SS",
+      "category": "Heritage",
+      "name": "Heritage Jacket Mid-Weight",
+      "version": "v2",
+      "uploadedAt": "2026-04-15T16:42:00+02:00",
+      "uploadedBy": "usr_5db4c9f8",
+      "stage": "Sample Inspection",
+      "aiGrade": "B",
+      "aiScore": 82,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": []
+    },
+    {
+      "id": "des_ben_002",
+      "submissionId": "DES-27SS-010",
+      "licenseeId": "lic_b56a4e2c",
+      "season": "27SS",
+      "category": "Heritage",
+      "name": "Heritage Tee",
+      "version": "v1",
+      "uploadedAt": "2026-05-04T10:08:00+02:00",
+      "uploadedBy": "usr_5db4c9f8",
+      "stage": "F&F Review",
+      "aiGrade": "B",
+      "aiScore": 80,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": []
+    },
+    {
+      "id": "des_bds_001",
+      "submissionId": "DES-27SS-011",
+      "licenseeId": "lic_05056c4c",
+      "season": "27SS",
+      "category": "Apparel",
+      "name": "Sport Track Top",
+      "version": "v1",
+      "uploadedAt": "2026-05-05T13:14:00+02:00",
+      "uploadedBy": "usr_5db4c9f8",
+      "stage": "F&F Review",
+      "aiGrade": "C",
+      "aiScore": 70,
+      "image": "assets/cads/STM26TT-001.svg",
+      "violations": []
+    }
+  ],
+  "similarApproved": [
+    {
+      "id": "STM25TT-008",
+      "name": "Track Top Refined",
+      "image": "assets/cads/STM25TT-008.svg",
+      "cosine": 0.91
+    },
+    {
+      "id": "STM25TT-013",
+      "name": "Track Top Sand",
+      "image": "assets/cads/STM25TT-013.svg",
+      "cosine": 0.87
+    },
+    {
+      "id": "STM25TT-021",
+      "name": "Track Top Lilac",
+      "image": "assets/cads/STM25TT-021.svg",
+      "cosine": 0.83
+    }
+  ],
+  "salesStatements": [
+    {
+      "id": "STM-2026-Q1-003",
+      "licenseeId": "lic_75f7462d",
+      "quarter": "Q1 2026",
+      "fileName": "BestOfBritain_Sales_Q1_2026_v2.xlsx",
+      "submittedAt": "2026-04-22T11:18:00+01:00",
+      "totalSalesGbp": 1320750,
+      "royaltyGbp": 132075,
+      "status": "Pending Review",
+      "rows": [
+        {
+          "sku": "des_84dfccf8",
+          "description": "Mens Track Top Premium",
+          "category": "Track Top",
+          "qty": 4200,
+          "unitPrice": 89.99,
+          "netAmount": 377958.0,
+          "date": "2026-02-23",
+          "account": "House of Fraser",
+          "channel": "Wholesale",
+          "gross": 377958.0,
+          "discount": 0
+        },
+        {
+          "sku": "des_ee259e7e",
+          "description": "Track Top Mono",
+          "category": "Track Top",
+          "qty": 3800,
+          "unitPrice": 79.99,
+          "netAmount": 303962.0,
+          "date": "2026-03-11",
+          "account": "Harrods",
+          "channel": "Wholesale",
+          "gross": 303962.0,
+          "discount": 0
+        },
+        {
+          "sku": "des_1a845211",
+          "description": "Wide Track Pant",
+          "category": "Track Pant",
+          "qty": 3500,
+          "unitPrice": 69.99,
+          "netAmount": 244965.0,
+          "date": "2026-03-21",
+          "account": "Amazon UK",
+          "channel": "DTC",
+          "gross": 244965.0,
+          "discount": 0
+        },
+        {
+          "sku": "des_19efa3a1",
+          "description": "Womens Polo Refined",
+          "category": "Polo",
+          "qty": 2900,
+          "unitPrice": 59.99,
+          "netAmount": 173971.0,
+          "date": "2026-03-09",
+          "account": "Mr Porter",
+          "channel": "Marketplace",
+          "gross": 173971.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM26HD-005",
+          "description": "Logo Hoodie",
+          "category": "Hoodie",
+          "qty": 1300,
+          "unitPrice": 89.99,
+          "netAmount": 116987.0,
+          "date": "2026-03-03",
+          "account": "Liberty London",
+          "channel": "Marketplace",
+          "gross": 116987.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM26AC-006",
+          "description": "Capsule Cap",
+          "category": "Accessory",
+          "qty": 4118,
+          "unitPrice": 24.99,
+          "netAmount": 102907.0,
+          "date": "2026-03-24",
+          "account": "END Clothing",
+          "channel": "Wholesale",
+          "gross": 102908.82,
+          "discount": 1.82
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q4-002",
+      "licenseeId": "lic_75f7462d",
+      "quarter": "Q4 2025",
+      "fileName": "BestOfBritain_Sales_Q4_2025_final.xlsx",
+      "submittedAt": "2026-01-28T17:42:00+00:00",
+      "totalSalesGbp": 1398420,
+      "royaltyGbp": 139842,
+      "status": "Invoiced",
+      "rows": [
+        {
+          "sku": "STM25TT-001",
+          "description": "Mens Track Top Classic",
+          "category": "Track Top",
+          "qty": 4500,
+          "unitPrice": 89.99,
+          "netAmount": 404955.0,
+          "date": "2025-10-02",
+          "account": "Liberty London",
+          "channel": "Wholesale",
+          "gross": 404955.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25TT-002",
+          "description": "Track Top Heritage",
+          "category": "Track Top",
+          "qty": 3900,
+          "unitPrice": 79.99,
+          "netAmount": 311961.0,
+          "date": "2025-10-30",
+          "account": "Selfridges",
+          "channel": "Wholesale",
+          "gross": 311961.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25TP-003",
+          "description": "Slim Track Pant",
+          "category": "Track Pant",
+          "qty": 3700,
+          "unitPrice": 69.99,
+          "netAmount": 258963.0,
+          "date": "2025-11-28",
+          "account": "Amazon UK",
+          "channel": "Marketplace",
+          "gross": 258963.0,
+          "discount": 0
+        },
+        {
+          "sku": "STW25PL-004",
+          "description": "Womens Polo Heritage",
+          "category": "Polo",
+          "qty": 3100,
+          "unitPrice": 59.99,
+          "netAmount": 185969.0,
+          "date": "2025-11-12",
+          "account": "Amazon UK",
+          "channel": "Wholesale",
+          "gross": 185969.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25HD-005",
+          "description": "Logo Hoodie",
+          "category": "Hoodie",
+          "qty": 1500,
+          "unitPrice": 89.99,
+          "netAmount": 134985.0,
+          "date": "2025-12-07",
+          "account": "END Clothing",
+          "channel": "DTC",
+          "gross": 134985.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25AC-006",
+          "description": "Beanie",
+          "category": "Accessory",
+          "qty": 4258,
+          "unitPrice": 24.99,
+          "netAmount": 101587.0,
+          "date": "2025-12-04",
+          "account": "END Clothing",
+          "channel": "Wholesale",
+          "gross": 106407.42,
+          "discount": 4820.42
+        }
+      ],
+      "invoice": {
+        "number": "INV-Q4-2025-001",
+        "generatedAt": "2026-01-28T17:42:00+00:00",
+        "generatedBy": "HQ Reviewer",
+        "periodLabel": "Q4 2025",
+        "currency": "GBP",
+        "netSales": 1398420,
+        "royaltyPct": 10,
+        "royaltyAmount": 139842,
+        "marketingPct": 2,
+        "marketingAmount": 27968,
+        "totalDue": 167810,
+        "dueDate": "2026-03-15T00:00:00+00:00",
+        "paymentTerms": "Net 30",
+        "status": "Issued"
+      }
+    },
+    {
+      "id": "STM-2025-Q3-001",
+      "licenseeId": "lic_75f7462d",
+      "quarter": "Q3 2025",
+      "fileName": "BestOfBritain_Sales_Q3_2025_final.xlsx",
+      "submittedAt": "2025-10-27T16:08:00+01:00",
+      "totalSalesGbp": 1184300,
+      "royaltyGbp": 118430,
+      "status": "Invoiced",
+      "rows": [
+        {
+          "sku": "STM25TT-001",
+          "description": "Mens Track Top Classic",
+          "category": "Track Top",
+          "qty": 3800,
+          "unitPrice": 89.99,
+          "netAmount": 341962.0,
+          "date": "2025-08-22",
+          "account": "Best of Britain DTC",
+          "channel": "DTC",
+          "gross": 341962.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25TT-002",
+          "description": "Track Top Heritage",
+          "category": "Track Top",
+          "qty": 3300,
+          "unitPrice": 79.99,
+          "netAmount": 263967.0,
+          "date": "2025-08-18",
+          "account": "END Clothing",
+          "channel": "Wholesale",
+          "gross": 263967.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25TP-003",
+          "description": "Slim Track Pant",
+          "category": "Track Pant",
+          "qty": 3100,
+          "unitPrice": 69.99,
+          "netAmount": 216969.0,
+          "date": "2025-09-05",
+          "account": "House of Fraser",
+          "channel": "Wholesale",
+          "gross": 216969.0,
+          "discount": 0
+        },
+        {
+          "sku": "STW25PL-004",
+          "description": "Womens Polo Heritage",
+          "category": "Polo",
+          "qty": 2400,
+          "unitPrice": 59.99,
+          "netAmount": 143976.0,
+          "date": "2025-09-03",
+          "account": "Best of Britain DTC",
+          "channel": "DTC",
+          "gross": 143976.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25HD-005",
+          "description": "Logo Hoodie",
+          "category": "Hoodie",
+          "qty": 1200,
+          "unitPrice": 89.99,
+          "netAmount": 107988.0,
+          "date": "2025-07-18",
+          "account": "Selfridges",
+          "channel": "DTC",
+          "gross": 107988.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25AC-006",
+          "description": "Beanie",
+          "category": "Accessory",
+          "qty": 4374,
+          "unitPrice": 24.99,
+          "netAmount": 109306.0,
+          "date": "2025-09-28",
+          "account": "Amazon UK",
+          "channel": "Wholesale",
+          "gross": 109306.26,
+          "discount": 0.26
+        }
+      ],
+      "invoice": {
+        "number": "INV-2025-Q3-001",
+        "generatedAt": "2026-01-12T09:30:00Z",
+        "generatedBy": "Min Jung",
+        "periodLabel": "2025 Q3",
+        "currency": "GBP",
+        "netSales": 1184300,
+        "royaltyPct": 10,
+        "royaltyAmount": 118430,
+        "marketingPct": 2,
+        "marketingAmount": 23686,
+        "totalDue": 142116,
+        "dueDate": "2026-02-11T09:30:00Z",
+        "paymentTerms": "Net 30",
+        "status": "Issued",
+        "statementIds": [
+          "STM-2025-Q3-001"
+        ]
+      }
+    },
+    {
+      "id": "STM-2025-Q2-001",
+      "licenseeId": "lic_75f7462d",
+      "quarter": "Q2 2025",
+      "fileName": "BestOfBritain_Sales_Q2_2025_final.xlsx",
+      "submittedAt": "2025-07-24T11:21:00+01:00",
+      "totalSalesGbp": 1062810,
+      "royaltyGbp": 106281,
+      "status": "Paid",
+      "rows": [
+        {
+          "sku": "STM25TT-001",
+          "description": "Mens Track Top Classic",
+          "category": "Track Top",
+          "qty": 3300,
+          "unitPrice": 89.99,
+          "netAmount": 296967.0,
+          "date": "2025-04-08",
+          "account": "Amazon UK",
+          "channel": "Wholesale",
+          "gross": 296967.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25TT-002",
+          "description": "Track Top Heritage",
+          "category": "Track Top",
+          "qty": 2900,
+          "unitPrice": 79.99,
+          "netAmount": 231971.0,
+          "date": "2025-06-11",
+          "account": "ASOS",
+          "channel": "DTC",
+          "gross": 231971.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25TP-003",
+          "description": "Slim Track Pant",
+          "category": "Track Pant",
+          "qty": 2700,
+          "unitPrice": 69.99,
+          "netAmount": 188973.0,
+          "date": "2025-06-17",
+          "account": "Amazon UK",
+          "channel": "Wholesale",
+          "gross": 188973.0,
+          "discount": 0
+        },
+        {
+          "sku": "STW25PL-004",
+          "description": "Womens Polo Heritage",
+          "category": "Polo",
+          "qty": 2100,
+          "unitPrice": 59.99,
+          "netAmount": 125979.0,
+          "date": "2025-04-30",
+          "account": "END Clothing",
+          "channel": "Outlet",
+          "gross": 125979.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25HD-005",
+          "description": "Logo Hoodie",
+          "category": "Hoodie",
+          "qty": 1100,
+          "unitPrice": 89.99,
+          "netAmount": 98989.0,
+          "date": "2025-05-02",
+          "account": "Mr Porter",
+          "channel": "DTC",
+          "gross": 98989.0,
+          "discount": 0
+        },
+        {
+          "sku": "STM25AC-006",
+          "description": "Beanie",
+          "category": "Accessory",
+          "qty": 4805,
+          "unitPrice": 24.99,
+          "netAmount": 120075.0,
+          "date": "2025-04-19",
+          "account": "Liberty London",
+          "channel": "Outlet",
+          "gross": 120076.95,
+          "discount": 1.95
+        }
+      ],
+      "invoice": {
+        "number": "INV-2025-Q2-001",
+        "generatedAt": "2025-10-14T10:00:00Z",
+        "generatedBy": "Min Jung",
+        "periodLabel": "2025 Q2",
+        "currency": "GBP",
+        "netSales": 1062810,
+        "royaltyPct": 10,
+        "royaltyAmount": 106281,
+        "marketingPct": 2,
+        "marketingAmount": 21256,
+        "totalDue": 127537,
+        "dueDate": "2025-11-13T10:00:00Z",
+        "paymentTerms": "Net 30",
+        "status": "Paid",
+        "statementIds": [
+          "STM-2025-Q2-001"
+        ],
+        "paidAt": "2025-11-05T16:42:00Z"
+      }
+    },
+    {
+      "id": "STM-2026-Q1-002",
+      "licenseeId": "lic_c2a5c666",
+      "quarter": "Q1 2026",
+      "fileName": "SugiSAS_Q1_2026.xlsx",
+      "submittedAt": "2026-04-18T09:50:00+02:00",
+      "totalSalesGbp": 1424800,
+      "royaltyGbp": 142480,
+      "status": "Pending Review",
+      "rows": [
+        {
+          "sku": "STF26TT-101",
+          "description": "Track Top Riviera",
+          "category": "Track Top",
+          "qty": 4400,
+          "unitPrice": 99.0,
+          "netAmount": 435600.0,
+          "date": "2026-03-10",
+          "account": "La Redoute",
+          "channel": "DTC",
+          "gross": 435600.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF26TT-102",
+          "description": "Track Top Saint Tropez",
+          "category": "Track Top",
+          "qty": 3700,
+          "unitPrice": 89.0,
+          "netAmount": 329300.0,
+          "date": "2026-02-01",
+          "account": "BHV",
+          "channel": "Wholesale",
+          "gross": 329300.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF26TP-103",
+          "description": "Track Pant Côte d'Azur",
+          "category": "Track Pant",
+          "qty": 3300,
+          "unitPrice": 79.0,
+          "netAmount": 260700.0,
+          "date": "2026-01-24",
+          "account": "Galeries Lafayette",
+          "channel": "DTC",
+          "gross": 260700.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF26PL-104",
+          "description": "Polo Mediterranée",
+          "category": "Polo",
+          "qty": 2600,
+          "unitPrice": 65.0,
+          "netAmount": 169000.0,
+          "date": "2026-03-20",
+          "account": "La Redoute",
+          "channel": "Wholesale",
+          "gross": 169000.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF26HD-105",
+          "description": "Hoodie Bordeaux",
+          "category": "Hoodie",
+          "qty": 1500,
+          "unitPrice": 95.0,
+          "netAmount": 142500.0,
+          "date": "2026-01-05",
+          "account": "Amazon FR",
+          "channel": "Wholesale",
+          "gross": 142500.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF26AC-106",
+          "description": "Casquette",
+          "category": "Accessory",
+          "qty": 3000,
+          "unitPrice": 29.0,
+          "netAmount": 87000.0,
+          "date": "2026-01-20",
+          "account": "La Redoute",
+          "channel": "DTC",
+          "gross": 87000.0,
+          "discount": 0
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q4-001",
+      "licenseeId": "lic_c2a5c666",
+      "quarter": "Q4 2025",
+      "fileName": "SugiSAS_Q4_2025.xlsx",
+      "submittedAt": "2026-01-22T14:05:00+01:00",
+      "totalSalesGbp": 1551200,
+      "royaltyGbp": 155120,
+      "status": "Invoiced",
+      "rows": [
+        {
+          "sku": "STF25TT-101",
+          "description": "Track Top Riviera",
+          "category": "Track Top",
+          "qty": 4800,
+          "unitPrice": 99.0,
+          "netAmount": 475200.0,
+          "date": "2025-10-14",
+          "account": "La Redoute",
+          "channel": "Wholesale",
+          "gross": 475200.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF25TT-102",
+          "description": "Track Top Saint Tropez",
+          "category": "Track Top",
+          "qty": 4000,
+          "unitPrice": 89.0,
+          "netAmount": 356000.0,
+          "date": "2025-10-04",
+          "account": "Sarenza",
+          "channel": "Outlet",
+          "gross": 356000.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF25TP-103",
+          "description": "Track Pant Côte d'Azur",
+          "category": "Track Pant",
+          "qty": 3600,
+          "unitPrice": 79.0,
+          "netAmount": 284400.0,
+          "date": "2025-10-31",
+          "account": "La Redoute",
+          "channel": "Outlet",
+          "gross": 284400.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF25PL-104",
+          "description": "Polo Mediterranée",
+          "category": "Polo",
+          "qty": 2900,
+          "unitPrice": 65.0,
+          "netAmount": 188500.0,
+          "date": "2025-10-29",
+          "account": "Amazon FR",
+          "channel": "Marketplace",
+          "gross": 188500.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF25HD-105",
+          "description": "Hoodie Bordeaux",
+          "category": "Hoodie",
+          "qty": 1700,
+          "unitPrice": 95.0,
+          "netAmount": 161500.0,
+          "date": "2025-12-26",
+          "account": "Spartoo",
+          "channel": "DTC",
+          "gross": 161500.0,
+          "discount": 0
+        },
+        {
+          "sku": "STF25AC-106",
+          "description": "Casquette",
+          "category": "Accessory",
+          "qty": 3000,
+          "unitPrice": 28.5,
+          "netAmount": 85500.0,
+          "date": "2025-10-15",
+          "account": "Sugi France DTC",
+          "channel": "Wholesale",
+          "gross": 85500.0,
+          "discount": 0
+        }
+      ],
+      "invoice": {
+        "number": "INV-2025-Q4-001",
+        "generatedAt": "2026-04-08T08:15:00Z",
+        "generatedBy": "Min Jung",
+        "periodLabel": "2025 Q4",
+        "currency": "EUR",
+        "netSales": 1551200,
+        "royaltyPct": 10,
+        "royaltyAmount": 155120,
+        "marketingPct": 2,
+        "marketingAmount": 31024,
+        "totalDue": 186144,
+        "dueDate": "2026-05-08T08:15:00Z",
+        "paymentTerms": "Net 30",
+        "status": "Issued",
+        "statementIds": [
+          "STM-2025-Q4-001"
+        ]
+      }
+    },
+    {
+      "id": "STM-2025-Q4-003",
+      "licenseeId": "lic_b56a4e2c",
+      "quarter": "Q4 2025",
+      "fileName": "Benjamin_GmbH_Q4_2025.xlsx",
+      "submittedAt": "2026-01-30T10:14:00+01:00",
+      "totalSalesGbp": 940200,
+      "royaltyGbp": 94020,
+      "status": "Invoiced",
+      "rows": [
+        {
+          "sku": "STD25TT-201",
+          "description": "Track Top Berlin",
+          "category": "Track Top",
+          "qty": 3000,
+          "unitPrice": 95.0,
+          "netAmount": 285000.0,
+          "date": "2025-11-25",
+          "account": "Breuninger",
+          "channel": "Outlet",
+          "gross": 285000.0,
+          "discount": 0
+        },
+        {
+          "sku": "STD25TT-202",
+          "description": "Track Top München",
+          "category": "Track Top",
+          "qty": 2400,
+          "unitPrice": 85.0,
+          "netAmount": 204000.0,
+          "date": "2025-12-08",
+          "account": "Mytheresa",
+          "channel": "DTC",
+          "gross": 204000.0,
+          "discount": 0
+        },
+        {
+          "sku": "STD25TP-203",
+          "description": "Track Pant Sport",
+          "category": "Track Pant",
+          "qty": 2200,
+          "unitPrice": 75.0,
+          "netAmount": 165000.0,
+          "date": "2025-10-16",
+          "account": "Zalando",
+          "channel": "Outlet",
+          "gross": 165000.0,
+          "discount": 0
+        },
+        {
+          "sku": "STD25PL-204",
+          "description": "Polo Heritage DE",
+          "category": "Polo",
+          "qty": 1900,
+          "unitPrice": 62.0,
+          "netAmount": 117800.0,
+          "date": "2025-12-04",
+          "account": "Amazon DE",
+          "channel": "Wholesale",
+          "gross": 117800.0,
+          "discount": 0
+        },
+        {
+          "sku": "STD25HD-205",
+          "description": "Hoodie Frankfurt",
+          "category": "Hoodie",
+          "qty": 1100,
+          "unitPrice": 92.0,
+          "netAmount": 101200.0,
+          "date": "2025-10-19",
+          "account": "KaDeWe",
+          "channel": "Wholesale",
+          "gross": 101200.0,
+          "discount": 0
+        },
+        {
+          "sku": "STD25AC-206",
+          "description": "Mütze",
+          "category": "Accessory",
+          "qty": 2520,
+          "unitPrice": 26.67,
+          "netAmount": 67200.0,
+          "date": "2025-10-19",
+          "account": "Zalando",
+          "channel": "DTC",
+          "gross": 67208.4,
+          "discount": 8.4
+        }
+      ],
+      "invoice": {
+        "number": "INV-Q4-2025-001",
+        "generatedAt": "2026-01-30T10:14:00+01:00",
+        "generatedBy": "HQ Reviewer",
+        "periodLabel": "Q4 2025",
+        "currency": "EUR",
+        "netSales": 940200,
+        "royaltyPct": 10,
+        "royaltyAmount": 94020,
+        "marketingPct": 2,
+        "marketingAmount": 18804,
+        "totalDue": 112824,
+        "dueDate": "2026-03-15T00:00:00+00:00",
+        "paymentTerms": "Net 30",
+        "status": "Issued"
+      }
+    },
+    {
+      "id": "STM-2026-Q1-001",
+      "licenseeId": "lic_b56a4e2c",
+      "quarter": "Q1 2026",
+      "fileName": null,
+      "submittedAt": null,
+      "totalSalesGbp": null,
+      "royaltyGbp": null,
+      "status": "Overdue",
+      "dueAt": "2026-04-30"
+    },
+    {
+      "id": "STM-2025-Q2-002",
+      "licenseeId": "lic_c2a5c666",
+      "quarter": "Q2 2025",
+      "fileName": "SugiSAS_Sales_Q2_2025_final.xlsx",
+      "submittedAt": "2025-07-25T16:30:00+02:00",
+      "totalSalesGbp": 920400,
+      "royaltyGbp": 92040,
+      "status": "Paid",
+      "lineItems": [
+        {
+          "category": "Apparel",
+          "netAmount": 612800
+        },
+        {
+          "category": "Accessory",
+          "netAmount": 307600
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q3-002",
+      "licenseeId": "lic_c2a5c666",
+      "quarter": "Q3 2025",
+      "fileName": "SugiSAS_Sales_Q3_2025_final.xlsx",
+      "submittedAt": "2025-10-25T15:42:00+02:00",
+      "totalSalesGbp": 1040250,
+      "royaltyGbp": 104025,
+      "status": "Paid",
+      "lineItems": [
+        {
+          "category": "Apparel",
+          "netAmount": 690400
+        },
+        {
+          "category": "Accessory",
+          "netAmount": 349850
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q2-003",
+      "licenseeId": "lic_b56a4e2c",
+      "quarter": "Q2 2025",
+      "fileName": "Benjamin_Sales_Q2_2025_final.xlsx",
+      "submittedAt": "2025-07-28T14:15:00+02:00",
+      "totalSalesGbp": 730200,
+      "royaltyGbp": 73020,
+      "status": "Paid",
+      "lineItems": [
+        {
+          "category": "Apparel",
+          "netAmount": 480000
+        },
+        {
+          "category": "Accessory",
+          "netAmount": 250200
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q3-003",
+      "licenseeId": "lic_b56a4e2c",
+      "quarter": "Q3 2025",
+      "fileName": "Benjamin_Sales_Q3_2025_final.xlsx",
+      "submittedAt": "2025-10-30T11:18:00+02:00",
+      "totalSalesGbp": 815400,
+      "royaltyGbp": 81540,
+      "status": "Paid",
+      "lineItems": [
+        {
+          "category": "Apparel",
+          "netAmount": 530200
+        },
+        {
+          "category": "Accessory",
+          "netAmount": 285200
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q3-004",
+      "licenseeId": "lic_000025e9",
+      "quarter": "Q3 2025",
+      "fileName": "SugiFootwear_Sales_Q3_2025_final.xlsx",
+      "submittedAt": "2025-10-29T17:05:00+02:00",
+      "totalSalesGbp": 540900,
+      "royaltyGbp": 54090,
+      "status": "Paid",
+      "lineItems": [
+        {
+          "category": "Footwear",
+          "netAmount": 540900
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q4-004",
+      "licenseeId": "lic_000025e9",
+      "quarter": "Q4 2025",
+      "fileName": "SugiFootwear_Sales_Q4_2025_final.xlsx",
+      "submittedAt": "2026-01-30T16:48:00+02:00",
+      "totalSalesGbp": 612300,
+      "royaltyGbp": 61230,
+      "status": "Invoiced",
+      "lineItems": [
+        {
+          "category": "Footwear",
+          "netAmount": 612300
+        }
+      ]
+    },
+    {
+      "id": "STM-2026-Q1-004",
+      "licenseeId": "lic_000025e9",
+      "quarter": "Q1 2026",
+      "fileName": "SugiFootwear_Sales_Q1_2026_v1.xlsx",
+      "submittedAt": "2026-04-26T13:22:00+02:00",
+      "totalSalesGbp": 482700,
+      "royaltyGbp": 48270,
+      "status": "Pending Review",
+      "lineItems": [
+        {
+          "category": "Footwear",
+          "netAmount": 482700
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q3-005",
+      "licenseeId": "lic_05056c4c",
+      "quarter": "Q3 2025",
+      "fileName": "BDS_Sales_Q3_2025_final.xlsx",
+      "submittedAt": "2025-10-31T15:33:00+02:00",
+      "totalSalesGbp": 420500,
+      "royaltyGbp": 42050,
+      "status": "Paid",
+      "lineItems": [
+        {
+          "category": "Apparel",
+          "netAmount": 296700
+        },
+        {
+          "category": "Accessory",
+          "netAmount": 123800
+        }
+      ]
+    },
+    {
+      "id": "STM-2025-Q4-005",
+      "licenseeId": "lic_05056c4c",
+      "quarter": "Q4 2025",
+      "fileName": "BDS_Sales_Q4_2025_final.xlsx",
+      "submittedAt": "2026-01-31T17:08:00+02:00",
+      "totalSalesGbp": 388400,
+      "royaltyGbp": 38840,
+      "status": "Invoiced",
+      "lineItems": [
+        {
+          "category": "Apparel",
+          "netAmount": 264500
+        },
+        {
+          "category": "Accessory",
+          "netAmount": 123900
+        }
+      ]
+    },
+    {
+      "id": "STM-2026-Q1-005",
+      "licenseeId": "lic_05056c4c",
+      "quarter": "Q1 2026",
+      "fileName": "BDS_Sales_Q1_2026_v1.xlsx",
+      "submittedAt": "2026-04-29T14:40:00+02:00",
+      "totalSalesGbp": 352800,
+      "royaltyGbp": 35280,
+      "status": "Pending Review",
+      "lineItems": [
+        {
+          "category": "Apparel",
+          "netAmount": 241500
+        },
+        {
+          "category": "Accessory",
+          "netAmount": 111300
+        }
+      ]
+    }
+  ],
+  "referenceData": {
+    "currencies": [
+      "GBP",
+      "EUR",
+      "USD",
+      "CHF",
+      "DKK",
+      "NOK",
+      "SEK",
+      "JPY",
+      "KRW"
+    ],
+    "categories": [
+      "T Shirt",
+      "Polo",
+      "Knitwear",
+      "Fleece",
+      "Jackets",
+      "Leggings",
+      "Pants",
+      "Shorts",
+      "Skirts",
+      "Dress",
+      "Tracksuit",
+      "Tracktop",
+      "Trackpants",
+      "Headwear",
+      "Underwear",
+      "Socks",
+      "Footwear",
+      "Skiwear",
+      "Wristbands",
+      "Towels",
+      "Headbands",
+      "Bandanas",
+      "Sports/Tennis Bags",
+      "Backpacks",
+      "Shoe Bags",
+      "Watches",
+      "Cosmetics & Perfumes",
+      "Other Sports Accessories",
+      "Pyjamas",
+      "Swimwear",
+      "Leather Goods",
+      "Luggage",
+      "Sunglasses",
+      "Optical Frames",
+      "Glass Cases",
+      "Home Textile Products"
+    ],
+    "productCategories": [
+      {
+        "category": "WEAR",
+        "subCategory": "INNER",
+        "productCategory": "T Shirt",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "INNER",
+        "productCategory": "Polo",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "INNER",
+        "productCategory": "Knitwear",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "INNER",
+        "productCategory": "Fleece",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "OUTER",
+        "productCategory": "Jackets",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "BOTTOM",
+        "productCategory": "Leggings",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "BOTTOM",
+        "productCategory": "Pants",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "BOTTOM",
+        "productCategory": "Shorts",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "BOTTOM",
+        "productCategory": "Skirts",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "INNER",
+        "productCategory": "Dress",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "OTHERS",
+        "productCategory": "Tracksuit",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "INNER",
+        "productCategory": "Tracktop",
+        "additionalInfo": ""
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "BOTTOM",
+        "productCategory": "Trackpants",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "HEADWEAR",
+        "productCategory": "Headwear",
+        "additionalInfo": "Hats, Caps, Visors"
+      },
+      {
+        "category": "ACC",
+        "subCategory": "UNDERWEAR",
+        "productCategory": "Underwear",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "SOCKS",
+        "productCategory": "Socks",
+        "additionalInfo": ""
+      },
+      {
+        "category": "SHOES",
+        "subCategory": "FOOTWEAR",
+        "productCategory": "Footwear",
+        "additionalInfo": "Tennis Shoes, Sandals, Flip Flops"
+      },
+      {
+        "category": "WEAR",
+        "subCategory": "OUTER",
+        "productCategory": "Skiwear",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Wristbands",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Towels",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Headbands",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Bandanas",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "BAG",
+        "productCategory": "Sports/Tennis Bags",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "BAG",
+        "productCategory": "Backpacks",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "BAG",
+        "productCategory": "Shoe Bags",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Watches",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Cosmetics & Perfumes",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Other Sports Accessories",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Pyjamas",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Swimwear",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Leather Goods",
+        "additionalInfo": "Wallets, driving license holders, document folders, checkbooks, credit card holders, key-chains, classic and casual belts, lady bags, lady handbags"
+      },
+      {
+        "category": "ACC",
+        "subCategory": "BAG",
+        "productCategory": "Luggage",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Sunglasses",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Optical Frames",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Glass Cases",
+        "additionalInfo": ""
+      },
+      {
+        "category": "ACC",
+        "subCategory": "OTHERS",
+        "productCategory": "Home Textile Products",
+        "additionalInfo": ""
+      }
+    ],
+    "channels": [
+      "DTC",
+      "WS",
+      "Marketplace",
+      "Outlet"
+    ]
+  },
+  "currentStatement": null,
+  "currentSettlement": null,
+  "seasonPlans": [
+    {
+      "id": "pln_b4d2c7a1",
+      "licenseeId": "lic_75f7462d",
+      "season": "26SS",
+      "subplan": "3-C",
+      "status": "Approved",
+      "submittedAt": "2026-02-20",
+      "approvedAt": "2026-03-15",
+      "rows": [
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "category": "Jackets",
+          "gender": "Mens",
+          "sku": 18,
+          "amountReporting": 820000,
+          "amountRetail": 1230000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "category": "Polo",
+          "gender": "Mens",
+          "sku": 22,
+          "amountReporting": 540000,
+          "amountRetail": 810000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "category": "T Shirt",
+          "gender": "Mens",
+          "sku": 24,
+          "amountReporting": 480000,
+          "amountRetail": 720000
+        },
+        {
+          "country": "UK",
+          "channel": "Retail",
+          "category": "Tracktop",
+          "gender": "Mens",
+          "sku": 14,
+          "amountReporting": 410000,
+          "amountRetail": 615000
+        },
+        {
+          "country": "UK",
+          "channel": "Retail",
+          "category": "Pants",
+          "gender": "Mens",
+          "sku": 16,
+          "amountReporting": 360000,
+          "amountRetail": 540000
+        },
+        {
+          "country": "UK",
+          "channel": "Marketplace",
+          "category": "Dress",
+          "gender": "Womens",
+          "sku": 12,
+          "amountReporting": 290000,
+          "amountRetail": 435000
+        },
+        {
+          "country": "UK",
+          "channel": "Marketplace",
+          "category": "Knitwear",
+          "gender": "Womens",
+          "sku": 10,
+          "amountReporting": 260000,
+          "amountRetail": 390000
+        },
+        {
+          "country": "UK",
+          "channel": "ST Online",
+          "category": "Headwear",
+          "gender": "Other",
+          "sku": 8,
+          "amountReporting": 140000,
+          "amountRetail": 210000
+        },
+        {
+          "country": "IE",
+          "channel": "Wholesale",
+          "category": "Fleece",
+          "gender": "Mens",
+          "sku": 10,
+          "amountReporting": 210000,
+          "amountRetail": 315000
+        },
+        {
+          "country": "IE",
+          "channel": "Wholesale",
+          "category": "Pants",
+          "gender": "Womens",
+          "sku": 8,
+          "amountReporting": 180000,
+          "amountRetail": 270000
+        },
+        {
+          "country": "IE",
+          "channel": "Retail",
+          "category": "Skirts",
+          "gender": "Womens",
+          "sku": 7,
+          "amountReporting": 130000,
+          "amountRetail": 195000
+        }
+      ],
+      "totalReportingSales": 3820000,
+      "totalRetailSales": 5730000,
+      "totalSkus": 149,
+      "approver": {
+        "role": "Brand Director",
+        "name": "Donghyuk Jang"
+      },
+      "aiNotes": [
+        "Above contract minimum (188% coverage)",
+        "Apparel/Acc/Footwear mix balanced",
+        "Style Code count borderline — recommend rationalisation",
+        "+9% YoY within run-rate band"
+      ]
+    },
+    {
+      "id": "pln_b4d2c7a1_3b",
+      "licenseeId": "lic_75f7462d",
+      "season": "26SS",
+      "subplan": "3-B",
+      "status": "Approved",
+      "submittedAt": "2026-02-22",
+      "approvedAt": "2026-03-17",
+      "accounts": [
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "Selfridges Oxford St.",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 420000,
+          "amountRetail": 630000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "Harrods Knightsbridge",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 380000,
+          "amountRetail": 570000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "John Lewis",
+          "doors": 6,
+          "status": "Existing",
+          "amountReporting": 340000,
+          "amountRetail": 510000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Liberty London",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 190000,
+          "amountRetail": 285000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Sports Direct",
+          "doors": 12,
+          "status": "Existing",
+          "amountReporting": 420000,
+          "amountRetail": 630000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "JD Sports",
+          "doors": 18,
+          "status": "Existing",
+          "amountReporting": 520000,
+          "amountRetail": 780000
+        },
+        {
+          "country": "UK",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Pro:Direct Tennis",
+          "doors": 4,
+          "status": "New",
+          "amountReporting": 120000,
+          "amountRetail": 180000
+        },
+        {
+          "country": "UK",
+          "channel": "ST Website",
+          "tier": "ST Online",
+          "accountName": "sergiotacchini.co.uk",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 480000,
+          "amountRetail": 720000
+        },
+        {
+          "country": "UK",
+          "channel": "Marketplace",
+          "tier": "Other",
+          "accountName": "Mr Porter",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 280000,
+          "amountRetail": 420000
+        },
+        {
+          "country": "UK",
+          "channel": "Marketplace",
+          "tier": "Other",
+          "accountName": "ASOS Premium",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 210000,
+          "amountRetail": 315000
+        },
+        {
+          "country": "IE",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Brown Thomas Dublin",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 150000,
+          "amountRetail": 225000
+        },
+        {
+          "country": "IE",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Lifestyle Sports",
+          "doors": 8,
+          "status": "Existing",
+          "amountReporting": 220000,
+          "amountRetail": 330000
+        }
+      ],
+      "totalReportingSales": 3730000,
+      "totalDoors": 55,
+      "totalAccounts": 12,
+      "approver": {
+        "role": "Distribution Approver",
+        "name": "Daewoon Park"
+      }
+    },
+    {
+      "id": "pln_b4d2c7a1_3a",
+      "licenseeId": "lic_75f7462d",
+      "season": "26SS",
+      "subplan": "3-A",
+      "status": "Approved",
+      "submittedAt": "2026-04-08",
+      "approvedAt": "2026-04-08T15:30:00+01:00",
+      "activities": [
+        {
+          "seq": 1,
+          "planId": "BBLT-SS26-CMP-001",
+          "activityName": "Tennis Heritage Reborn",
+          "activityType": "Campaign",
+          "targetCountry": "UK",
+          "startDate": "2026-04-01",
+          "endDate": "2026-06-30",
+          "purpose": "Anchor SS26 around Wimbledon-era heritage with an updated retro court line.",
+          "kpi": {
+            "reach": "5,000,000",
+            "impressions": "18,000,000",
+            "engagement": "320,000",
+            "followerGrowth": "+18,000",
+            "clicks": "120,000",
+            "conversions": "4,200"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "24",
+              "publishPeriod": "Apr–Jun"
+            },
+            {
+              "channel": "OOH (Outdoor)",
+              "contentFormat": "Print Ad",
+              "plannedVolume": "40 sites",
+              "publishPeriod": "May–Jun"
+            },
+            {
+              "channel": "PR / Editorial",
+              "contentFormat": "Press Release",
+              "plannedVolume": "6",
+              "publishPeriod": "Apr"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 42000,
+            "Production": 18000,
+            "Influencer": 8000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 12000,
+            "Other": 0
+          },
+          "totalBudget": 80000
+        },
+        {
+          "seq": 2,
+          "planId": "BBLT-SS26-EVT-002",
+          "activityName": "Wimbledon Pop-up",
+          "activityType": "Event",
+          "targetCountry": "UK",
+          "startDate": "2026-06-29",
+          "endDate": "2026-07-13",
+          "purpose": "Limited-run pop-up store on King's Road during the Championships.",
+          "kpi": {
+            "reach": "180,000",
+            "impressions": "540,000",
+            "engagement": "24,000",
+            "followerGrowth": "+3,200",
+            "clicks": "9,500",
+            "conversions": "1,100"
+          },
+          "channels": [
+            {
+              "channel": "Offline / In-store",
+              "contentFormat": "Event Coverage",
+              "plannedVolume": "15 days",
+              "publishPeriod": "Jun–Jul"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "30",
+              "publishPeriod": "Jun–Jul"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 5000,
+            "Production": 12000,
+            "Influencer": 3000,
+            "Event": 22000,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 3000
+          },
+          "totalBudget": 45000
+        },
+        {
+          "seq": 3,
+          "planId": "BBLT-SS26-COL-003",
+          "activityName": "Local Designer Collab",
+          "activityType": "Collaboration",
+          "targetCountry": "UK",
+          "startDate": "2026-05-15",
+          "endDate": "2026-08-15",
+          "purpose": "Capsule with a London-based illustrator for 12 SKUs of court-art tees.",
+          "kpi": {
+            "reach": "95,000",
+            "impressions": "280,000",
+            "engagement": "12,000",
+            "followerGrowth": "+1,800",
+            "clicks": "5,400",
+            "conversions": "620"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Post (Feed)",
+              "plannedVolume": "16",
+              "publishPeriod": "May–Aug"
+            },
+            {
+              "channel": "PR / Editorial",
+              "contentFormat": "Article / Blog",
+              "plannedVolume": "4",
+              "publishPeriod": "May–Jun"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 4000,
+            "Production": 8000,
+            "Influencer": 2000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 14000,
+            "Other": 2000
+          },
+          "totalBudget": 30000
+        },
+        {
+          "seq": 4,
+          "planId": "BBLT-SS26-INF-004",
+          "activityName": "UK Tennis Influencers",
+          "activityType": "Influencer",
+          "targetCountry": "UK",
+          "startDate": "2026-04-15",
+          "endDate": "2026-07-31",
+          "purpose": "3 macro + 4 micro influencers for sustained heritage-line content.",
+          "kpi": {
+            "reach": "420,000",
+            "impressions": "1,200,000",
+            "engagement": "52,000",
+            "followerGrowth": "+4,600",
+            "clicks": "18,000",
+            "conversions": "1,800"
+          },
+          "channels": [
+            {
+              "channel": "TikTok",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "42",
+              "publishPeriod": "Apr–Jul"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "60",
+              "publishPeriod": "Apr–Jul"
+            }
+          ],
+          "influencer": {
+            "count": "7 (3 macro · 4 micro)",
+            "category": "Tennis · Court Lifestyle",
+            "products": "Tracktop, Polo, Tee",
+            "tagValue": "£140,000",
+            "expectedMedia": "~3.0× tag value"
+          },
+          "budget": {
+            "Media (Advertising)": 2000,
+            "Production": 4000,
+            "Influencer": 17000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 2000
+          },
+          "totalBudget": 25000
+        }
+      ],
+      "totalBudgetGbp": 180000,
+      "approver": {
+        "role": "Marketing Approver",
+        "name": "Jongjin Lee"
+      },
+      "aiNotes": [
+        "Reasonable vs prior season ROI (25SS: £164k → 1.18× lift)",
+        "Aligned with global \"Tennis Heritage Reborn\" campaign",
+        "Influencer mix balanced — recommend +1 micro-creator"
+      ]
+    },
+    {
+      "id": "pln_9bbbc347",
+      "licenseeId": "lic_c2a5c666",
+      "season": "26SS",
+      "subplan": "3-C",
+      "status": "Approved",
+      "submittedAt": "2026-02-25",
+      "approvedAt": "2026-03-12",
+      "rows": [
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "category": "Jackets",
+          "gender": "Mens",
+          "sku": 16,
+          "amountReporting": 620000,
+          "amountRetail": 930000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "category": "Polo",
+          "gender": "Mens",
+          "sku": 20,
+          "amountReporting": 480000,
+          "amountRetail": 720000
+        },
+        {
+          "country": "FR",
+          "channel": "Retail",
+          "category": "T Shirt",
+          "gender": "Womens",
+          "sku": 18,
+          "amountReporting": 380000,
+          "amountRetail": 570000
+        },
+        {
+          "country": "FR",
+          "channel": "Retail",
+          "category": "Tracktop",
+          "gender": "Mens",
+          "sku": 12,
+          "amountReporting": 340000,
+          "amountRetail": 510000
+        },
+        {
+          "country": "FR",
+          "channel": "Marketplace",
+          "category": "Dress",
+          "gender": "Womens",
+          "sku": 10,
+          "amountReporting": 260000,
+          "amountRetail": 390000
+        },
+        {
+          "country": "FR",
+          "channel": "ST Online",
+          "category": "Knitwear",
+          "gender": "Womens",
+          "sku": 9,
+          "amountReporting": 210000,
+          "amountRetail": 315000
+        },
+        {
+          "country": "FR",
+          "channel": "ST Online",
+          "category": "Headwear",
+          "gender": "Other",
+          "sku": 6,
+          "amountReporting": 110000,
+          "amountRetail": 165000
+        },
+        {
+          "country": "BE",
+          "channel": "Wholesale",
+          "category": "Pants",
+          "gender": "Mens",
+          "sku": 8,
+          "amountReporting": 160000,
+          "amountRetail": 240000
+        },
+        {
+          "country": "BE",
+          "channel": "Retail",
+          "category": "Fleece",
+          "gender": "Womens",
+          "sku": 6,
+          "amountReporting": 120000,
+          "amountRetail": 180000
+        },
+        {
+          "country": "Monaco",
+          "channel": "Retail",
+          "category": "Dress",
+          "gender": "Womens",
+          "sku": 4,
+          "amountReporting": 90000,
+          "amountRetail": 135000
+        }
+      ],
+      "totalReportingSales": 2770000,
+      "totalRetailSales": 4155000,
+      "totalSkus": 109,
+      "approver": {
+        "role": "Brand Director",
+        "name": "Donghyuk Jang"
+      }
+    },
+    {
+      "id": "pln_2a48846c",
+      "licenseeId": "lic_c2a5c666",
+      "season": "26SS",
+      "subplan": "3-A",
+      "status": "Approved",
+      "submittedAt": "2026-03-30",
+      "approvedAt": "2026-04-18",
+      "activities": [
+        {
+          "seq": 1,
+          "planId": "SUGI-SS26-CMP-001",
+          "activityName": "Roland-Garros Edit",
+          "activityType": "Campaign",
+          "targetCountry": "FR",
+          "startDate": "2026-05-15",
+          "endDate": "2026-06-15",
+          "purpose": "Tie SS26 launch to Roland-Garros — clay-court palette capsule and on-court visibility.",
+          "kpi": {
+            "reach": "3,600,000",
+            "impressions": "12,000,000",
+            "engagement": "260,000",
+            "followerGrowth": "+14,000",
+            "clicks": "96,000",
+            "conversions": "3,400"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "20",
+              "publishPeriod": "May–Jun"
+            },
+            {
+              "channel": "OOH (Outdoor)",
+              "contentFormat": "Print Ad",
+              "plannedVolume": "60 sites",
+              "publishPeriod": "May"
+            },
+            {
+              "channel": "TikTok",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "12",
+              "publishPeriod": "May–Jun"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 36000,
+            "Production": 14000,
+            "Influencer": 6000,
+            "Event": 4000,
+            "Trade Show": 0,
+            "Collaboration Fee": 4000,
+            "Other": 2000
+          },
+          "totalBudget": 66000
+        },
+        {
+          "seq": 2,
+          "planId": "SUGI-SS26-EVT-002",
+          "activityName": "Paris Flagship Re-launch",
+          "activityType": "Event",
+          "targetCountry": "FR",
+          "startDate": "2026-04-25",
+          "endDate": "2026-04-26",
+          "purpose": "Saint-Honoré flagship re-launch with media + influencer cocktail.",
+          "kpi": {
+            "reach": "95,000",
+            "impressions": "260,000",
+            "engagement": "12,000",
+            "followerGrowth": "+2,200",
+            "clicks": "5,200",
+            "conversions": "560"
+          },
+          "channels": [
+            {
+              "channel": "Offline / In-store",
+              "contentFormat": "Event Coverage",
+              "plannedVolume": "2 days",
+              "publishPeriod": "Apr"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "18",
+              "publishPeriod": "Apr"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 4000,
+            "Production": 8000,
+            "Influencer": 3000,
+            "Event": 18000,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 2000
+          },
+          "totalBudget": 35000
+        },
+        {
+          "seq": 3,
+          "planId": "SUGI-SS26-COL-003",
+          "activityName": "Riviera Capsule",
+          "activityType": "Collaboration",
+          "targetCountry": "FR",
+          "startDate": "2026-06-01",
+          "endDate": "2026-08-31",
+          "purpose": "Côte d'Azur capsule with a Nice-based artist for resort-line graphics.",
+          "kpi": {
+            "reach": "120,000",
+            "impressions": "340,000",
+            "engagement": "15,000",
+            "followerGrowth": "+2,100",
+            "clicks": "6,400",
+            "conversions": "720"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Post (Feed)",
+              "plannedVolume": "14",
+              "publishPeriod": "Jun–Aug"
+            },
+            {
+              "channel": "Blog",
+              "contentFormat": "Article / Blog",
+              "plannedVolume": "6",
+              "publishPeriod": "Jun–Aug"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 3000,
+            "Production": 6000,
+            "Influencer": 2000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 10000,
+            "Other": 1000
+          },
+          "totalBudget": 22000
+        },
+        {
+          "seq": 4,
+          "planId": "SUGI-SS26-INF-004",
+          "activityName": "FR Creators",
+          "activityType": "Influencer",
+          "targetCountry": "FR",
+          "startDate": "2026-05-01",
+          "endDate": "2026-08-15",
+          "purpose": "5 lifestyle/sport creators for ongoing capsule visibility.",
+          "kpi": {
+            "reach": "360,000",
+            "impressions": "1,080,000",
+            "engagement": "42,000",
+            "followerGrowth": "+3,800",
+            "clicks": "14,000",
+            "conversions": "1,400"
+          },
+          "channels": [
+            {
+              "channel": "TikTok",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "32",
+              "publishPeriod": "May–Aug"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "48",
+              "publishPeriod": "May–Aug"
+            }
+          ],
+          "influencer": {
+            "count": "5 (2 macro · 3 micro)",
+            "category": "Lifestyle · Court",
+            "products": "Tracktop, Dress, Polo",
+            "tagValue": "€90,000",
+            "expectedMedia": "~2.6× tag value"
+          },
+          "budget": {
+            "Media (Advertising)": 2000,
+            "Production": 3000,
+            "Influencer": 14000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 1000
+          },
+          "totalBudget": 20000
+        }
+      ],
+      "totalBudgetGbp": 143000,
+      "approver": {
+        "role": "Marketing Approver",
+        "name": "Yumi Sato"
+      }
+    },
+    {
+      "id": "pln_0e724ea7",
+      "licenseeId": "lic_c2a5c666",
+      "season": "26SS",
+      "subplan": "3-B",
+      "status": "Pending Review",
+      "submittedAt": "2026-05-04",
+      "accounts": [
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "Le Bon Marché",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 260000,
+          "amountRetail": 390000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "Galeries Lafayette Haussmann",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 290000,
+          "amountRetail": 435000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Printemps",
+          "doors": 2,
+          "status": "Existing",
+          "amountReporting": 210000,
+          "amountRetail": 315000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Citadium",
+          "doors": 3,
+          "status": "Existing",
+          "amountReporting": 150000,
+          "amountRetail": 225000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Courir",
+          "doors": 14,
+          "status": "Existing",
+          "amountReporting": 340000,
+          "amountRetail": 510000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Foot Locker FR",
+          "doors": 18,
+          "status": "Existing",
+          "amountReporting": 420000,
+          "amountRetail": 630000
+        },
+        {
+          "country": "FR",
+          "channel": "Marketplace",
+          "tier": "Other",
+          "accountName": "24 Sèvres",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 160000,
+          "amountRetail": 240000
+        },
+        {
+          "country": "FR",
+          "channel": "ST Website",
+          "tier": "ST Online",
+          "accountName": "sergiotacchini.fr",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 380000,
+          "amountRetail": 570000
+        },
+        {
+          "country": "BE",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Inno Bruxelles",
+          "doors": 2,
+          "status": "New",
+          "amountReporting": 120000,
+          "amountRetail": 180000
+        },
+        {
+          "country": "Monaco",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "Onyx Monaco",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 90000,
+          "amountRetail": 135000
+        }
+      ],
+      "totalReportingSales": 2420000,
+      "totalDoors": 44,
+      "totalAccounts": 10
+    },
+    {
+      "id": "pln_633d8adc",
+      "licenseeId": "lic_000025e9",
+      "season": "26SS",
+      "subplan": "3-C",
+      "status": "Approved",
+      "submittedAt": "2026-02-28",
+      "approvedAt": "2026-03-20",
+      "rows": [
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "category": "Jackets",
+          "gender": "Mens",
+          "sku": 18,
+          "amountReporting": 680000,
+          "amountRetail": 1020000
+        },
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "category": "Polo",
+          "gender": "Mens",
+          "sku": 22,
+          "amountReporting": 560000,
+          "amountRetail": 840000
+        },
+        {
+          "country": "IT",
+          "channel": "Retail",
+          "category": "Tracktop",
+          "gender": "Mens",
+          "sku": 14,
+          "amountReporting": 420000,
+          "amountRetail": 630000
+        },
+        {
+          "country": "IT",
+          "channel": "Retail",
+          "category": "T Shirt",
+          "gender": "Womens",
+          "sku": 16,
+          "amountReporting": 380000,
+          "amountRetail": 570000
+        },
+        {
+          "country": "IT",
+          "channel": "Marketplace",
+          "category": "Knitwear",
+          "gender": "Womens",
+          "sku": 12,
+          "amountReporting": 290000,
+          "amountRetail": 435000
+        },
+        {
+          "country": "IT",
+          "channel": "ST Online",
+          "category": "Pants",
+          "gender": "Mens",
+          "sku": 12,
+          "amountReporting": 270000,
+          "amountRetail": 405000
+        },
+        {
+          "country": "IT",
+          "channel": "ST Online",
+          "category": "Footwear",
+          "gender": "Other",
+          "sku": 10,
+          "amountReporting": 220000,
+          "amountRetail": 330000
+        },
+        {
+          "country": "ES",
+          "channel": "Wholesale",
+          "category": "Polo",
+          "gender": "Mens",
+          "sku": 10,
+          "amountReporting": 220000,
+          "amountRetail": 330000
+        },
+        {
+          "country": "ES",
+          "channel": "Retail",
+          "category": "Skirts",
+          "gender": "Womens",
+          "sku": 7,
+          "amountReporting": 140000,
+          "amountRetail": 210000
+        },
+        {
+          "country": "PT",
+          "channel": "Wholesale",
+          "category": "Fleece",
+          "gender": "Mens",
+          "sku": 6,
+          "amountReporting": 110000,
+          "amountRetail": 165000
+        }
+      ],
+      "totalReportingSales": 3290000,
+      "totalRetailSales": 4935000,
+      "totalSkus": 127,
+      "approver": {
+        "role": "Brand Director",
+        "name": "Donghyuk Jang"
+      }
+    },
+    {
+      "id": "pln_633d8adc_3b",
+      "licenseeId": "lic_000025e9",
+      "season": "26SS",
+      "subplan": "3-B",
+      "status": "Approved",
+      "submittedAt": "2026-03-04",
+      "approvedAt": "2026-03-22",
+      "accounts": [
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "La Rinascente Duomo",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 340000,
+          "amountRetail": 510000
+        },
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "Excelsior Milano",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 260000,
+          "amountRetail": 390000
+        },
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Tessabit",
+          "doors": 2,
+          "status": "Existing",
+          "amountReporting": 210000,
+          "amountRetail": 315000
+        },
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Antonia Milano",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 140000,
+          "amountRetail": 210000
+        },
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Cisalfa Sport",
+          "doors": 20,
+          "status": "Existing",
+          "amountReporting": 480000,
+          "amountRetail": 720000
+        },
+        {
+          "country": "IT",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Decathlon IT",
+          "doors": 24,
+          "status": "Existing",
+          "amountReporting": 520000,
+          "amountRetail": 780000
+        },
+        {
+          "country": "IT",
+          "channel": "ST Website",
+          "tier": "ST Online",
+          "accountName": "sergiotacchini.it",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 420000,
+          "amountRetail": 630000
+        },
+        {
+          "country": "ES",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "El Corte Inglés",
+          "doors": 4,
+          "status": "Existing",
+          "amountReporting": 290000,
+          "amountRetail": 435000
+        },
+        {
+          "country": "ES",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Sprinter Sports",
+          "doors": 12,
+          "status": "New",
+          "amountReporting": 210000,
+          "amountRetail": 315000
+        },
+        {
+          "country": "PT",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Sport Zone PT",
+          "doors": 6,
+          "status": "Existing",
+          "amountReporting": 150000,
+          "amountRetail": 225000
+        }
+      ],
+      "totalReportingSales": 3020000,
+      "totalDoors": 72,
+      "totalAccounts": 10,
+      "approver": {
+        "role": "Distribution Approver",
+        "name": "Sumin Choi"
+      }
+    },
+    {
+      "id": "pln_3794cf40",
+      "licenseeId": "lic_000025e9",
+      "season": "26SS",
+      "subplan": "3-A",
+      "status": "Pending Review",
+      "submittedAt": "2026-05-02",
+      "activities": [
+        {
+          "seq": 1,
+          "planId": "SUGI-SS26-CMP-001",
+          "activityName": "Italian Court Series",
+          "activityType": "Campaign",
+          "targetCountry": "IT",
+          "startDate": "2026-04-01",
+          "endDate": "2026-06-30",
+          "purpose": "Hero campaign tied to Italian Open with court-art storytelling and player partnership.",
+          "kpi": {
+            "reach": "4,200,000",
+            "impressions": "14,000,000",
+            "engagement": "310,000",
+            "followerGrowth": "+16,000",
+            "clicks": "110,000",
+            "conversions": "3,800"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "22",
+              "publishPeriod": "Apr–Jun"
+            },
+            {
+              "channel": "YouTube",
+              "contentFormat": "Long Video",
+              "plannedVolume": "4",
+              "publishPeriod": "Apr–Jun"
+            },
+            {
+              "channel": "OOH (Outdoor)",
+              "contentFormat": "Print Ad",
+              "plannedVolume": "55 sites",
+              "publishPeriod": "May"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 42000,
+            "Production": 18000,
+            "Influencer": 6000,
+            "Event": 4000,
+            "Trade Show": 0,
+            "Collaboration Fee": 5000,
+            "Other": 3000
+          },
+          "totalBudget": 78000
+        },
+        {
+          "seq": 2,
+          "planId": "SUGI-SS26-EVT-002",
+          "activityName": "Milan Design Week",
+          "activityType": "Event",
+          "targetCountry": "IT",
+          "startDate": "2026-04-15",
+          "endDate": "2026-04-21",
+          "purpose": "Activation at Tortona Design District tying court heritage to product design.",
+          "kpi": {
+            "reach": "140,000",
+            "impressions": "380,000",
+            "engagement": "18,000",
+            "followerGrowth": "+2,600",
+            "clicks": "7,200",
+            "conversions": "680"
+          },
+          "channels": [
+            {
+              "channel": "Offline / In-store",
+              "contentFormat": "Booth Display",
+              "plannedVolume": "7 days",
+              "publishPeriod": "Apr"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "22",
+              "publishPeriod": "Apr"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 4000,
+            "Production": 10000,
+            "Influencer": 3000,
+            "Event": 21000,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 2000
+          },
+          "totalBudget": 40000
+        },
+        {
+          "seq": 3,
+          "planId": "SUGI-SS26-MED-003",
+          "activityName": "Footwear Drop",
+          "activityType": "Media",
+          "targetCountry": "IT",
+          "startDate": "2026-06-15",
+          "endDate": "2026-07-15",
+          "purpose": "Drop campaign for the SS26 footwear capsule across digital + print.",
+          "kpi": {
+            "reach": "260,000",
+            "impressions": "720,000",
+            "engagement": "32,000",
+            "followerGrowth": "+3,400",
+            "clicks": "12,000",
+            "conversions": "1,400"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Post (Feed)",
+              "plannedVolume": "12",
+              "publishPeriod": "Jun–Jul"
+            },
+            {
+              "channel": "Print",
+              "contentFormat": "Print Ad",
+              "plannedVolume": "4 placements",
+              "publishPeriod": "Jun"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 14000,
+            "Production": 8000,
+            "Influencer": 2000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 2000,
+            "Other": 2000
+          },
+          "totalBudget": 28000
+        },
+        {
+          "seq": 4,
+          "planId": "SUGI-SS26-INF-004",
+          "activityName": "IG Reels Push",
+          "activityType": "Influencer",
+          "targetCountry": "IT",
+          "startDate": "2026-05-01",
+          "endDate": "2026-08-15",
+          "purpose": "5 IT creators sustaining Court Series content beyond hero burst.",
+          "kpi": {
+            "reach": "380,000",
+            "impressions": "1,100,000",
+            "engagement": "44,000",
+            "followerGrowth": "+4,000",
+            "clicks": "15,000",
+            "conversions": "1,500"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "36",
+              "publishPeriod": "May–Aug"
+            },
+            {
+              "channel": "TikTok",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "24",
+              "publishPeriod": "May–Aug"
+            }
+          ],
+          "influencer": {
+            "count": "5 (2 macro · 3 micro)",
+            "category": "Tennis · Streetwear",
+            "products": "Tracktop, Polo, Footwear",
+            "tagValue": "€110,000",
+            "expectedMedia": "~2.7× tag value"
+          },
+          "budget": {
+            "Media (Advertising)": 2000,
+            "Production": 4000,
+            "Influencer": 17000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 1000
+          },
+          "totalBudget": 24000
+        }
+      ],
+      "totalBudgetGbp": 170000
+    },
+    {
+      "id": "pln_f6ba1455",
+      "licenseeId": "lic_b56a4e2c",
+      "season": "26SS",
+      "subplan": "3-C",
+      "status": "Approved",
+      "submittedAt": "2026-04-15",
+      "approvedAt": "2026-04-30",
+      "rows": [
+        {
+          "country": "DE",
+          "channel": "Wholesale",
+          "category": "Jackets",
+          "gender": "Mens",
+          "sku": 14,
+          "amountReporting": 420000,
+          "amountRetail": 630000
+        },
+        {
+          "country": "DE",
+          "channel": "Wholesale",
+          "category": "Polo",
+          "gender": "Mens",
+          "sku": 16,
+          "amountReporting": 360000,
+          "amountRetail": 540000
+        },
+        {
+          "country": "DE",
+          "channel": "Retail",
+          "category": "Tracktop",
+          "gender": "Mens",
+          "sku": 12,
+          "amountReporting": 280000,
+          "amountRetail": 420000
+        },
+        {
+          "country": "DE",
+          "channel": "Retail",
+          "category": "T Shirt",
+          "gender": "Womens",
+          "sku": 10,
+          "amountReporting": 210000,
+          "amountRetail": 315000
+        },
+        {
+          "country": "DE",
+          "channel": "ST Online",
+          "category": "Pants",
+          "gender": "Mens",
+          "sku": 10,
+          "amountReporting": 200000,
+          "amountRetail": 300000
+        },
+        {
+          "country": "DE",
+          "channel": "Marketplace",
+          "category": "Knitwear",
+          "gender": "Womens",
+          "sku": 8,
+          "amountReporting": 160000,
+          "amountRetail": 240000
+        },
+        {
+          "country": "AT",
+          "channel": "Wholesale",
+          "category": "Headwear",
+          "gender": "Other",
+          "sku": 6,
+          "amountReporting": 80000,
+          "amountRetail": 120000
+        },
+        {
+          "country": "AT",
+          "channel": "Retail",
+          "category": "Dress",
+          "gender": "Womens",
+          "sku": 6,
+          "amountReporting": 110000,
+          "amountRetail": 165000
+        },
+        {
+          "country": "CH",
+          "channel": "Retail",
+          "category": "Fleece",
+          "gender": "Mens",
+          "sku": 7,
+          "amountReporting": 120000,
+          "amountRetail": 180000
+        }
+      ],
+      "totalReportingSales": 1940000,
+      "totalRetailSales": 2910000,
+      "totalSkus": 89,
+      "approver": {
+        "role": "Brand Director",
+        "name": "Donghyuk Jang"
+      }
+    },
+    {
+      "id": "pln_f6ba1455_3b",
+      "licenseeId": "lic_b56a4e2c",
+      "season": "26SS",
+      "subplan": "3-B",
+      "status": "Pending Review",
+      "submittedAt": "2026-05-06",
+      "accounts": [
+        {
+          "country": "DE",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "KaDeWe Berlin",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 220000,
+          "amountRetail": 330000
+        },
+        {
+          "country": "DE",
+          "channel": "Wholesale",
+          "tier": "Tier 1",
+          "accountName": "Breuninger",
+          "doors": 3,
+          "status": "Existing",
+          "amountReporting": 280000,
+          "amountRetail": 420000
+        },
+        {
+          "country": "DE",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Engelhorn",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 140000,
+          "amountRetail": 210000
+        },
+        {
+          "country": "DE",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Intersport DE",
+          "doors": 18,
+          "status": "Existing",
+          "amountReporting": 340000,
+          "amountRetail": 510000
+        },
+        {
+          "country": "DE",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "SportScheck",
+          "doors": 12,
+          "status": "Existing",
+          "amountReporting": 260000,
+          "amountRetail": 390000
+        },
+        {
+          "country": "DE",
+          "channel": "ST Website",
+          "tier": "ST Online",
+          "accountName": "sergiotacchini.de",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 240000,
+          "amountRetail": 360000
+        },
+        {
+          "country": "AT",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Steffl Wien",
+          "doors": 1,
+          "status": "New",
+          "amountReporting": 80000,
+          "amountRetail": 120000
+        },
+        {
+          "country": "AT",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Hervis",
+          "doors": 8,
+          "status": "Existing",
+          "amountReporting": 120000,
+          "amountRetail": 180000
+        },
+        {
+          "country": "CH",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Jelmoli Zürich",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 80000,
+          "amountRetail": 120000
+        },
+        {
+          "country": "CH",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Ochsner Sport",
+          "doors": 6,
+          "status": "Existing",
+          "amountReporting": 110000,
+          "amountRetail": 165000
+        }
+      ],
+      "totalReportingSales": 1870000,
+      "totalDoors": 52,
+      "totalAccounts": 10
+    },
+    {
+      "id": "pln_f6ba1455_3a",
+      "licenseeId": "lic_b56a4e2c",
+      "season": "26SS",
+      "subplan": "3-A",
+      "status": "Pending Review",
+      "submittedAt": "2026-05-08",
+      "activities": [
+        {
+          "seq": 1,
+          "planId": "BENJ-SS26-CMP-001",
+          "activityName": "Bundesliga Active",
+          "activityType": "Campaign",
+          "targetCountry": "DE",
+          "startDate": "2026-03-15",
+          "endDate": "2026-06-30",
+          "purpose": "Bundesliga-window activation around active wear with tennis-court visual identity.",
+          "kpi": {
+            "reach": "2,400,000",
+            "impressions": "8,000,000",
+            "engagement": "180,000",
+            "followerGrowth": "+10,000",
+            "clicks": "68,000",
+            "conversions": "2,400"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "18",
+              "publishPeriod": "Mar–Jun"
+            },
+            {
+              "channel": "YouTube",
+              "contentFormat": "Long Video",
+              "plannedVolume": "3",
+              "publishPeriod": "Mar–May"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 28000,
+            "Production": 12000,
+            "Influencer": 6000,
+            "Event": 2000,
+            "Trade Show": 0,
+            "Collaboration Fee": 2000,
+            "Other": 2000
+          },
+          "totalBudget": 52000
+        },
+        {
+          "seq": 2,
+          "planId": "BENJ-SS26-EVT-002",
+          "activityName": "Berlin Pop-up",
+          "activityType": "Event",
+          "targetCountry": "DE",
+          "startDate": "2026-05-10",
+          "endDate": "2026-05-24",
+          "purpose": "Mitte pop-up co-located with a local sports retailer.",
+          "kpi": {
+            "reach": "75,000",
+            "impressions": "210,000",
+            "engagement": "9,000",
+            "followerGrowth": "+1,400",
+            "clicks": "3,600",
+            "conversions": "380"
+          },
+          "channels": [
+            {
+              "channel": "Offline / In-store",
+              "contentFormat": "Event Coverage",
+              "plannedVolume": "15 days",
+              "publishPeriod": "May"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "18",
+              "publishPeriod": "May"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 3000,
+            "Production": 6000,
+            "Influencer": 2000,
+            "Event": 15000,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 1000
+          },
+          "totalBudget": 27000
+        },
+        {
+          "seq": 3,
+          "planId": "BENJ-SS26-COL-003",
+          "activityName": "Alpine Capsule",
+          "activityType": "Collaboration",
+          "targetCountry": "AT",
+          "startDate": "2026-06-01",
+          "endDate": "2026-09-30",
+          "purpose": "Austrian alpine resort capsule with a small Vienna brand.",
+          "kpi": {
+            "reach": "60,000",
+            "impressions": "170,000",
+            "engagement": "7,000",
+            "followerGrowth": "+900",
+            "clicks": "2,800",
+            "conversions": "320"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Post (Feed)",
+              "plannedVolume": "10",
+              "publishPeriod": "Jun–Sep"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 2000,
+            "Production": 4000,
+            "Influencer": 1000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 8000,
+            "Other": 1000
+          },
+          "totalBudget": 16000
+        },
+        {
+          "seq": 4,
+          "planId": "BENJ-SS26-INF-004",
+          "activityName": "DE Creators",
+          "activityType": "Influencer",
+          "targetCountry": "DE",
+          "startDate": "2026-04-01",
+          "endDate": "2026-07-31",
+          "purpose": "4 mid-tier creators for organic Bundesliga-window content.",
+          "kpi": {
+            "reach": "220,000",
+            "impressions": "640,000",
+            "engagement": "24,000",
+            "followerGrowth": "+2,200",
+            "clicks": "8,400",
+            "conversions": "880"
+          },
+          "channels": [
+            {
+              "channel": "TikTok",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "24",
+              "publishPeriod": "Apr–Jul"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "32",
+              "publishPeriod": "Apr–Jul"
+            }
+          ],
+          "influencer": {
+            "count": "4 (1 macro · 3 micro)",
+            "category": "Sport · Lifestyle",
+            "products": "Tracktop, Polo, Tee",
+            "tagValue": "€55,000",
+            "expectedMedia": "~2.4× tag value"
+          },
+          "budget": {
+            "Media (Advertising)": 1000,
+            "Production": 2000,
+            "Influencer": 11000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 1000
+          },
+          "totalBudget": 15000
+        }
+      ],
+      "totalBudgetGbp": 110000
+    },
+    {
+      "id": "pln_63e524ab",
+      "licenseeId": "lic_05056c4c",
+      "season": "26SS",
+      "subplan": "3-C",
+      "status": "Draft",
+      "rows": [
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "category": "Polo",
+          "gender": "Mens",
+          "sku": 14,
+          "amountReporting": 280000,
+          "amountRetail": 420000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "category": "Tracktop",
+          "gender": "Mens",
+          "sku": 12,
+          "amountReporting": 240000,
+          "amountRetail": 360000
+        },
+        {
+          "country": "FR",
+          "channel": "Retail",
+          "category": "T Shirt",
+          "gender": "Womens",
+          "sku": 12,
+          "amountReporting": 220000,
+          "amountRetail": 330000
+        },
+        {
+          "country": "FR",
+          "channel": "Retail",
+          "category": "Pants",
+          "gender": "Mens",
+          "sku": 10,
+          "amountReporting": 180000,
+          "amountRetail": 270000
+        },
+        {
+          "country": "FR",
+          "channel": "Marketplace",
+          "category": "Dress",
+          "gender": "Womens",
+          "sku": 8,
+          "amountReporting": 140000,
+          "amountRetail": 210000
+        },
+        {
+          "country": "FR",
+          "channel": "ST Online",
+          "category": "Knitwear",
+          "gender": "Womens",
+          "sku": 8,
+          "amountReporting": 150000,
+          "amountRetail": 225000
+        },
+        {
+          "country": "NL",
+          "channel": "Wholesale",
+          "category": "Jackets",
+          "gender": "Mens",
+          "sku": 8,
+          "amountReporting": 180000,
+          "amountRetail": 270000
+        },
+        {
+          "country": "NL",
+          "channel": "Retail",
+          "category": "Headwear",
+          "gender": "Other",
+          "sku": 6,
+          "amountReporting": 80000,
+          "amountRetail": 120000
+        },
+        {
+          "country": "BE",
+          "channel": "Wholesale",
+          "category": "Fleece",
+          "gender": "Mens",
+          "sku": 7,
+          "amountReporting": 110000,
+          "amountRetail": 165000
+        },
+        {
+          "country": "BE",
+          "channel": "Marketplace",
+          "category": "Socks",
+          "gender": "Other",
+          "sku": 5,
+          "amountReporting": 40000,
+          "amountRetail": 60000
+        }
+      ],
+      "totalReportingSales": 1620000,
+      "totalRetailSales": 2430000,
+      "totalSkus": 90
+    },
+    {
+      "id": "pln_63e524ab_3b",
+      "licenseeId": "lic_05056c4c",
+      "season": "26SS",
+      "subplan": "3-B",
+      "status": "Draft",
+      "accounts": [
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Go Sport",
+          "doors": 8,
+          "status": "Existing",
+          "amountReporting": 180000,
+          "amountRetail": 270000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Intersport FR",
+          "doors": 14,
+          "status": "Existing",
+          "amountReporting": 260000,
+          "amountRetail": 390000
+        },
+        {
+          "country": "FR",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Sport 2000",
+          "doors": 10,
+          "status": "Existing",
+          "amountReporting": 160000,
+          "amountRetail": 240000
+        },
+        {
+          "country": "FR",
+          "channel": "ST Website",
+          "tier": "ST Online",
+          "accountName": "sergiotacchini.fr (BDS share)",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 150000,
+          "amountRetail": 225000
+        },
+        {
+          "country": "FR",
+          "channel": "Marketplace",
+          "tier": "Other",
+          "accountName": "Zalando FR Premium",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 120000,
+          "amountRetail": 180000
+        },
+        {
+          "country": "NL",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "De Bijenkorf",
+          "doors": 2,
+          "status": "New",
+          "amountReporting": 140000,
+          "amountRetail": 210000
+        },
+        {
+          "country": "NL",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "Intersport NL",
+          "doors": 6,
+          "status": "Existing",
+          "amountReporting": 120000,
+          "amountRetail": 180000
+        },
+        {
+          "country": "BE",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Inno Brussels",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 90000,
+          "amountRetail": 135000
+        },
+        {
+          "country": "BE",
+          "channel": "Wholesale",
+          "tier": "Tier 3",
+          "accountName": "AS Adventure",
+          "doors": 4,
+          "status": "Existing",
+          "amountReporting": 80000,
+          "amountRetail": 120000
+        },
+        {
+          "country": "LU",
+          "channel": "Wholesale",
+          "tier": "Tier 2",
+          "accountName": "Galeries Lafayette LU",
+          "doors": 1,
+          "status": "Existing",
+          "amountReporting": 50000,
+          "amountRetail": 75000
+        }
+      ],
+      "totalReportingSales": 1350000,
+      "totalDoors": 48,
+      "totalAccounts": 10
+    },
+    {
+      "id": "pln_63e524ab_3a",
+      "licenseeId": "lic_05056c4c",
+      "season": "26SS",
+      "subplan": "3-A",
+      "status": "Draft",
+      "activities": [
+        {
+          "seq": 1,
+          "planId": "BDSG-SS26-CMP-001",
+          "activityName": "Benelux Launch",
+          "activityType": "Campaign",
+          "targetCountry": "FR",
+          "startDate": "2026-03-20",
+          "endDate": "2026-06-15",
+          "purpose": "Benelux-wide launch leading with court heritage repositioning.",
+          "kpi": {
+            "reach": "1,800,000",
+            "impressions": "6,200,000",
+            "engagement": "140,000",
+            "followerGrowth": "+8,400",
+            "clicks": "56,000",
+            "conversions": "1,800"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "14",
+              "publishPeriod": "Mar–Jun"
+            },
+            {
+              "channel": "OOH (Outdoor)",
+              "contentFormat": "Print Ad",
+              "plannedVolume": "30 sites",
+              "publishPeriod": "Apr–May"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 22000,
+            "Production": 10000,
+            "Influencer": 4000,
+            "Event": 2000,
+            "Trade Show": 0,
+            "Collaboration Fee": 2000,
+            "Other": 2000
+          },
+          "totalBudget": 42000
+        },
+        {
+          "seq": 2,
+          "planId": "BDSG-SS26-EVT-002",
+          "activityName": "Amsterdam Pop-up",
+          "activityType": "Event",
+          "targetCountry": "NL",
+          "startDate": "2026-05-15",
+          "endDate": "2026-05-31",
+          "purpose": "Negen Straatjes pop-up with a local court-art collective.",
+          "kpi": {
+            "reach": "60,000",
+            "impressions": "170,000",
+            "engagement": "7,200",
+            "followerGrowth": "+1,100",
+            "clicks": "3,000",
+            "conversions": "320"
+          },
+          "channels": [
+            {
+              "channel": "Offline / In-store",
+              "contentFormat": "Event Coverage",
+              "plannedVolume": "17 days",
+              "publishPeriod": "May"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "16",
+              "publishPeriod": "May"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 3000,
+            "Production": 5000,
+            "Influencer": 2000,
+            "Event": 12000,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 1000
+          },
+          "totalBudget": 23000
+        },
+        {
+          "seq": 3,
+          "planId": "BDSG-SS26-MED-003",
+          "activityName": "Outlet Drive",
+          "activityType": "Media",
+          "targetCountry": "FR",
+          "startDate": "2026-06-15",
+          "endDate": "2026-07-31",
+          "purpose": "Outlet-only summer drive to clear SS25 tails before SS26 main floor refresh.",
+          "kpi": {
+            "reach": "120,000",
+            "impressions": "320,000",
+            "engagement": "13,000",
+            "followerGrowth": "+1,400",
+            "clicks": "5,200",
+            "conversions": "640"
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Post (Feed)",
+              "plannedVolume": "8",
+              "publishPeriod": "Jun–Jul"
+            },
+            {
+              "channel": "Newsletter",
+              "contentFormat": "Newsletter",
+              "plannedVolume": "6",
+              "publishPeriod": "Jun–Jul"
+            }
+          ],
+          "budget": {
+            "Media (Advertising)": 8000,
+            "Production": 3000,
+            "Influencer": 1000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 1000,
+            "Other": 1000
+          },
+          "totalBudget": 14000
+        },
+        {
+          "seq": 4,
+          "planId": "BDSG-SS26-INF-004",
+          "activityName": "Micro-Creators",
+          "activityType": "Influencer",
+          "targetCountry": "FR",
+          "startDate": "2026-04-01",
+          "endDate": "2026-08-31",
+          "purpose": "6 micro-creators across FR/NL/BE for sustained activation on a tight budget.",
+          "kpi": {
+            "reach": "160,000",
+            "impressions": "440,000",
+            "engagement": "18,000",
+            "followerGrowth": "+1,800",
+            "clicks": "6,400",
+            "conversions": "720"
+          },
+          "channels": [
+            {
+              "channel": "TikTok",
+              "contentFormat": "Reels / Short Video",
+              "plannedVolume": "24",
+              "publishPeriod": "Apr–Aug"
+            },
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story",
+              "plannedVolume": "36",
+              "publishPeriod": "Apr–Aug"
+            }
+          ],
+          "influencer": {
+            "count": "6 (0 macro · 6 micro)",
+            "category": "Court · Lifestyle",
+            "products": "Polo, T Shirt, Tracktop",
+            "tagValue": "€34,000",
+            "expectedMedia": "~2.2× tag value"
+          },
+          "budget": {
+            "Media (Advertising)": 1000,
+            "Production": 2000,
+            "Influencer": 8000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 1000
+          },
+          "totalBudget": 12000
+        }
+      ],
+      "totalBudgetGbp": 91000
+    },
+    {
+      "id": "lic_75f7462d-25FW-3C",
+      "licenseeId": "lic_75f7462d",
+      "season": "25FW",
+      "subplan": "3-C",
+      "status": "Rejected",
+      "submittedAt": "2025-10-05T11:20:00+01:00",
+      "rejectedAt": "2025-10-09T14:18:00+09:00",
+      "rejectedBy": "Min Jung",
+      "rejectionReason": "Reporting sales projection 23% below Q3 baseline — re-evaluate channel mix and re-submit with revised assumptions.",
+      "rows": [
+        {
+          "country": "United Kingdom",
+          "channel": "Wholesale",
+          "category": "Track Top",
+          "gender": "Men",
+          "sku": 18,
+          "amountReporting": 165000,
+          "amountRetail": 412500
+        },
+        {
+          "country": "United Kingdom",
+          "channel": "DTC",
+          "category": "Polo",
+          "gender": "Men",
+          "sku": 12,
+          "amountReporting": 92000,
+          "amountRetail": 230000
+        },
+        {
+          "country": "United Kingdom",
+          "channel": "Wholesale",
+          "category": "Track Pant",
+          "gender": "Men",
+          "sku": 14,
+          "amountReporting": 118000,
+          "amountRetail": 295000
+        },
+        {
+          "country": "Ireland",
+          "channel": "Wholesale",
+          "category": "Track Top",
+          "gender": "Women",
+          "sku": 9,
+          "amountReporting": 54000,
+          "amountRetail": 135000
+        },
+        {
+          "country": "United Kingdom",
+          "channel": "Marketplace",
+          "category": "Hoodie",
+          "gender": "Unisex",
+          "sku": 7,
+          "amountReporting": 38000,
+          "amountRetail": 95000
+        }
+      ],
+      "totalReportingSales": 467000,
+      "totalRetailSales": 1167500,
+      "totalSkus": 60,
+      "totalRevenueTargetGbp": 467000,
+      "categoryMix": {
+        "Track Top": 46.9,
+        "Polo": 19.7,
+        "Track Pant": 25.3,
+        "Hoodie": 8.1
+      },
+      "genderMix": {
+        "Men": 80.3,
+        "Women": 11.6,
+        "Unisex": 8.1,
+        "Kids": 0.0
+      },
+      "skuCount": 60,
+      "avgWholesaleGbp": 7783.33,
+      "aiChecks": []
+    },
+    {
+      "id": "lic_75f7462d-25FW-3B",
+      "licenseeId": "lic_75f7462d",
+      "season": "25FW",
+      "subplan": "3-B",
+      "status": "Rejected",
+      "submittedAt": "2025-10-05T11:25:00+01:00",
+      "rejectedAt": "2025-10-09T14:22:00+09:00",
+      "rejectedBy": "Min Jung",
+      "rejectionReason": "Account list missing two top-tier DTC partners (Mr Porter, END.) — reassess Tier A coverage and re-submit.",
+      "accounts": [
+        {
+          "country": "United Kingdom",
+          "channel": "Wholesale",
+          "tier": "A",
+          "accountName": "Selfridges",
+          "doors": 4,
+          "status": "Active",
+          "amountReporting": 115000,
+          "amountRetail": 287500
+        },
+        {
+          "country": "United Kingdom",
+          "channel": "Wholesale",
+          "tier": "A",
+          "accountName": "Harrods",
+          "doors": 1,
+          "status": "Active",
+          "amountReporting": 78000,
+          "amountRetail": 195000
+        },
+        {
+          "country": "United Kingdom",
+          "channel": "Wholesale",
+          "tier": "B",
+          "accountName": "JD Sports",
+          "doors": 28,
+          "status": "Active",
+          "amountReporting": 92000,
+          "amountRetail": 230000
+        },
+        {
+          "country": "United Kingdom",
+          "channel": "DTC",
+          "tier": "A",
+          "accountName": "Best of Britain Web",
+          "doors": 1,
+          "status": "Active",
+          "amountReporting": 110000,
+          "amountRetail": 275000
+        },
+        {
+          "country": "Ireland",
+          "channel": "Wholesale",
+          "tier": "B",
+          "accountName": "Brown Thomas",
+          "doors": 2,
+          "status": "Active",
+          "amountReporting": 38000,
+          "amountRetail": 95000
+        },
+        {
+          "country": "United Kingdom",
+          "channel": "Marketplace",
+          "tier": "C",
+          "accountName": "ASOS",
+          "doors": 1,
+          "status": "Active",
+          "amountReporting": 34000,
+          "amountRetail": 85000
+        }
+      ],
+      "totalReportingSales": 467000,
+      "totalDoors": 37,
+      "totalAccounts": 6,
+      "totalAccountRevenueGbp": 467000,
+      "aiNotes": []
+    },
+    {
+      "id": "lic_75f7462d-25FW-3A",
+      "licenseeId": "lic_75f7462d",
+      "season": "25FW",
+      "subplan": "3-A",
+      "status": "Rejected",
+      "submittedAt": "2025-10-05T11:30:00+01:00",
+      "rejectedAt": "2025-10-09T14:26:00+09:00",
+      "rejectedBy": "Min Jung",
+      "rejectionReason": "Influencer + media spend mix skews 70/30 — bring media-buy share back above 50% for brand-awareness coverage.",
+      "activities": [
+        {
+          "seq": 1,
+          "planId": "BBUK-25FW-CMP-001",
+          "activityName": "25FW Heritage Lookbook Drop",
+          "activityType": "Campaign",
+          "targetCountry": "United Kingdom",
+          "startDate": "2025-08-15",
+          "endDate": "2025-09-30",
+          "purpose": "Drive autumn launch awareness across UK terraces. Lookbook drop pairs with Selfridges + Harrods windows.",
+          "kpi": {
+            "reach": 1800000,
+            "impressions": 4200000,
+            "engagement": 65000,
+            "followerGrowth": 4500,
+            "clicks": 22000,
+            "conversions": 1100
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Reel",
+              "plannedVolume": 12,
+              "publishPeriod": "2025-08 — 2025-09"
+            },
+            {
+              "channel": "TikTok",
+              "contentFormat": "Video",
+              "plannedVolume": 8,
+              "publishPeriod": "2025-08 — 2025-09"
+            },
+            {
+              "channel": "Email",
+              "contentFormat": "EDM",
+              "plannedVolume": 4,
+              "publishPeriod": "2025-08 — 2025-09"
+            }
+          ],
+          "influencer": {
+            "count": 0,
+            "category": "",
+            "products": 0,
+            "tagValue": 0,
+            "expectedMedia": ""
+          },
+          "budget": {
+            "Media (Advertising)": 28000,
+            "Production": 12000,
+            "Influencer": 0,
+            "Event": 6000,
+            "Trade Show": 0,
+            "Collaboration Fee": 4000,
+            "Other": 2000
+          },
+          "totalBudget": 52000
+        },
+        {
+          "seq": 2,
+          "planId": "BBUK-25FW-INF-002",
+          "activityName": "London Style Creators Seeding",
+          "activityType": "Influencer",
+          "targetCountry": "United Kingdom",
+          "startDate": "2025-09-01",
+          "endDate": "2025-10-31",
+          "purpose": "Seed 25FW track tops + heritage knitwear with 12 mid-tier London style creators ahead of party season.",
+          "kpi": {
+            "reach": 950000,
+            "impressions": 2100000,
+            "engagement": 41000,
+            "followerGrowth": 1800,
+            "clicks": 9500,
+            "conversions": 420
+          },
+          "channels": [
+            {
+              "channel": "Instagram",
+              "contentFormat": "Story + Reel",
+              "plannedVolume": 24,
+              "publishPeriod": "2025-09 — 2025-10"
+            }
+          ],
+          "influencer": {
+            "count": 12,
+            "category": "Style / Heritage menswear",
+            "products": 36,
+            "tagValue": 9500,
+            "expectedMedia": "24 Stories, 12 Reels, 6 Grid posts"
+          },
+          "budget": {
+            "Media (Advertising)": 6000,
+            "Production": 3500,
+            "Influencer": 22000,
+            "Event": 0,
+            "Trade Show": 0,
+            "Collaboration Fee": 0,
+            "Other": 1500
+          },
+          "totalBudget": 33000
+        }
+      ],
+      "totalBudgetGbp": 85000,
+      "campaigns": [
+        {
+          "name": "25FW Heritage Lookbook Drop",
+          "budgetGbp": 52000
+        },
+        {
+          "name": "London Style Creators Seeding",
+          "budgetGbp": 33000
+        }
+      ],
+      "aiNotes": []
+    }
+  ],
+  "negotiationThreads": [
+    {
+      "contractId": "0003",
+      "messages": [
+        {
+          "author": "James Smith",
+          "role": "Best of Britain Ltd · CEO",
+          "at": "2026-05-02T14:08:00+01:00",
+          "offerType": "counter",
+          "version": 1,
+          "side": "licensee",
+          "terms": {
+            "royaltyPct": 10.0,
+            "minQuarterlyGbp": 500000,
+            "termYears": 5,
+            "marketingPct": 2.0
+          },
+          "body": "Prefer 5-year renewal with current terms. We've delivered 191% of cumulative minimum and would like continuity for the 27SS–SS31 cycle."
+        },
+        {
+          "author": "Min Jung",
+          "role": "F&F ST BU License Lead",
+          "at": "2026-05-04T11:23:00+09:00",
+          "offerType": "offer",
+          "version": 1,
+          "side": "fnf",
+          "terms": {
+            "royaltyPct": 11.0,
+            "minQuarterlyGbp": 600000,
+            "termYears": 5,
+            "marketingPct": 2.0
+          },
+          "body": "Thank you for the proposal. Given the strong run-rate, please consider a Royalty increase to 11% and Minimum increase to £600K / Q. Happy to share the underlying analysis."
+        },
+        {
+          "author": "James Smith",
+          "role": "Best of Britain Ltd · CEO",
+          "at": "2026-05-06T09:47:00+01:00",
+          "offerType": "counter",
+          "version": 2,
+          "side": "licensee",
+          "terms": {
+            "royaltyPct": 10.5,
+            "minQuarterlyGbp": 560000,
+            "termYears": 5,
+            "marketingPct": 2.0
+          },
+          "body": "Acknowledged. After CFO review, Best of Britain Ltd can accept Royalty 10.5% and Minimum £560K / Q for a 5-year term — meets us at the midpoint of the proposed uplift."
+        }
+      ]
+    },
+    {
+      "contractId": "AGR-2026-002",
+      "messages": [
+        {
+          "author": "Min Jung",
+          "role": "F&F ST BU License Lead",
+          "at": "2026-04-23T09:15:00.000Z",
+          "offerType": "offer",
+          "version": 1,
+          "side": "fnf",
+          "terms": {
+            "royaltyPct": 11.5,
+            "minQuarterlyEur": 350000,
+            "marketingPct": 2.5,
+            "termYears": 5
+          },
+          "body": "Opening offer sent to BDS Distribution — 11.5% royalty, €350K / quarter minimum, 5-year term."
+        },
+        {
+          "author": "Hugo Bernard",
+          "role": "BDS Distribution · Operations Director",
+          "at": "2026-05-08T14:22:00.000Z",
+          "offerType": "counter",
+          "version": 1,
+          "side": "licensee",
+          "terms": {
+            "royaltyPct": 10.0,
+            "minQuarterlyEur": 300000,
+            "marketingPct": 2.0,
+            "termYears": 5
+          },
+          "body": "Counter v1: 11.5% royalty is above what our channel margins can support post-COVID. Asking for 10% royalty and €300K / Q minimum — or a phased ramp from 10% to 11% over years 1–3."
+        }
+      ]
+    },
+    {
+      "contractId": "AGR-DRAFT-001",
+      "messages": [
+        {
+          "author": "Min Jung",
+          "role": "F&F ST BU License Lead",
+          "at": "2026-05-20T09:30:00.000Z",
+          "offerType": "offer",
+          "version": 1,
+          "side": "fnf",
+          "terms": {
+            "royaltyPct": 11.0,
+            "minQuarterlyGbp": 600000,
+            "marketingPct": 2.0,
+            "termYears": 5
+          },
+          "body": "Renewal opening offer for the 2022 master — royalty stepped up to 11%, quarterly minimum bumped to £600K, 5+5 year renewal option."
+        }
+      ]
+    }
+  ],
+  "renewalSchedule": {
+    "0003": {
+      "verdict": "renew",
+      "verdictConfidence": 94,
+      "verdictRationale": "Cumulative minimum 191% · Compliance 94/100 · 4-year YoY +18% · Design pass rate 96%",
+      "reminders": [
+        {
+          "checkpoint": "D-365",
+          "sentAt": "2025-05-30T09:00:00+09:00",
+          "status": "sent"
+        },
+        {
+          "checkpoint": "D-180",
+          "sentAt": "2025-11-26T09:00:00+09:00",
+          "status": "sent"
+        },
+        {
+          "checkpoint": "D-90",
+          "sentAt": "2026-02-24T09:00:00+09:00",
+          "status": "sent"
+        },
+        {
+          "checkpoint": "D-30",
+          "sentAt": null,
+          "status": "upcoming"
+        }
+      ]
+    },
+    "0004": {
+      "verdict": "conditional",
+      "verdictConfidence": 71,
+      "verdictRationale": "Cumulative minimum 98% · Compliance 86/100 · Design pass rate trending down (88% → 76%) · Brand Elevation conditions recommended",
+      "reminders": [
+        {
+          "checkpoint": "D-365",
+          "sentAt": null,
+          "status": "upcoming"
+        },
+        {
+          "checkpoint": "D-180",
+          "sentAt": null,
+          "status": "upcoming"
+        },
+        {
+          "checkpoint": "D-90",
+          "sentAt": null,
+          "status": "upcoming"
+        },
+        {
+          "checkpoint": "D-30",
+          "sentAt": null,
+          "status": "upcoming"
+        }
+      ]
+    },
+    "0005": {
+      "verdict": "terminate",
+      "verdictConfidence": 88,
+      "verdictRationale": "Cumulative minimum 32% · Compliance 61/100 · 3 consecutive quarter Min misses · Design pass rate 54%",
+      "reminders": [
+        {
+          "checkpoint": "D-365",
+          "sentAt": "2025-09-12T09:00:00+09:00",
+          "status": "sent"
+        },
+        {
+          "checkpoint": "D-180",
+          "sentAt": "2026-03-12T09:00:00+09:00",
+          "status": "sent"
+        },
+        {
+          "checkpoint": "D-90",
+          "sentAt": null,
+          "status": "due"
+        },
+        {
+          "checkpoint": "D-30",
+          "sentAt": null,
+          "status": "upcoming"
+        }
+      ]
+    }
+  },
+  "auditLog": [
+    {
+      "at": "2026-05-20T09:30:00.000Z",
+      "event": "Renewal opening offer sent to Best of Britain Ltd",
+      "actor": "Min Jung",
+      "contractId": "AGR-DRAFT-001"
+    },
+    {
+      "at": "2026-05-18T11:00:00.000Z",
+      "event": "Renewal draft created for AGR-2022-001",
+      "actor": "Min Jung",
+      "contractId": "AGR-DRAFT-001"
+    },
+    {
+      "at": "2026-05-14T10:30:00.000Z",
+      "event": "Master License draft created",
+      "actor": "Min Jung",
+      "contractId": "AGR-2026-003"
+    },
+    {
+      "at": "2026-05-14T11:02:00.000Z",
+      "event": "Sent to Sugi Footwear SpA for review",
+      "actor": "Min Jung",
+      "contractId": "AGR-2026-003"
+    },
+    {
+      "at": "2026-04-22T15:40:00.000Z",
+      "event": "Master License draft created",
+      "actor": "Min Jung",
+      "contractId": "AGR-2026-002"
+    },
+    {
+      "at": "2026-04-23T09:15:00.000Z",
+      "event": "Sent to BDS Distribution for review",
+      "actor": "Min Jung",
+      "contractId": "AGR-2026-002"
+    },
+    {
+      "at": "2026-05-08T14:22:00.000Z",
+      "event": "BDS Distribution sent revised terms v1",
+      "actor": "Hugo Bernard",
+      "contractId": "AGR-2026-002"
+    },
+    {
+      "at": "2026-05-19T09:45:00.000Z",
+      "event": "Amendment draft created",
+      "actor": "Min Jung",
+      "contractId": "AGR-DRAFT-001"
+    },
+    {
+      "at": "2026-05-04T11:23:00+09:00",
+      "event": "Renewal negotiation opened",
+      "actor": "Min Jung",
+      "contractId": "0003",
+      "attachment": "Term Sheet v0.3.docx"
+    },
+    {
+      "at": "2024-03-15T10:00:00+09:00",
+      "event": "Amendment #1 executed — Minimum increased by 5%",
+      "actor": "Donghyuk Jang",
+      "contractId": "0003",
+      "attachment": "Amendment_1_signed.pdf"
+    },
+    {
+      "at": "2022-01-01T09:00:00+09:00",
+      "event": "Original Master Licence Agreement signed",
+      "actor": "Founding parties",
+      "contractId": "0003",
+      "attachment": "0003_master.pdf"
+    }
+  ],
+  "brandGuide": {
+    "html": "",
+    "version": 1,
+    "updatedAt": "2026-05-21T00:00:00.000Z",
+    "updatedBy": "Min Jung",
+    "brandBook": {
+      "title": "Sergio Tacchini Brandbook 2026",
+      "version": "v2026.1",
+      "url": "assets/brandbook-2026.pdf",
+      "description": "Official global brand book — visual identity, palette, mark usage, typography, and the canonical form of the 5 pillars."
+    },
+    "history": []
+  },
+  "seedVersion": 23
+};
+window.STE_SKU_MASTER = {
+  "version": "3.1",
+  "publishedAt": "2026-01-15T00:00:00Z",
+  "region": "EU",
+  "currency": "GBP",
+  "skus": [
+    {"sku": "ST-EU-1001", "name": "Mens Track Top Premium - Black", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 78.00, "msrp_gbp": 195.00, "season": "SS26"},
+    {"sku": "ST-EU-1002", "name": "Mens Track Top Premium - Navy", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 78.00, "msrp_gbp": 195.00, "season": "SS26"},
+    {"sku": "ST-EU-1003", "name": "Mens Track Top Mono", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 64.00, "msrp_gbp": 160.00, "season": "SS26"},
+    {"sku": "ST-EU-1004", "name": "Mens Track Top Sand", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 64.00, "msrp_gbp": 160.00, "season": "SS25"},
+    {"sku": "ST-EU-2001", "name": "Wide Track Pant - Charcoal", "category": "Apparel", "subcategory": "Track Pant", "wholesale_gbp": 56.00, "msrp_gbp": 140.00, "season": "SS26"},
+    {"sku": "ST-EU-2002", "name": "Wide Track Pant - Cream", "category": "Apparel", "subcategory": "Track Pant", "wholesale_gbp": 56.00, "msrp_gbp": 140.00, "season": "SS26"},
+    {"sku": "ST-EU-3001", "name": "Womens Polo Refined", "category": "Apparel", "subcategory": "Polo", "wholesale_gbp": 48.00, "msrp_gbp": 120.00, "season": "SS26"},
+    {"sku": "ST-EU-3002", "name": "Mens Polo Heritage", "category": "Apparel", "subcategory": "Polo", "wholesale_gbp": 48.00, "msrp_gbp": 120.00, "season": "SS26"},
+    {"sku": "ST-EU-4001", "name": "Tennis Cap Damarindo", "category": "Accessory", "subcategory": "Cap", "wholesale_gbp": 18.00, "msrp_gbp": 45.00, "season": "SS26"},
+    {"sku": "ST-EU-4002", "name": "Cotton Sock 3-pack", "category": "Accessory", "subcategory": "Socks", "wholesale_gbp": 12.00, "msrp_gbp": 30.00, "season": "SS26"},
+    {"sku": "ST-EU-4003", "name": "Sport Wristband", "category": "Accessory", "subcategory": "Wristband", "wholesale_gbp": 8.00, "msrp_gbp": 20.00, "season": "SS26"},
+    {"sku": "ST-EU-5001", "name": "Court Sneaker Low", "category": "Footwear", "subcategory": "Sneaker", "wholesale_gbp": 92.00, "msrp_gbp": 230.00, "season": "SS26"},
+    {"sku": "ST-EU-5002", "name": "Court Sneaker High", "category": "Footwear", "subcategory": "Sneaker", "wholesale_gbp": 98.00, "msrp_gbp": 245.00, "season": "SS26"},
+    {"sku": "ST-EU-9871", "name": "Heritage Track Top Limited", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 88.00, "msrp_gbp": 220.00, "season": "SS26", "notes": "Replaces legacy ST-INT-9871"}
+  ]
+}
+;
+window.STE_FX = {
+  "source": "ECB Daily reference rates",
+  "base": "EUR",
+  "rates": {
+    "2026-01-02": {"GBP": 0.84321, "USD": 1.10520},
+    "2026-01-31": {"GBP": 0.84610, "USD": 1.09870},
+    "2026-02-22": {"GBP": 0.84680, "USD": 1.10120, "GBP_per_EUR": 1.18091},
+    "2026-02-27": {"GBP": 0.84700, "USD": 1.10500},
+    "2026-03-15": {"GBP": 0.84800, "USD": 1.10810},
+    "2026-03-31": {"GBP": 0.84900, "USD": 1.11240},
+    "2026-04-30": {"GBP": 0.85020, "USD": 1.11400}
+  },
+  "note": "EUR/GBP and EUR/USD daily reference. GBP_per_EUR derived for convenience."
+}
+;
+window.STE_CRAWL_IMAGES = [
+ {
+  "id": 1,
+  "file": "crawl-001.jpg",
+  "brand": "Loro Piana",
+  "category": "Outerwear",
+  "name": "MATTIA BOMBER SILK TECH STORM"
+ },
+ {
+  "id": 2,
+  "file": "crawl-002.jpg",
+  "brand": "Loro Piana",
+  "category": "Outerwear",
+  "name": "LORO PIANA BOMBER REV SOLAIRE RAIN"
+ },
+ {
+  "id": 3,
+  "file": "crawl-003.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Outerwear",
+  "name": "Yankees Serif Track Jacket"
+ },
+ {
+  "id": 4,
+  "file": "crawl-004.jpg",
+  "brand": "Lululemon",
+  "category": "Outerwear",
+  "name": "디파인 크롭 재킷 _리브드 Nulu"
+ },
+ {
+  "id": 5,
+  "file": "crawl-005.jpg",
+  "brand": "Diadora",
+  "category": "Outerwear",
+  "name": "코트 스트라이프 카라 반팔 티셔츠 GREEN"
+ },
+ {
+  "id": 6,
+  "file": "crawl-006.jpg",
+  "brand": "FILA",
+  "category": "Outerwear",
+  "name": "_우즈 착용_ 블럭 트랙 자켓"
+ },
+ {
+  "id": 7,
+  "file": "crawl-007.jpg",
+  "brand": "FILA",
+  "category": "Outerwear",
+  "name": "FHC 스타컷 오버핏 바람막이"
+ },
+ {
+  "id": 8,
+  "file": "crawl-008.jpg",
+  "brand": "FILA",
+  "category": "Outerwear",
+  "name": "Coldwave+ 우븐 스트레치 바람막이"
+ },
+ {
+  "id": 9,
+  "file": "crawl-009.jpg",
+  "brand": "Diadora",
+  "category": "Outerwear",
+  "name": "아이콘 트랙 자켓 CHARCOAL GREY"
+ },
+ {
+  "id": 10,
+  "file": "crawl-010.jpg",
+  "brand": "Diadora",
+  "category": "Outerwear",
+  "name": "레거시 트랙 자켓 BLUE"
+ },
+ {
+  "id": 11,
+  "file": "crawl-011.jpg",
+  "brand": "Lacoste",
+  "category": "Polo",
+  "name": "오픈카라 피케 스웨터 폴로 셔츠"
+ },
+ {
+  "id": 12,
+  "file": "crawl-012.jpg",
+  "brand": "Lacoste",
+  "category": "Polo",
+  "name": "베이직 레귤러핏 폴로 셔츠"
+ },
+ {
+  "id": 13,
+  "file": "crawl-013.jpg",
+  "brand": "Lacoste",
+  "category": "Polo",
+  "name": "테니스 헤리티지 V컷 폴로 셔츠"
+ },
+ {
+  "id": 14,
+  "file": "crawl-014.jpg",
+  "brand": "FILA",
+  "category": "Polo",
+  "name": "여성 골지 트레이닝 카라 반팔티"
+ },
+ {
+  "id": 15,
+  "file": "crawl-015.jpg",
+  "brand": "FILA",
+  "category": "T-Shirt",
+  "name": "Drywave 빅리니어 레터링 반팔티"
+ },
+ {
+  "id": 16,
+  "file": "crawl-016.jpg",
+  "brand": "Diadora",
+  "category": "T-Shirt",
+  "name": "이지 무빙 테니스 반팔 티셔츠 BLUE"
+ },
+ {
+  "id": 17,
+  "file": "crawl-017.jpg",
+  "brand": "Diadora",
+  "category": "T-Shirt",
+  "name": "에르미나 플리츠 반팔 티셔츠 우먼 OFF WHITE"
+ },
+ {
+  "id": 18,
+  "file": "crawl-018.jpg",
+  "brand": "Diadora",
+  "category": "T-Shirt",
+  "name": "테니스타 크롭 반팔 피스테 우먼 VIOLET"
+ },
+ {
+  "id": 19,
+  "file": "crawl-019.jpg",
+  "brand": "Lacoste",
+  "category": "Dress",
+  "name": "티핑 디테일 폴로 드레스"
+ },
+ {
+  "id": 20,
+  "file": "crawl-020.jpg",
+  "brand": "Lacoste",
+  "category": "Dress",
+  "name": "오픈워크 디테일 셔츠드레스"
+ },
+ {
+  "id": 21,
+  "file": "crawl-021.jpg",
+  "brand": "Lacoste",
+  "category": "Dress",
+  "name": "브이넥 슬리브리스 플리츠 원피스"
+ },
+ {
+  "id": 22,
+  "file": "crawl-022.jpg",
+  "brand": "Ralph Lauren",
+  "category": "Dress",
+  "name": "벨트 실크 블렌드 에이라인 셔츠드레스"
+ },
+ {
+  "id": 23,
+  "file": "crawl-023.jpg",
+  "brand": "Skims",
+  "category": "Dress",
+  "name": "POPLIN APPAREL MINI TUBE DRESS"
+ },
+ {
+  "id": 24,
+  "file": "crawl-024.jpg",
+  "brand": "Miu Miu",
+  "category": "Dress",
+  "name": "코듀로이 드레스"
+ },
+ {
+  "id": 25,
+  "file": "crawl-025.jpg",
+  "brand": "Miu Miu",
+  "category": "Dress",
+  "name": "포플린 드레스"
+ },
+ {
+  "id": 26,
+  "file": "crawl-026.png",
+  "brand": "Wilson",
+  "category": "Dress",
+  "name": "레이저 플리티드 드레스 W"
+ },
+ {
+  "id": 27,
+  "file": "crawl-027.jpg",
+  "brand": "Diadora",
+  "category": "Dress",
+  "name": "에르미나 테니스 원피스 BLACK"
+ },
+ {
+  "id": 28,
+  "file": "crawl-028.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Skirt",
+  "name": "Serif Logo Silk Pique Aline Skirt"
+ },
+ {
+  "id": 29,
+  "file": "crawl-029.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Skirt",
+  "name": "Serif Logo Mila Skirt"
+ },
+ {
+  "id": 30,
+  "file": "crawl-030.jpg",
+  "brand": "Loro Piana",
+  "category": "Skirt",
+  "name": "WILLOW SKIRT CASH WOOL LINEN GG 14"
+ },
+ {
+  "id": 31,
+  "file": "crawl-031.jpg",
+  "brand": "Lululemon",
+  "category": "Skirt",
+  "name": "스트레치 트윌 프런트 플리트 골프 스커트"
+ },
+ {
+  "id": 32,
+  "file": "crawl-032.jpg",
+  "brand": "Miu Miu",
+  "category": "Skirt",
+  "name": "벨루어 미디스커트"
+ },
+ {
+  "id": 33,
+  "file": "crawl-033.jpg",
+  "brand": "Miu Miu",
+  "category": "Skirt",
+  "name": "테크니컬 저지 스커트"
+ },
+ {
+  "id": 34,
+  "file": "crawl-034.png",
+  "brand": "Wilson",
+  "category": "Skirt",
+  "name": "멜로우 셔링 스커트 W"
+ },
+ {
+  "id": 35,
+  "file": "crawl-035.png",
+  "brand": "Wilson",
+  "category": "Skirt",
+  "name": "멜로우 스칸츠 W"
+ },
+ {
+  "id": 36,
+  "file": "crawl-036.jpg",
+  "brand": "Diadora",
+  "category": "Skirt",
+  "name": "에어서커 카고 스커트 BEIGE"
+ },
+ {
+  "id": 37,
+  "file": "crawl-037.jpg",
+  "brand": "Diadora",
+  "category": "Skirt",
+  "name": "스트링 포인트 우븐 스커트 BLACK"
+ },
+ {
+  "id": 38,
+  "file": "crawl-038.png",
+  "brand": "Wilson",
+  "category": "Skirt",
+  "name": "리플 메쉬 옴브레 스커트 W"
+ },
+ {
+  "id": 39,
+  "file": "crawl-039.jpg",
+  "brand": "FILA",
+  "category": "Skirt",
+  "name": "숏 플리츠 체크 스커트"
+ },
+ {
+  "id": 40,
+  "file": "crawl-040.jpg",
+  "brand": "Diadora",
+  "category": "Skirt",
+  "name": "클래식 에르미나 스커트 BLACK"
+ },
+ {
+  "id": 41,
+  "file": "crawl-041.jpg",
+  "brand": "FILA",
+  "category": "Skirt",
+  "name": "플리츠 스커트"
+ },
+ {
+  "id": 42,
+  "file": "crawl-042.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Sweatshirt",
+  "name": "USA Wellness Club Crewneck"
+ },
+ {
+  "id": 43,
+  "file": "crawl-043.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Sweatshirt",
+  "name": "Varsity Crest Soft Crewneck"
+ },
+ {
+  "id": 44,
+  "file": "crawl-044.jpg",
+  "brand": "FILA",
+  "category": "Sweatshirt",
+  "name": "_우즈 착용_ 럭비 맨투맨"
+ },
+ {
+  "id": 45,
+  "file": "crawl-045.jpg",
+  "brand": "FILA",
+  "category": "Sweatshirt",
+  "name": "여성 우븐 V넥 트랙 맨투맨"
+ },
+ {
+  "id": 46,
+  "file": "crawl-046.jpg",
+  "brand": "Diadora",
+  "category": "Sweatshirt",
+  "name": "[DIADORA by PALMES] 그래픽 맨투맨 GREEN"
+ },
+ {
+  "id": 47,
+  "file": "crawl-047.jpg",
+  "brand": "Lacoste",
+  "category": "Pants",
+  "name": "볼드 스트라이프 쇼츠"
+ },
+ {
+  "id": 48,
+  "file": "crawl-048.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Pants",
+  "name": "S&R Ivy Gym Short"
+ },
+ {
+  "id": 49,
+  "file": "crawl-049.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Pants",
+  "name": "BH Riding Club Disco Short"
+ },
+ {
+  "id": 50,
+  "file": "crawl-050.jpg",
+  "brand": "Sporty & Rich",
+  "category": "Pants",
+  "name": "NY Health Club Disco Short"
+ },
+ {
+  "id": 51,
+  "file": "crawl-051.jpg",
+  "brand": "Skims",
+  "category": "Pants",
+  "name": "COTTON RIB BOXER"
+ },
+ {
+  "id": 52,
+  "file": "crawl-052.jpg",
+  "brand": "Skims",
+  "category": "Pants",
+  "name": "COTTON FLEECE CLASSIC SHORT"
+ },
+ {
+  "id": 53,
+  "file": "crawl-053.jpg",
+  "brand": "Skims",
+  "category": "Pants",
+  "name": "COTTON JERSEY LOOSE SHORT"
+ },
+ {
+  "id": 54,
+  "file": "crawl-054.png",
+  "brand": "Wilson",
+  "category": "Pants",
+  "name": "펀더멘탈 3인치 쇼츠 W"
+ },
+ {
+  "id": 55,
+  "file": "crawl-055.jpg",
+  "brand": "FILA",
+  "category": "Pants",
+  "name": "피그먼트 워싱 버뮤다 6부 쇼츠"
+ },
+ {
+  "id": 56,
+  "file": "crawl-056.jpg",
+  "brand": "FILA",
+  "category": "Pants",
+  "name": "여성 에어닷 러닝 3.5부 쇼츠"
+ },
+ {
+  "id": 57,
+  "file": "crawl-057.jpg",
+  "brand": "Diadora",
+  "category": "Pants",
+  "name": "테니스타 슬라이딩 쇼츠 BLACK"
+ },
+ {
+  "id": 58,
+  "file": "crawl-058.jpg",
+  "brand": "Diadora",
+  "category": "Pants",
+  "name": "컴피 4부 우븐 쇼츠 TURQUOISE"
+ },
+ {
+  "id": 59,
+  "file": "crawl-059.jpg",
+  "brand": "Diadora",
+  "category": "Pants",
+  "name": "테니스타 슬라이딩 쇼츠 우먼 BLACK"
+ },
+ {
+  "id": 60,
+  "file": "crawl-060.jpg",
+  "brand": "Diadora",
+  "category": "Pants",
+  "name": "쿨웨이브 4부 쇼츠 BLACK"
+ }
+];
+

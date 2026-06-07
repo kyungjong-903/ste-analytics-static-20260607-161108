@@ -1,0 +1,21 @@
+<svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg" style="background:#fafafa">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e7eb" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="800" fill="url(#grid)"/>
+  <text x="30" y="40" font-family="JetBrains Mono, monospace" font-size="11" fill="#6b7280" letter-spacing="2">STM25TT-013 · Track Top Sand · APPROVED</text>
+  <rect x="540" y="20" width="40" height="24" rx="4" fill="#1f2937"/><text x="560" y="36" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">A</text>
+  
+  <path d="M 225 210 L 185 235 L 180 290 L 215 295 L 215 580 L 385 580 L 385 295 L 420 290 L 415 235 L 375 210 L 360 195 L 240 195 Z" fill="#E8DCC4" stroke="#92400e" stroke-width="1.5"/>
+  <ellipse cx="300" cy="207" rx="30" ry="10" fill="#D6C5A1"/>
+  <path d="M 185 235 L 165 375 L 205 400 L 215 320 Z" fill="#E8DCC4" stroke="#92400e" stroke-width="1.5"/>
+  <path d="M 415 235 L 435 375 L 395 400 L 385 320 Z" fill="#E8DCC4" stroke="#92400e" stroke-width="1.5"/>
+  <line x1="220" y1="500" x2="380" y2="500" stroke="#C9B98E" stroke-width="3"/>
+  <line x1="165" y1="390" x2="205" y2="400" stroke="#92400e" stroke-width="2.5"/>
+  <line x1="395" y1="400" x2="435" y2="390" stroke="#92400e" stroke-width="2.5"/>
+
+  <circle cx="480" cy="700" r="9" fill="#E8DCC4" stroke="#374151" stroke-width="0.5"/><circle cx="480" cy="722" r="9" fill="#92400e" stroke="#374151" stroke-width="0.5"/>
+  <text x="30" y="780" font-family="JetBrains Mono, monospace" font-size="9" fill="#9ca3af">CAD · v3 · SS26</text>
+</svg>

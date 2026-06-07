@@ -1,0 +1,22 @@
+{
+  "version": "3.1",
+  "publishedAt": "2026-01-15T00:00:00Z",
+  "region": "EU",
+  "currency": "GBP",
+  "skus": [
+    {"sku": "ST-EU-1001", "name": "Mens Track Top Premium - Black", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 78.00, "msrp_gbp": 195.00, "season": "SS26"},
+    {"sku": "ST-EU-1002", "name": "Mens Track Top Premium - Navy", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 78.00, "msrp_gbp": 195.00, "season": "SS26"},
+    {"sku": "ST-EU-1003", "name": "Mens Track Top Mono", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 64.00, "msrp_gbp": 160.00, "season": "SS26"},
+    {"sku": "ST-EU-1004", "name": "Mens Track Top Sand", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 64.00, "msrp_gbp": 160.00, "season": "SS25"},
+    {"sku": "ST-EU-2001", "name": "Wide Track Pant - Charcoal", "category": "Apparel", "subcategory": "Track Pant", "wholesale_gbp": 56.00, "msrp_gbp": 140.00, "season": "SS26"},
+    {"sku": "ST-EU-2002", "name": "Wide Track Pant - Cream", "category": "Apparel", "subcategory": "Track Pant", "wholesale_gbp": 56.00, "msrp_gbp": 140.00, "season": "SS26"},
+    {"sku": "ST-EU-3001", "name": "Womens Polo Refined", "category": "Apparel", "subcategory": "Polo", "wholesale_gbp": 48.00, "msrp_gbp": 120.00, "season": "SS26"},
+    {"sku": "ST-EU-3002", "name": "Mens Polo Heritage", "category": "Apparel", "subcategory": "Polo", "wholesale_gbp": 48.00, "msrp_gbp": 120.00, "season": "SS26"},
+    {"sku": "ST-EU-4001", "name": "Tennis Cap Damarindo", "category": "Accessory", "subcategory": "Cap", "wholesale_gbp": 18.00, "msrp_gbp": 45.00, "season": "SS26"},
+    {"sku": "ST-EU-4002", "name": "Cotton Sock 3-pack", "category": "Accessory", "subcategory": "Socks", "wholesale_gbp": 12.00, "msrp_gbp": 30.00, "season": "SS26"},
+    {"sku": "ST-EU-4003", "name": "Sport Wristband", "category": "Accessory", "subcategory": "Wristband", "wholesale_gbp": 8.00, "msrp_gbp": 20.00, "season": "SS26"},
+    {"sku": "ST-EU-5001", "name": "Court Sneaker Low", "category": "Footwear", "subcategory": "Sneaker", "wholesale_gbp": 92.00, "msrp_gbp": 230.00, "season": "SS26"},
+    {"sku": "ST-EU-5002", "name": "Court Sneaker High", "category": "Footwear", "subcategory": "Sneaker", "wholesale_gbp": 98.00, "msrp_gbp": 245.00, "season": "SS26"},
+    {"sku": "ST-EU-9871", "name": "Heritage Track Top Limited", "category": "Apparel", "subcategory": "Track Top", "wholesale_gbp": 88.00, "msrp_gbp": 220.00, "season": "SS26", "notes": "Replaces legacy ST-INT-9871"}
+  ]
+}

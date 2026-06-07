@@ -1,0 +1,14 @@
+{
+  "source": "ECB Daily reference rates",
+  "base": "EUR",
+  "rates": {
+    "2026-01-02": {"GBP": 0.84321, "USD": 1.10520},
+    "2026-01-31": {"GBP": 0.84610, "USD": 1.09870},
+    "2026-02-22": {"GBP": 0.84680, "USD": 1.10120, "GBP_per_EUR": 1.18091},
+    "2026-02-27": {"GBP": 0.84700, "USD": 1.10500},
+    "2026-03-15": {"GBP": 0.84800, "USD": 1.10810},
+    "2026-03-31": {"GBP": 0.84900, "USD": 1.11240},
+    "2026-04-30": {"GBP": 0.85020, "USD": 1.11400}
+  },
+  "note": "EUR/GBP and EUR/USD daily reference. GBP_per_EUR derived for convenience."
+}
