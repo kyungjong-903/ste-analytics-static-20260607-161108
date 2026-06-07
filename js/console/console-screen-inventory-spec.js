@@ -263,20 +263,6 @@
       });
     }
 
-    // Country inventory — horizontal bars with share + stock-to-sales aux metric
-    const coInst = mountLocal(document.getElementById("inv-country"));
-    if (coInst) {
-      const rows = det.countries.slice().reverse(); // largest on top
-      coInst.setOption({ animation: false,
-        tooltip: Object.assign(tipBase(C), { trigger: "item", formatter: (p) => { const r = rows[p.dataIndex]; return `<b>${r.name}</b><br/>${fmt(r.value)} · ${r.share.toFixed(0)}% of stock<br/>Stock-to-Sales: <b>${r.sts.toFixed(1)} mo</b>`; } }),
-        grid: { left: 8, right: 96, top: 8, bottom: 6, containLabel: true },
-        xAxis: { type: "value", splitLine: { lineStyle: { color: C.grid || "rgba(15,23,42,0.06)" } }, axisLabel: { color: C.ink3 || "#8b94a6", fontFamily: MONO, fontSize: 10.5, formatter: (v) => fmt(v) } },
-        yAxis: { type: "category", data: rows.map((r) => r.name), axisLine: { lineStyle: { color: C.axis || "rgba(15,23,42,0.16)" } }, axisTick: { show: false }, axisLabel: { color: C.ink || "#5b6577", fontSize: 11.5 } },
-        series: [{ type: "bar", barWidth: "58%",
-          data: rows.map((r) => ({ value: Math.round(r.value), itemStyle: { color: r.sts > inv.stockToSales * 1.25 ? (C.amber || "#d97706") : (C.blue || "#2563eb"), borderRadius: [0, 4, 4, 0] } })),
-          label: { show: true, position: "right", fontSize: 10.5, fontFamily: MONO, color: C.ink3 || "#8b94a6", formatter: (p) => { const r = rows[p.dataIndex]; return `${r.share.toFixed(0)}% · ${r.sts.toFixed(1)}mo`; } } }],
-      });
-    }
   }
 
   global.Screens = global.Screens || {};
@@ -350,7 +336,7 @@
 
       const m = det.movement;
       const rateTile = (label, val, formula) => `<div><div class="klabel" style="margin:0">${label}</div><div class="kval" style="font-size:20px;margin-top:6px">${val}</div><div class="muted" style="font-size:11px;margin-top:2px">${formula}</div></div>`;
-      const movement = `<div class="card card-pad mt-16">
+      const movement = `<div class="card card-pad">
         ${W.sec("Quarter-over-Quarter Movement", "Beginning stock + inbound + returns − sold − markdowns → ending stock")}
         <div id="inv-movement" class="chart" style="height:280px"></div>
         <hr class="div" style="margin:16px 0"/>
@@ -361,9 +347,9 @@
         </div>
       </div>`;
 
-      const geoAge = `<div class="spec-grid g2 mt-16">
+      const movementAge = `<div class="spec-grid g2 mt-16">
+        ${movement}
         <div class="card card-pad">${W.sec("Age Distribution", "Stock value by aging bucket — 90+ days share drives the Aged KPI")}<div id="inv-age-dist" class="chart" style="height:280px"></div></div>
-        <div class="card card-pad">${W.sec("Country Inventory", "Stock value by territory · bar label = share + stock-to-sales")}<div id="inv-country" class="chart" style="height:280px"></div></div>
       </div>`;
 
       const snapLabel = s.axis === "season" ? String(s.season || "").toUpperCase() + " season" : periodLabel(s.period);
@@ -372,7 +358,7 @@
         ${aiLines(data, det).map((line) => `<div class="ai-line"><span class="sp">*</span><span>${line}</span></div>`).join("")}
       </div>`;
 
-      return kpis + mainRow + comp + risk + movement + geoAge + aiCard;
+      return kpis + mainRow + comp + risk + movementAge + aiCard;
     },
     init(s) {
       renderInventoryCharts(s);

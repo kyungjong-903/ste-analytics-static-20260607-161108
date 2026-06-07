@@ -25,6 +25,7 @@ globalThis.UI = {
   "js/console/console-screens-a12.js",
   "js/console/console-screen-overview-spec.js",
   "js/console/console-screen-distribution-spec.js",
+  "js/console/console-screen-inventory-spec.js",
   "js/console/console-screen-marketing-spec.js",
 ].forEach((file) => {
   vm.runInThisContext(fs.readFileSync(file, "utf8"), { filename: file });
@@ -93,6 +94,14 @@ function checkDistributionStOnlineHasNoDoors() {
   assert(/<td class="num">0<\/td>/.test(row[0]), "ST Online should show 0 doors in Distribution Tier Mix");
 }
 
+function checkInventoryMovementAndAgeLayout() {
+  const html = stripped(Screens.a4.render({ ...baseState, view: "actual" }));
+  assert(!html.includes("Country Inventory"), "Inventory screen should not render the Country Inventory card");
+  assert(html.includes("Quarter-over-Quarter Movement"), "Inventory screen should render Quarter-over-Quarter Movement");
+  assert(html.includes("Age Distribution"), "Inventory screen should render Age Distribution");
+  assert(/spec-grid g2 mt-16[\s\S]*inv-movement[\s\S]*inv-age-dist/.test(html), "QoQ Movement and Age Distribution should share one two-column row");
+}
+
 function checkInventoryAndSalesPlanContracts() {
   const host = fs.readFileSync("js/console/console-host.js", "utf8");
   const sales = fs.readFileSync("js/console/console-sales-royalty-sugi.js", "utf8");
@@ -127,6 +136,7 @@ function checkOverviewSpecOverrideDisabled() {
 checkOverviewCoversAnalyticsPages();
 checkDistributionPlanUsesPlanDoors();
 checkDistributionStOnlineHasNoDoors();
+checkInventoryMovementAndAgeLayout();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
 checkLegacyOverviewDistributionCardUsesTierShare();
