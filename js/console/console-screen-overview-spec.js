@@ -86,6 +86,15 @@
     </div>`;
   }
 
+  function tierShare(dist) {
+    const rows = (dist.tiers || []).map((tier) => ({
+      label: String(tier.tier || "").replace("Tier ", "T"),
+      count: (tier.existing || 0) + (tier.nw || 0) - (tier.closing || 0),
+    }));
+    const total = rows.reduce((sum, item) => sum + item.count, 0) || 1;
+    return rows.map((item) => ({ label: item.label, pct: Math.round(item.count / total * 100) }));
+  }
+
   function render(state) {
     const data = bundle(state);
     const ctx = data.overview.ctx;
@@ -95,6 +104,8 @@
     const dist = data.distribution.dist;
     const inv = data.inventory.inv;
     const mkt = data.marketing.mkt;
+    const distTierShare = tierShare(dist);
+    const distTierText = distTierShare.map((item) => `${item.label} ${item.pct}%`).join(" · ");
     const net = salesValue(sales, planView);
     const royalty = royaltyValue(sales, planView);
     const budgetPace = mkt.spendPlan ? mkt.spend / mkt.spendPlan * 100 : 0;
@@ -122,7 +133,7 @@
 
       <div class="spec-grid g4 mt-16">
         ${coverageCard("a2", "Sales & Royalty", "Net sales, royalty, variance, minimum guarantee", `${money(net, entity)} sales &middot; ${money(royalty, entity)} royalty &middot; ${pct(sales.vsPlan, 1)} vs plan`)}
-        ${coverageCard("a3", "Distribution", "Doors, account tiers, geography, concentration", `${dist.active} active doors &middot; ${dist.newD} new &middot; ${dist.closeD} closed &middot; Top 5 ${dist.top5}%`)}
+        ${coverageCard("a3", "Distribution", "Doors, account tiers, geography, concentration", `${distTierText} &middot; ${dist.active} active doors`)}
         ${coverageCard("a4", "Inventory", "Stock value, aging, stockout, markdown risk", `${money(inv.stockValue, entity)} stock &middot; ${inv.stockToSales.toFixed(1)}mo stock-to-sales &middot; ${inv.aged}% aged`)}
         ${coverageCard("a5", "Marketing", "Spend, ROI, SNS, campaign and compliance", `${money(marketingSpend, entity)} spend &middot; ${mkt.roi.toFixed(1)}x ROI &middot; ${mkt.violations} compliance issues`)}
       </div>
@@ -136,8 +147,8 @@
         </div>
         <div class="card card-pad">
           ${W().sec("Distribution Snapshot", planView ? "Door plan coverage" : "Door performance and movement")}
+          ${row("Tier Share", distTierText, `${dist.active} active doors`)}
           ${row("Active / Plan Doors", `${dist.active} / ${dist.planDoors}`, `${distAttain.toFixed(0)}% coverage`)}
-          ${row("Door Movement", `+${dist.newD} / -${dist.closeD}`, "new doors / closed doors")}
           ${row("Top 5 Concentration", `${dist.top5}%`, "sales concentration across anchor accounts")}
         </div>
         <div class="card card-pad">

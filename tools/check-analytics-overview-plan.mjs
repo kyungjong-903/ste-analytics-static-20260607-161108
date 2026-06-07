@@ -87,9 +87,17 @@ function checkInventoryAndSalesPlanContracts() {
   assert(sales.includes("planMain"), "Sales & Royalty PoC charts should promote plan data in plan view");
 }
 
+function checkLegacyOverviewDistributionCardUsesTierShare() {
+  const legacyOverview = fs.readFileSync("js/console/console-screens-a12.js", "utf8");
+  assert(legacyOverview.includes("tierShareMetrics"), "Legacy overview Distribution card should derive tier share metrics");
+  assert(!legacyOverview.includes("metric('Net Δ'"), "Legacy overview Distribution card should not show Net Delta metrics");
+  assert(!legacyOverview.includes("metric('Rev/Door'"), "Legacy overview Distribution card should not show Rev/Door metrics");
+}
+
 checkOverviewCoversAnalyticsPages();
 checkDistributionPlanUsesPlanDoors();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
+checkLegacyOverviewDistributionCardUsesTierShare();
 
 console.log("analytics overview and plan toggles OK");

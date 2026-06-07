@@ -58,6 +58,17 @@
 
       const metric = (l, v, cls) => `<div class="h-metric"><div class="ml">${l}</div><div class="mv ${cls||''}" style="${cls==='g'?'color:var(--green)':cls==='r'?'color:var(--red)':''}">${v}</div></div>`;
       const own = '';
+      const tierShareMetrics = (tiers) => {
+        const rows = (tiers || []).map((t) => ({
+          label: String(t.tier || '').replace('Tier ', 'T'),
+          count: (t.existing || 0) + (t.nw || 0) - (t.closing || 0),
+        }));
+        const total = rows.reduce((a, r) => a + r.count, 0) || 1;
+        return rows.map((r) => ({ label: r.label, pct: Math.round(r.count / total * 100) }));
+      };
+      const distTierShare = tierShareMetrics(dist.tiers);
+      const distTierValue = distTierShare.map((r) => r.pct + '%').join(' · ');
+      const distTierMetrics = distTierShare.map((r) => metric(r.label + ' Share', r.pct + '%')).join('');
 
       const planView = s.view === 'plan';
       const annualRoyMin = ent.annual * 0.40 * 0.10;
@@ -83,10 +94,8 @@
           val: (planView ? m(sales.royaltyPlan, ent) : m(sales.royalty, ent)).book, cur: (planView?'Planned royalty · ':'Royalty earned · ')+periodLabel(s.period),
           metrics: royMetrics })}
         ${hero({ go:'a3', name:own+'Distribution', icon:ICN.dist, color:'var(--cyan)', glow:'rgba(34,211,238,0.14)',
-          val: (planView ? planActive : dist.active).toLocaleString(), cur: (planView?'Planned active doors · target':'Active doors · '+dist.countries.length+' countries'),
-          metrics: planView
-            ? metric('Achieved', (dist.active/planActive*100).toFixed(0)+'%', dist.active>=planActive?'g':'r') + metric('Target', planActive.toLocaleString()) + metric('Gap', (dist.active-planActive))
-            : metric('Net Δ', (dist.netDelta>=0?'+':'')+dist.netDelta, dist.netDelta>=0?'g':'r') + metric('New', '+'+dist.newD) + metric('Rev/Door', m(dist.revPerDoor, ent).book) })}
+          val: distTierValue, cur: 'Tier share · '+dist.active.toLocaleString()+' active doors',
+          metrics: distTierMetrics })}
         ${planView
           ? `<div class="card hero" style="opacity:.6"><div class="h-top"><div class="center gap-12"><span class="h-ic" style="background:var(--violet-dim);color:var(--violet)">${ICN.inv}</span><span class="h-name">${own}Inventory</span></div></div><div style="padding:14px 0 6px;color:var(--ink-3);font-size:13px;line-height:1.5">Plan data not applicable for Inventory</div><div class="muted" style="font-size:11px">No committed plan model</div></div>`
           : hero({ go:'a4', name:own+'Inventory', icon:ICN.inv, color:'var(--violet)', glow:'var(--violet-dim)',
