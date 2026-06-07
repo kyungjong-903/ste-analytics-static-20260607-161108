@@ -62,9 +62,11 @@
     return values.length ? values[values.length - 1] : 0;
   }
 
-  function marketingDetail(base) {
+  function marketingDetail(base, view) {
     const spend = base.spend || 0;
     const plan = base.spendPlan || spend;
+    const planView = view === "plan";
+    const displaySpend = planView ? plan : spend;
     const priorFactor = 0.84;
     const channelSeeds = [
       ["Instagram", "Performance", 0.32, 4.2, 0.36],
@@ -79,16 +81,16 @@
       name,
       type,
       share,
-      spend: spend * share,
+      spend: displaySpend * share,
       plan: plan * share,
       prior: spend * share * priorFactor,
       roi,
       reach: base.reach * reachShare,
     }));
     const typeSplit = [
-      { label: "Brand Marketing", key: "brand", type: "Brand", share: 0.30, spend: spend * 0.30, plan: plan * 0.34 },
-      { label: "Performance Marketing", key: "performance", type: "Performance", share: 0.60, spend: spend * 0.60, plan: plan * 0.57 },
-      { label: "Product Photography", key: "photography", type: "Photography", share: 0.10, spend: spend * 0.10, plan: plan * 0.09 },
+      { label: "Brand Marketing", key: "brand", type: "Brand", share: 0.30, spend: displaySpend * 0.30, plan: plan * 0.34 },
+      { label: "Performance Marketing", key: "performance", type: "Performance", share: 0.60, spend: displaySpend * 0.60, plan: plan * 0.57 },
+      { label: "Product Photography", key: "photography", type: "Photography", share: 0.10, spend: displaySpend * 0.10, plan: plan * 0.09 },
     ];
     const spendQ = base.spendQ || { q: ["Q1", "Q2", "Q3", "Q4"], actual: [], plan: [] };
     const actualQ = spendQ.actual.map((v, i) => i < 2 ? v : null);
@@ -104,8 +106,8 @@
       name,
       channel,
       period,
-      spend: spend * spendShare,
-      sales: spend * spendShare * roi,
+      spend: displaySpend * spendShare,
+      sales: displaySpend * spendShare * roi,
       roi,
       action,
     }));
@@ -116,8 +118,8 @@
     ].map(([name, channel, spendShare, roi, reason]) => ({
       name,
       channel,
-      spend: spend * spendShare,
-      sales: spend * spendShare * roi,
+      spend: displaySpend * spendShare,
+      sales: displaySpend * spendShare * roi,
       roi,
       reason,
     }));
@@ -136,17 +138,17 @@
     const geo = geoSeeds.map(([country, region, share, roi]) => ({
       country,
       region,
-      spend: spend * share,
-      lift: spend * share * roi,
+      spend: displaySpend * share,
+      lift: displaySpend * share * roi,
       roi,
       share,
     }));
     const customerTypes = [
-      { label: "Wholesale Trade Activation", value: spend * 0.18, share: 18 },
-      { label: "Retail / Brand DTC", value: spend * 0.42, share: 42 },
-      { label: "Marketplace Co-op", value: spend * 0.15, share: 15 },
-      { label: "ST Online Support", value: spend * 0.10, share: 10 },
-      { label: "Cross-channel Brand", value: spend * 0.15, share: 15 },
+      { label: "Wholesale Trade Activation", value: displaySpend * 0.18, share: 18 },
+      { label: "Retail / Brand DTC", value: displaySpend * 0.42, share: 42 },
+      { label: "Marketplace Co-op", value: displaySpend * 0.15, share: 15 },
+      { label: "ST Online Support", value: displaySpend * 0.10, share: 10 },
+      { label: "Cross-channel Brand", value: displaySpend * 0.15, share: 15 },
     ];
     const reviews = [
       { asset: "French Open OOH", type: "Visual", submitted: "2026-04-20", status: "Approved", reviewer: "F&F Brand" },
@@ -203,10 +205,12 @@
     const pace = data.mkt.spendPlan ? data.mkt.spend / data.mkt.spendPlan * 100 : 0;
     const vsPlan = pace - 100;
     const issues = details.complianceIssues;
+    const planView = data.ctx.view === "plan";
+    const spendValue = planView ? data.mkt.spendPlan : data.mkt.spend;
     return `<div class="spec-grid g4">
-      ${W().kpi("Total Spend", money(data.mkt.spend, ent), `<span class="muted">YTD ${data.ctx.year}</span>`)}
-      ${W().kpi("vs Plan", pct(vsPlan, 0), `<span class="muted">${pace.toFixed(0)}% of plan</span>`, Math.abs(vsPlan) > 10 ? "risk" : "ok")}
-      ${W().kpi("ROI / ROAS", fmtMult(data.mkt.roi), `<span class="muted">Net sales return / spend</span>`, data.mkt.roi >= 3 ? "ok" : "risk")}
+      ${W().kpi(planView ? "Planned Spend" : "Total Spend", money(spendValue, ent), `<span class="muted">${planView ? `budget plan · actual ${money(data.mkt.spend, ent)}` : `YTD ${data.ctx.year}`}</span>`)}
+      ${W().kpi(planView ? "Budget Pace" : "vs Plan", planView ? `${pace.toFixed(0)}%` : pct(vsPlan, 0), `<span class="muted">${planView ? "actual spend / plan" : `${pace.toFixed(0)}% of plan`}</span>`, Math.abs(vsPlan) > 10 ? "risk" : "ok")}
+      ${W().kpi(planView ? "Target ROI / ROAS" : "ROI / ROAS", fmtMult(data.mkt.roi), `<span class="muted">${planView ? "planned return benchmark" : "Net sales return / spend"}</span>`, data.mkt.roi >= 3 ? "ok" : "risk")}
       ${W().kpi("Brand Compliance", `${issues} issues`, `<span class="muted">${details.reviews.length}/${details.reviews.length} approved</span>`, issues ? "risk" : "ok")}
     </div>`;
   }
@@ -258,6 +262,7 @@
 
   function renderBreakdown(data, details) {
     const ent = data.ctx.entity;
+    const planView = data.ctx.view === "plan";
     return `<div class="spec-grid g2 mt-16">
       <div class="card card-pad" data-mkt-section="brand performance photography">
         ${W().sec("Brand vs Performance Split", "Spend by marketing type")}
@@ -265,10 +270,10 @@
         <div class="legend wrap" style="margin-top:10px;justify-content:center">${details.typeSplit.map((r, i) => `<span class="lg"><span class="sw" style="background:${TYPE_COLORS[i]}"></span>${W().esc(r.label)} ${Math.round(r.share * 100)}%</span>`).join("")}</div>
       </div>
       <div class="card card-pad" data-mkt-section="brand performance photography">
-        ${W().sec("Budget Allocation", "Actual pacing versus plan")}
+        ${W().sec("Budget Allocation", planView ? "Plan budget allocation with current actual pace" : "Actual pacing versus plan")}
         ${W().table([
           { label: "Type", key: "label" },
-          { label: "Actual", key: "spend", num: true, render: (r) => money(r.spend, ent) },
+          { label: planView ? "Selected View" : "Actual", key: "spend", num: true, render: (r) => money(r.spend, ent) },
           { label: "Plan", key: "plan", num: true, render: (r) => money(r.plan, ent) },
           { label: "Pace", key: "pace", num: true, render: (r) => `${(r.spend / r.plan * 100).toFixed(0)}%` },
         ], details.typeSplit)}
@@ -327,11 +332,12 @@
 
   function render(s) {
     const data = M().marketing(s);
-    const details = marketingDetail(data.mkt);
+    const details = marketingDetail(data.mkt, data.ctx.view);
+    const planView = data.ctx.view === "plan";
     return `
       <div class="between" style="gap:16px;margin-bottom:14px;align-items:flex-start">
         <div>
-          <div class="muted" style="font-size:12px">Monthly actuals &middot; In-territory marketing &middot; Calendar/Season context inherited</div>
+          <div class="muted" style="font-size:12px">${planView ? "Committed plan budget" : "Monthly actuals"} &middot; In-territory marketing &middot; Calendar/Season context inherited</div>
         </div>
         ${renderMarketingTypeControl()}
       </div>
@@ -360,7 +366,7 @@
 
   function init(s) {
     const data = M().marketing(s);
-    const details = marketingDetail(data.mkt);
+    const details = marketingDetail(data.mkt, data.ctx.view);
     renderCharts(data, details);
     bindMarketingTypeFilter();
   }
