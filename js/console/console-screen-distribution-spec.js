@@ -67,9 +67,9 @@
   // Tier mix — door / revenue weights from spec §4.2
   const TIER_DEF = [
     { name: "Tier 1 (Anchor)", doorW: 0.08, revW: 0.36, pill: "pill-blue" },
-    { name: "Tier 2 (Core)",   doorW: 0.41, revW: 0.39, pill: "pill-violet" },
-    { name: "Tier 3 (Volume)", doorW: 0.37, revW: 0.21, pill: "pill-gray" },
-    { name: "ST Online",       doorW: 0.10, revW: 0.04, pill: "pill-green" },
+    { name: "Tier 2 (Core)",   doorW: 0.46, revW: 0.39, pill: "pill-violet" },
+    { name: "Tier 3 (Volume)", doorW: 0.42, revW: 0.21, pill: "pill-gray" },
+    { name: "ST Online",       doorW: 0.00, revW: 0.04, pill: "pill-green" },
     { name: "Other",           doorW: 0.04, revW: 0.00, pill: "pill-amber" },
   ];
 

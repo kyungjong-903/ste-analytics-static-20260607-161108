@@ -86,6 +86,13 @@ function checkDistributionPlanUsesPlanDoors() {
   assert(planHtml.includes("season door plan"), "Distribution plan view should identify the door plan");
 }
 
+function checkDistributionStOnlineHasNoDoors() {
+  const html = Screens.a3.render({ ...baseState, view: "actual" });
+  const row = html.match(/<tr>\s*<td><span class="pill pill-green">[\s\S]*?ST Online[\s\S]*?<\/tr>/);
+  assert(row, "Distribution Tier Mix should include ST Online row");
+  assert(/<td class="num">0<\/td>/.test(row[0]), "ST Online should show 0 doors in Distribution Tier Mix");
+}
+
 function checkInventoryAndSalesPlanContracts() {
   const host = fs.readFileSync("js/console/console-host.js", "utf8");
   const sales = fs.readFileSync("js/console/console-sales-royalty-sugi.js", "utf8");
@@ -119,6 +126,7 @@ function checkOverviewSpecOverrideDisabled() {
 
 checkOverviewCoversAnalyticsPages();
 checkDistributionPlanUsesPlanDoors();
+checkDistributionStOnlineHasNoDoors();
 checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
 checkLegacyOverviewDistributionCardUsesTierShare();
