@@ -33,6 +33,8 @@
       const eid = ent.id;
       const sym = UI.curSym(ent);
       const sales = D().salesFor(eid, s.period);
+      const wholesaleSales = D().salesFor(eid, s.period, 'wholesale');
+      const retailSales = D().salesFor(eid, s.period, 'retail');
       const dist = D().distributionFor(eid, s.period);
       const inv = D().inventoryFor(eid, s.period);
       const mkt = D().marketingFor(eid, s.period);
@@ -74,10 +76,9 @@
       const royEarned = sales.royalty;
       const royPace = annualRoyMin > 0 ? (royEarned / annualRoyMin * 100) : 0;
       const royProj = royEarned * (12 / 5); // YTD→year-end projection
-      const planActive = Math.round(dist.active * 1.08);
-      const salesMetrics = planView
-        ? metric('Achieved', sales.hasActual ? sales.achieved.toFixed(0)+'%' : '—', sales.hasActual ? (sales.achieved>=100?'g':'r') : '') + metric('vs Prior Plan', UI.delta(sales.vsPriorPlan,{}), sales.vsPriorPlan>=0?'g':'r')
-        : metric('vs Plan', UI.delta(sales.vsPlan,{}), sales.vsPlan>=0?'g':'r') + metric('vs YoY', UI.delta(sales.vsYoY,{}), sales.vsYoY>=0?'g':'r');
+      const salesMetrics = (row) => planView
+        ? metric('Achieved', row.hasActual ? row.achieved.toFixed(0)+'%' : '—', row.hasActual ? (row.achieved>=100?'g':'r') : '') + metric('vs Prior Plan', UI.delta(row.vsPriorPlan,{}), row.vsPriorPlan>=0?'g':'r')
+        : metric('vs Plan', UI.delta(row.vsPlan,{}), row.vsPlan>=0?'g':'r') + metric('vs YoY', UI.delta(row.vsYoY,{}), row.vsYoY>=0?'g':'r');
       const royVsPlan = (sales.royalty/sales.royaltyPlan - 1) * 100;
       const royVsYoY = (sales.royalty/sales.royaltyPrior - 1) * 100;
       const royContractTip = encodeURIComponent(JSON.stringify({ title:'Royalty vs Contract', rows:[['Annual Min', m(annualRoyMin,ent).book],['Earned YTD', m(royEarned,ent).book],['Projected Year-End', m(royProj,ent).book+' ('+(royProj/annualRoyMin*100).toFixed(0)+'%)']], src:'Pace vs Annual Royalty Minimum' }));
@@ -87,8 +88,11 @@
 
       const heroes = `<div class="grid" style="grid-template-columns:repeat(3,1fr)">
         ${hero({ go:'a2', name:own+'Sales', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
-          val: (planView ? m(sales.plan, ent) : m(sales.netSales, ent)).book, cur: (planView?'Planned net sales · ':'Net sales · ')+periodLabel(s.period),
-          metrics: salesMetrics })}
+          val: (planView ? m(wholesaleSales.plan, ent) : m(wholesaleSales.netSales, ent)).book, cur: (planView?'Wholesale planned net sales · ':'Wholesale net sales · ')+periodLabel(s.period),
+          metrics: salesMetrics(wholesaleSales) })}
+        ${hero({ go:'a2', name:'Retail', icon:ICN.sales, color:'var(--accent)', glow:'var(--accent-dim)',
+          val: (planView ? m(retailSales.plan, ent) : m(retailSales.netSales, ent)).book, cur: (planView?'Retail planned net sales · ':'Retail net sales · ')+periodLabel(s.period),
+          metrics: salesMetrics(retailSales) })}
         ${hero({ go:'a2', gotab:'royalty', name:own+'Royalty', icon:ICN.roy, color:'#fbbf24', glow:'rgba(251,191,36,0.14)',
           val: (planView ? m(sales.royaltyPlan, ent) : m(sales.royalty, ent)).book, cur: (planView?'Planned royalty · ':'Royalty · ')+periodLabel(s.period),
           metrics: royMetrics })}

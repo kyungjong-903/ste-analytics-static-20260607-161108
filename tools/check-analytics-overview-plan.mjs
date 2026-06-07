@@ -127,6 +127,19 @@ function checkLegacyOverviewRoyaltyCopy() {
   assert(!legacyOverview.includes("'Royalty earned · '"), "Legacy overview Royalty card should not say Royalty earned");
 }
 
+function checkOverviewWholesaleAndRetailSalesCards() {
+  const html = stripped(Screens.a1.render({ ...baseState, view: "actual" }));
+  const ent = STEData.byId("sugifr");
+  const wholesale = STEData.money(STEData.salesFor("sugifr", "ytd", "wholesale").netSales, ent).book;
+  const retail = STEData.money(STEData.salesFor("sugifr", "ytd", "retail").netSales, ent).book;
+
+  assert(html.includes("Wholesale net sales"), "Overview Sales card should be scoped to Wholesale net sales");
+  assert(html.includes(wholesale), `Overview Sales card should show Wholesale net sales ${wholesale}`);
+  assert(html.includes(">Retail<") || html.includes(">Retail Sales<"), "Overview should render a Retail sales card");
+  assert(html.includes("Retail net sales"), "Overview Retail card should describe Retail net sales");
+  assert(html.includes(retail), `Overview Retail card should show Retail net sales ${retail}`);
+}
+
 function checkOverviewSpecOverrideDisabled() {
   const overviewSpec = fs.readFileSync("js/console/console-screen-overview-spec.js", "utf8");
   assert(overviewSpec.includes("intentionally a no-op"), "Overview spec override should remain disabled");
@@ -141,6 +154,7 @@ checkMarketingPlanUsesPlanSpend();
 checkInventoryAndSalesPlanContracts();
 checkLegacyOverviewDistributionCardUsesTierShare();
 checkLegacyOverviewRoyaltyCopy();
+checkOverviewWholesaleAndRetailSalesCards();
 checkOverviewSpecOverrideDisabled();
 
 console.log("analytics overview and plan toggles OK");
