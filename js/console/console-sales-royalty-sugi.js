@@ -482,7 +482,13 @@
   function licenseeControl(){
     const D=global.STEData;
     if(!hostState||hostState.mode!=='licensor'||!D){
-      return '<div class="f-group"><span class="f-lab">Licensee</span><span class="pill pill-gray" style="font-size:11px">SUGI France</span></div>';
+      return '<div class="filter-group"><span class="filter-lab">Scope</span>'+
+        '<div class="lic-trigger" style="cursor:default">'+
+          '<span class="flag flag-anon"></span>'+
+          '<div class="lt"><b>Licensee A</b><small>Auto-scoped to your account</small></div>'+
+          '<span class="chev" style="opacity:.5"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>'+
+        '</div>'+
+      '</div>';
     }
     const cur=D.byId(hostState.entId)||D.byId('sugifr');
     return '<div class="filter-group"><span class="f-lab">Licensee</span>'+
