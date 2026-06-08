@@ -482,7 +482,7 @@
       ], det.accounts);
       const concRows = [["Top 5 accounts", det.conc.top5], ["Top 10 accounts", det.conc.top10], ["Top 20 accounts", det.conc.top20]]
         .map(([lab, pct]) => bar(lab, pct + "% · " + money(det.revenue * pct / 100), pct)).join("");
-      const accSec = `<div class="grid mt-16 dist-account-risk-row" style="grid-template-columns:1.6fr 1fr;gap:16px;align-items:stretch">
+      const accSec = `<div class="grid mt-16 dist-account-risk-row" style="grid-template-columns:minmax(0,1.45fr) minmax(340px,.85fr);gap:16px;align-items:stretch">
         <div class="card card-pad">
           ${W.sec("Top 10 Accounts", "Account-level sales, doors and performance vs plan / prior year")}
           ${accTable}
