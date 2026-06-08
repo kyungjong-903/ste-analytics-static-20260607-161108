@@ -10060,10 +10060,17 @@
     return `${row.royaltyPct}%`;
   }
 
+  function agreementLicenseeAvatarText(licensee) {
+    if (isSugiFranceLicensee(licensee)) return "A";
+    const displayName = agreementLicenseeDisplayName(licensee);
+    return (displayName || '').split(/\s+/).map(s => s[0]).filter(Boolean).slice(0,2).join('').toUpperCase();
+  }
+
   global.STEScreensTestHooks = {
     ...(global.STEScreensTestHooks || {}),
     agreementLicenseeDisplayName,
     agreementRoyaltyDisplay,
+    agreementLicenseeAvatarText,
   };
 
   function renderOneContractRow(r, isChild) {
@@ -10088,7 +10095,7 @@
     })();
     const startCell = r.effectiveStart ? `<span class="ste-mini">${escape(r.effectiveStart)}</span>` : '<span class="ste-mini">—</span>';
     const endCell = r.effectiveEnd ? `<span class="ste-mini">${escape(r.effectiveEnd)}</span>` : '<span class="ste-mini">—</span>';
-    const initials = (licenseeDisplayName || '').split(/\s+/).map(s => s[0]).filter(Boolean).slice(0,2).join('').toUpperCase();
+    const initials = agreementLicenseeAvatarText(l);
     const warningDot = (() => {
       if (!r.warning) return '';
       const daysAbs = Math.abs(r.renewalDays || 0);
