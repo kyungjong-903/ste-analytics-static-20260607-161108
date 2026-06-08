@@ -159,6 +159,9 @@ function checkDistributionLayoutRefinements() {
   assert(!html.includes("Door Share by Region"), "Distribution Region Grouping should not render Door Share by Region bars");
   assert(html.includes("dist-geo-region-row"), "Distribution geography row should use a custom ratio layout");
   assert(html.includes("grid-template-columns:minmax(0,1.45fr) minmax(340px,.85fr)"), "Distribution geography row should give the chart more width than the region summary");
+  assert(!html.includes("align-self:start"), "Distribution paired cards should stretch so their top and bottom lines align");
+  assert(html.includes("dist-account-risk-row"), "Distribution account analysis row should have an explicit alignment hook");
+  assert(/dist-account-risk-row[^"]*" style="[^"]*align-items:stretch/.test(html), "Distribution account analysis cards should stretch to matching row heights");
   assert(html.includes("dist-productivity-customer-stack"), "Distribution should stack Customer Type below Productivity");
   assert(html.includes("dist-productivity-card is-compact"), "Distribution Productivity card should use the compact variant");
   assert(!html.includes('id="dist-hist"'), "Distribution Productivity compact card should not render the revenue-bucket histogram");
