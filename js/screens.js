@@ -10042,8 +10042,34 @@
     return children.map(c => renderOneContractRow(c, true)).join("");
   }
 
+  function isSugiFranceLicensee(licensee) {
+    if (!licensee) return false;
+    const name = String(licensee.legalName || licensee.name || "").trim();
+    return licensee.id === "lic_c2a5c666" || /^sugi\s+france$/i.test(name);
+  }
+
+  function agreementLicenseeDisplayName(licensee) {
+    if (!licensee) return "";
+    if (isSugiFranceLicensee(licensee)) return "Licensee A";
+    return licensee.legalName || licensee.name || licensee.id || "";
+  }
+
+  function agreementRoyaltyDisplay(row) {
+    if (!row || row.royaltyPct == null) return null;
+    if (isSugiFranceLicensee(row.licensee) && Number(row.royaltyPct) === 10) return "xx%";
+    return `${row.royaltyPct}%`;
+  }
+
+  global.STEScreensTestHooks = {
+    ...(global.STEScreensTestHooks || {}),
+    agreementLicenseeDisplayName,
+    agreementRoyaltyDisplay,
+  };
+
   function renderOneContractRow(r, isChild) {
     const l = r.licensee;
+    const licenseeDisplayName = agreementLicenseeDisplayName(l);
+    const royaltyDisplay = agreementRoyaltyDisplay(r);
     // Tone is audience-aware for the back-and-forth statuses: "warn" only
     // when it's the viewer's turn. Terms Sent → HQ pushed terms (licensee
     // owes a response); Terms Updated → licensee countered (HQ owes a
@@ -10062,7 +10088,7 @@
     })();
     const startCell = r.effectiveStart ? `<span class="ste-mini">${escape(r.effectiveStart)}</span>` : '<span class="ste-mini">—</span>';
     const endCell = r.effectiveEnd ? `<span class="ste-mini">${escape(r.effectiveEnd)}</span>` : '<span class="ste-mini">—</span>';
-    const initials = (l.legalName || '').split(/\s+/).map(s => s[0]).filter(Boolean).slice(0,2).join('').toUpperCase();
+    const initials = (licenseeDisplayName || '').split(/\s+/).map(s => s[0]).filter(Boolean).slice(0,2).join('').toUpperCase();
     const warningDot = (() => {
       if (!r.warning) return '';
       const daysAbs = Math.abs(r.renewalDays || 0);
@@ -10112,7 +10138,7 @@
         <td data-col="licensee">
           <div style="display:flex;gap:8px;align-items:center">
             <span class="ste-mini-avatar">${escape(initials)}</span>
-            <strong>${escape(l.legalName)}</strong>
+            <strong>${escape(licenseeDisplayName)}</strong>
           </div>
         </td>
         <td data-col="territories">${(r.contract && (r.contract.territories || []).length)
@@ -10121,7 +10147,7 @@
         <td data-col="exclusivity">${r.contract && r.contract.exclusivity
           ? `<span class="ste-mini">${escape(r.contract.exclusivity.replace(/ \(.*\)$/, '').split(' ')[0])}</span>`
           : '<span class="ste-mini">—</span>'}</td>
-        <td data-col="royalty">${r.royaltyPct != null ? `<span class="ste-mono-cell">${r.royaltyPct}%</span>` : '<span class="ste-mini">—</span>'}</td>
+        <td data-col="royalty">${royaltyDisplay != null ? `<span class="ste-mono-cell">${escape(royaltyDisplay)}</span>` : '<span class="ste-mini">—</span>'}</td>
         <td data-col="start">${r.effectiveStart ? `<span class="ste-mini">${escape(fmtDate(r.effectiveStart))}</span>` : '<span class="ste-mini">—</span>'}</td>
         <td data-col="end">${r.effectiveEnd ? `<span class="ste-mini">${escape(fmtDate(r.effectiveEnd))}</span>` : '<span class="ste-mini">—</span>'}</td>
         <td data-col="renewal">${r.contract && r.contract.renewalOption ? `<span class="ste-mini">${escape(r.contract.renewalOption)}</span>` : '<span class="ste-mini">—</span>'}</td>
