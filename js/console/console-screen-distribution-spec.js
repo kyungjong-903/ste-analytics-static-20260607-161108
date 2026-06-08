@@ -66,11 +66,11 @@
 
   // Tier mix — door / revenue weights from spec §4.2
   const TIER_DEF = [
-    { name: "Tier 1 (Anchor)", doorW: 0.08, revW: 0.36, pill: "pill-blue" },
-    { name: "Tier 2 (Core)",   doorW: 0.48, revW: 0.39, pill: "pill-violet" },
-    { name: "Tier 3 (Volume)", doorW: 0.44, revW: 0.21, pill: "pill-gray" },
-    { name: "ST Online",       doorW: 0.00, revW: 0.04, pill: "pill-green" },
-    { name: "Other",           doorW: 0.00, revW: 0.00, pill: "pill-amber" },
+    { name: "Tier 1",   doorW: 0.08, revW: 0.36, pill: "pill-blue" },
+    { name: "Tier 2",   doorW: 0.48, revW: 0.39, pill: "pill-violet" },
+    { name: "Tier 3",   doorW: 0.44, revW: 0.21, pill: "pill-gray" },
+    { name: "ST Online", doorW: 0.00, revW: 0.04, pill: "pill-green" },
+    { name: "Other",     doorW: 0.00, revW: 0.00, pill: "pill-amber" },
   ];
 
   // 10 authorized territory countries — baseline shares from MockData §8,
@@ -466,9 +466,6 @@
         <div class="card card-pad">
           ${W.sec("Region Grouping", "Territory regions — door share and productivity")}
           <table class="tbl spec-table"><thead><tr><th>Region</th><th class="num">Doors</th><th class="num">Net Sales</th><th class="num">Productivity</th></tr></thead><tbody>${regionRows}</tbody></table>
-          <hr class="div" style="margin:14px 0"/>
-          <div class="klabel" style="margin-bottom:10px">Door Share by Region</div>
-          ${det.regions.map((r, i) => bar(W.esc(r.name), r.doorPct + "%", r.doorPct, ["var(--accent)", "#a78bfa", "#22d3ee", "#34d399"][i])).join("")}
         </div>
       </div>`;
 
@@ -536,12 +533,25 @@
         <td><b>${W.esc(r.name)}</b><div class="muted" style="font-size:11px;margin-top:2px">${W.esc(r.loc)}</div></td>
         <td class="num">${money(r.value)}${r.review ? ' <span class="pill pill-amber" style="margin-left:6px"><span class="dot"></span>Review</span>' : ""}</td>
       </tr>`).join("");
-      const prodSec = `<div class="spec-grid g2 mt-16">
-        <div class="card card-pad">
+      const custRows = det.cust.map((c) => `<tr>
+        <td><b>${W.esc(c.label)}</b></td>
+        <td class="num">${c.doors}</td>
+        <td class="num">${money(c.value)}</td>
+        <td class="num">${c.pct}%</td>
+      </tr>`).join("");
+      const prodCustSec = `<div class="grid mt-16" style="grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+        <div class="dist-productivity-customer-stack" style="display:grid;gap:16px">
+        <div class="card card-pad dist-productivity-card is-compact">
           ${W.sec("Productivity — Revenue per Door", "Tier benchmarks and door distribution by revenue bucket")}
           ${tierProdRows}
-          <hr class="div" style="margin:14px 0"/>
-          <div id="dist-hist" class="chart" style="height:200px"></div>
+        </div>
+        <div class="card card-pad dist-customer-card">
+          ${W.sec("Customer Type Distribution", "Net sales and door mix by customer type")}
+          <div class="grid" style="grid-template-columns:200px 1fr;gap:18px;align-items:center">
+            <div id="dist-cust" class="chart" style="height:190px"></div>
+            <table class="tbl spec-table"><thead><tr><th>Type</th><th class="num">Doors</th><th class="num">Net Sales</th><th class="num">Share</th></tr></thead><tbody>${custRows}</tbody></table>
+          </div>
+        </div>
         </div>
         <div class="card card-pad">
           ${W.sec("Top Performing Doors", "Highest revenue locations")}
@@ -552,28 +562,13 @@
         </div>
       </div>`;
 
-      // Customer type distribution
-      const custRows = det.cust.map((c) => `<tr>
-        <td><b>${W.esc(c.label)}</b></td>
-        <td class="num">${c.doors}</td>
-        <td class="num">${money(c.value)}</td>
-        <td class="num">${c.pct}%</td>
-      </tr>`).join("");
-      const custSec = `<div class="card card-pad mt-16">
-        ${W.sec("Customer Type Distribution", "Net sales and door mix by customer type")}
-        <div class="grid" style="grid-template-columns:260px 1fr;gap:20px;align-items:center">
-          <div id="dist-cust" class="chart" style="height:210px"></div>
-          <table class="tbl spec-table"><thead><tr><th>Type</th><th class="num">Doors</th><th class="num">Net Sales</th><th class="num">Share</th></tr></thead><tbody>${custRows}</tbody></table>
-        </div>
-      </div>`;
-
       // AI Distribution Insights
       const aiSec = `<div class="card card-pad spec-ai">
         ${W.sec("AI Distribution Insights", `Auto-generated recommendations · ${det.periodTxt}`)}
         ${det.ai.map((line) => `<div class="ai-line"><span class="sp">✦</span><span>${line}</span></div>`).join("")}
       </div>`;
 
-      return kpis + mainViz + geoSec + accSec + moveSec + prodSec + custSec + aiSec;
+      return kpis + mainViz + geoSec + accSec + moveSec + prodCustSec + aiSec;
     },
 
     init(s) {

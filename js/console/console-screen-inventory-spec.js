@@ -131,6 +131,55 @@
     };
   }
 
+  function normalizeSeasonCode(value) {
+    return String(value || "").trim().toUpperCase();
+  }
+
+  function movementSeasonOptions(data, det) {
+    const allowed = new Set((data.inv.seasons || []).map(normalizeSeasonCode));
+    return det.seasonStock
+      .filter((row) => allowed.has(normalizeSeasonCode(row.season)))
+      .map((row) => ({ code: normalizeSeasonCode(row.season), label: row.season, status: row.status }));
+  }
+
+  function selectedMovementSeason(state, data, det) {
+    const options = movementSeasonOptions(data, det);
+    const requested = state.axis === "season" && state.season && state.season !== "all"
+      ? normalizeSeasonCode(state.season)
+      : "";
+    if (options.some((o) => o.code === requested)) return requested;
+    return options.some((o) => o.code === "SS26") ? "SS26" : (options[0] && options[0].code) || "";
+  }
+
+  function movementForSeason(data, det, seasonCode) {
+    const code = normalizeSeasonCode(seasonCode);
+    const row = det.seasonStock.find((r) => normalizeSeasonCode(r.season) === code) || det.seasonStock[0];
+    const share = Math.max(0.01, (row && row.share ? row.share : 100) / 100);
+    const profiles = {
+      SS26: { inbound: 1.15, returns: 0.80, sold: 0.90, markdown: 0.45 },
+      FW25: { inbound: 0.50, returns: 1.05, sold: 1.15, markdown: 0.85 },
+      SS25: { inbound: 0.20, returns: 0.75, sold: 0.70, markdown: 1.45 },
+      FW26: { inbound: 1.90, returns: 0.10, sold: 0.08, markdown: 0.05 },
+    };
+    const profile = profiles[code] || { inbound: 1, returns: 1, sold: 1, markdown: 1 };
+    const total = det.movement;
+    const ending = data.inv.stockValue * share;
+    const inbound = total.inbound * share * profile.inbound;
+    const returns = total.returns * share * profile.returns;
+    const sold = total.sold * share * profile.sold;
+    const markdownVal = total.markdownVal * share * profile.markdown;
+    const beginning = Math.max(0, ending - inbound - returns + sold + markdownVal);
+    const denom = beginning + inbound;
+    return {
+      season: code,
+      status: row ? row.status : "",
+      beginning, ending, inbound, returns, sold, markdownVal,
+      sellThrough: denom > 0 ? sold / denom * 100 : 0,
+      returnRate: sold > 0 ? returns / sold * 100 : 0,
+      adjRate: denom > 0 ? markdownVal / denom * 100 : 0,
+    };
+  }
+
   /* Seeded vs-prior-quarter deltas for the KPI tiles. */
   function kpiDeltas(data) {
     const rng = mul(data.ctx.entity.id + data.ctx.period + (data.ctx.season || "") + "invdelta");
@@ -151,6 +200,36 @@
     return `<div style="margin-bottom:12px">
       <div class="between" style="font-size:12px;margin-bottom:4px"><span>${label}</span><b class="mono">${valTxt} · ${pctTxt}</b></div>
       <div class="minibar"><i style="width:${Math.min(100, Math.round(width))}%;background:${color}"></i></div>
+    </div>`;
+  }
+
+  function movementRateTile(label, val, formula) {
+    return `<div><div class="klabel" style="margin:0">${label}</div><div class="kval" style="font-size:20px;margin-top:6px">${val}</div><div class="muted" style="font-size:11px;margin-top:2px">${formula}</div></div>`;
+  }
+
+  function movementRatesHtml(m) {
+    return `<div class="spec-grid g3">
+      ${movementRateTile("Sell-through rate", m.sellThrough.toFixed(0) + "%", "Sold ÷ (Beginning + Inbound)")}
+      ${movementRateTile("Return rate", m.returnRate.toFixed(1) + "%", "Returns ÷ Sold")}
+      ${movementRateTile("Adjustment rate", m.adjRate.toFixed(1) + "%", "Markdowns ÷ (Beginning + Inbound)")}
+    </div>`;
+  }
+
+  function renderMovementPanel(state, data, det, W) {
+    const selected = selectedMovementSeason(state, data, det);
+    const options = movementSeasonOptions(data, det);
+    const movement = movementForSeason(data, det, selected);
+    const right = `<label class="inv-season-track" style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:.08em">
+      <span>Season</span>
+      <select id="inv-movement-season" style="height:30px;border:1px solid var(--border);border-radius:8px;background:var(--panel);color:var(--ink);font:600 12px var(--font);padding:0 28px 0 10px">
+        ${options.map((o) => `<option value="${W.esc(o.code)}" ${o.code === selected ? "selected" : ""}>${W.esc(o.label)}</option>`).join("")}
+      </select>
+    </label>`;
+    return `<div class="card card-pad">
+      ${W.sec("Quarter-over-Quarter Movement", "Beginning stock + inbound + returns - sold - markdowns -> ending stock", right)}
+      <div id="inv-movement" class="chart" data-season="${W.esc(selected)}" style="height:280px"></div>
+      <hr class="div" style="margin:16px 0"/>
+      <div id="inv-movement-rates">${movementRatesHtml(movement)}</div>
     </div>`;
   }
 
@@ -184,6 +263,52 @@
       textStyle: { color: C.tipInk || "#f9fafb", fontSize: 12 },
       extraCssText: "border-radius:10px; box-shadow:0 24px 64px rgba(0,0,0,0.35);",
     };
+  }
+
+  function paintMovementChart(el, m, ent) {
+    const Ch = global.Charts;
+    const C = (Ch && Ch.C) || {};
+    const sym = global.UI ? global.UI.curSym(ent) : "€";
+    const fmt = (v) => sym + (Ch && Ch.fmtK ? Ch.fmtK(v) : Math.round(v));
+    const MONO = "'JetBrains Mono', ui-monospace, monospace";
+    const mvInst = mountLocal(el);
+    if (!mvInst) return;
+    const steps = [
+      { label: "Beginning", offset: 0, value: m.beginning, color: C.plan || "#94a3b8", sign: "" },
+      { label: "Inbound", offset: m.beginning, value: m.inbound, color: C.green || "#059669", sign: "+" },
+      { label: "Returns", offset: m.beginning + m.inbound, value: m.returns, color: C.green || "#059669", sign: "+" },
+      { label: "Sold", offset: m.beginning + m.inbound + m.returns - m.sold, value: m.sold, color: C.red || "#dc2626", sign: "-" },
+      { label: "Markdowns", offset: m.ending, value: m.markdownVal, color: C.amber || "#d97706", sign: "-" },
+      { label: "Ending", offset: 0, value: m.ending, color: C.actual || "#2563eb", sign: "" },
+    ];
+    mvInst.setOption({ animation: false,
+      tooltip: Object.assign(tipBase(C), { trigger: "axis", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(148,163,184,0.06)" } },
+        formatter: (ps) => { const p = ps[ps.length - 1]; const st = steps[p.dataIndex]; return `<b>${st.label}</b><br/>${st.sign}${fmt(st.value)}`; } }),
+      grid: { left: 8, right: 16, top: 28, bottom: 6, containLabel: true },
+      xAxis: { type: "category", data: steps.map((x) => x.label), axisLine: { lineStyle: { color: C.axis || "rgba(15,23,42,0.16)" } }, axisTick: { show: false }, axisLabel: { color: C.ink3 || "#8b94a6", fontSize: 10.5 } },
+      yAxis: { type: "value", splitLine: { lineStyle: { color: C.grid || "rgba(15,23,42,0.06)" } }, axisLabel: { color: C.ink3 || "#8b94a6", fontFamily: MONO, fontSize: 10.5, formatter: (v) => fmt(v) } },
+      series: [
+        { type: "bar", stack: "wf", itemStyle: { color: "transparent" }, emphasis: { itemStyle: { color: "transparent" } }, tooltip: { show: false }, data: steps.map((x) => Math.round(x.offset)) },
+        { type: "bar", stack: "wf", barWidth: "54%",
+          data: steps.map((x) => ({ value: Math.round(x.value), itemStyle: { color: x.color, borderRadius: [4, 4, 0, 0] } })),
+          label: { show: true, position: "top", fontSize: 10.5, fontFamily: MONO, color: C.ink3 || "#8b94a6", formatter: (p) => steps[p.dataIndex].sign + fmt(p.value) } },
+      ],
+    });
+  }
+
+  function updateMovementSeason(s) {
+    const data = model().inventory(s);
+    const det = inventoryDetail(data);
+    const select = document.getElementById("inv-movement-season");
+    const season = select ? select.value : selectedMovementSeason(s, data, det);
+    const movement = movementForSeason(data, det, season);
+    const chart = document.getElementById("inv-movement");
+    if (chart) {
+      chart.dataset.season = movement.season;
+      paintMovementChart(chart, movement, data.ctx.entity);
+    }
+    const rates = document.getElementById("inv-movement-rates");
+    if (rates) rates.innerHTML = movementRatesHtml(movement);
   }
 
   function renderInventoryCharts(s) {
@@ -221,31 +346,11 @@
       ], { palette: [C.blue || "#2563eb", C.cyan || "#0891b2"], sym });
     }
 
-    // QoQ movement waterfall (no Charts.* helper — local, guarded)
-    const mvInst = mountLocal(document.getElementById("inv-movement"));
-    if (mvInst) {
-      const m = det.movement;
-      const steps = [
-        { label: "Beginning", offset: 0, value: m.beginning, color: C.plan || "#94a3b8", sign: "" },
-        { label: "Inbound", offset: m.beginning, value: m.inbound, color: C.green || "#059669", sign: "+" },
-        { label: "Returns", offset: m.beginning + m.inbound, value: m.returns, color: C.green || "#059669", sign: "+" },
-        { label: "Sold", offset: m.beginning + m.inbound + m.returns - m.sold, value: m.sold, color: C.red || "#dc2626", sign: "−" },
-        { label: "Markdowns", offset: m.ending, value: m.markdownVal, color: C.amber || "#d97706", sign: "−" },
-        { label: "Ending", offset: 0, value: m.ending, color: C.actual || "#2563eb", sign: "" },
-      ];
-      mvInst.setOption({ animation: false,
-        tooltip: Object.assign(tipBase(C), { trigger: "axis", axisPointer: { type: "shadow", shadowStyle: { color: "rgba(148,163,184,0.06)" } },
-          formatter: (ps) => { const p = ps[ps.length - 1]; const st = steps[p.dataIndex]; return `<b>${st.label}</b><br/>${st.sign}${fmt(st.value)}`; } }),
-        grid: { left: 8, right: 16, top: 28, bottom: 6, containLabel: true },
-        xAxis: { type: "category", data: steps.map((x) => x.label), axisLine: { lineStyle: { color: C.axis || "rgba(15,23,42,0.16)" } }, axisTick: { show: false }, axisLabel: { color: C.ink3 || "#8b94a6", fontSize: 10.5 } },
-        yAxis: { type: "value", splitLine: { lineStyle: { color: C.grid || "rgba(15,23,42,0.06)" } }, axisLabel: { color: C.ink3 || "#8b94a6", fontFamily: MONO, fontSize: 10.5, formatter: (v) => fmt(v) } },
-        series: [
-          { type: "bar", stack: "wf", itemStyle: { color: "transparent" }, emphasis: { itemStyle: { color: "transparent" } }, tooltip: { show: false }, data: steps.map((x) => Math.round(x.offset)) },
-          { type: "bar", stack: "wf", barWidth: "54%",
-            data: steps.map((x) => ({ value: Math.round(x.value), itemStyle: { color: x.color, borderRadius: [4, 4, 0, 0] } })),
-            label: { show: true, position: "top", fontSize: 10.5, fontFamily: MONO, color: C.ink3 || "#8b94a6", formatter: (p) => steps[p.dataIndex].sign + fmt(p.value) } },
-        ],
-      });
+    updateMovementSeason(s);
+    const movementSelect = document.getElementById("inv-movement-season");
+    if (movementSelect && !movementSelect._steInvMovementWired) {
+      movementSelect._steInvMovementWired = true;
+      movementSelect.addEventListener("change", () => updateMovementSeason(s));
     }
 
     // Age distribution histogram (local, guarded)
@@ -334,18 +439,7 @@
         </div>
       </div>`;
 
-      const m = det.movement;
-      const rateTile = (label, val, formula) => `<div><div class="klabel" style="margin:0">${label}</div><div class="kval" style="font-size:20px;margin-top:6px">${val}</div><div class="muted" style="font-size:11px;margin-top:2px">${formula}</div></div>`;
-      const movement = `<div class="card card-pad">
-        ${W.sec("Quarter-over-Quarter Movement", "Beginning stock + inbound + returns − sold − markdowns → ending stock")}
-        <div id="inv-movement" class="chart" style="height:280px"></div>
-        <hr class="div" style="margin:16px 0"/>
-        <div class="spec-grid g3">
-          ${rateTile("Sell-through rate", m.sellThrough.toFixed(0) + "%", "Sold ÷ (Beginning + Inbound)")}
-          ${rateTile("Return rate", m.returnRate.toFixed(1) + "%", "Returns ÷ Sold")}
-          ${rateTile("Adjustment rate", m.adjRate.toFixed(1) + "%", "Markdowns ÷ (Beginning + Inbound)")}
-        </div>
-      </div>`;
+      const movement = renderMovementPanel(s, data, det, W);
 
       const movementAge = `<div class="spec-grid g2 mt-16">
         ${movement}

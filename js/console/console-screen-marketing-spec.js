@@ -5,6 +5,24 @@
   const TYPE_COLORS = ["#2563eb", "#10b981", "#8b5cf6", "#f59e0b", "#64748b"];
   const SNS_COLORS = { Instagram: "#e1306c", TikTok: "#22d3ee", X: "#64748b" };
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const CLOSED_ACTUAL_MONTHS = 5;
+  const TERRITORY_ROI_BASE = [
+    { country: "France", spend: 270000, baseline: 5770000, lift: 1030000, total: 6800000, roas: 3.8 },
+    { country: "Germany", spend: 98000, baseline: 2050000, lift: 353000, total: 2400000, roas: 3.6 },
+    { country: "Belgium", spend: 55000, baseline: 1150000, lift: 248000, total: 1400000, roas: 4.5 },
+    { country: "Netherlands", spend: 44000, baseline: 810000, lift: 189000, total: 1000000, roas: 4.3 },
+    { country: "Switzerland", spend: 27000, baseline: 610000, lift: 86000, total: 700000, roas: 3.2 },
+    { country: "Austria", spend: 22000, baseline: 410000, lift: 88000, total: 500000, roas: 4.0 },
+    { country: "Luxembourg", spend: 11000, baseline: 250000, lift: 50000, total: 300000, roas: 4.5 },
+    { country: "Morocco", spend: 11000, baseline: 340000, lift: 61000, total: 400000, roas: 5.5 },
+    { country: "Tunisia", spend: 6000, baseline: 170000, lift: 29000, total: 200000, roas: 4.8 },
+    { country: "Algeria", spend: 6000, baseline: 170000, lift: 30000, total: 200000, roas: 5.0 },
+  ];
+  const SNS_ENGAGEMENT_ROWS = [
+    { date: "2026-04-22", channel: "TikTok", content: "French Open Activation Teaser", like: 24800, impression: 685000, cost: 4500, roas: 5.4 },
+    { date: "2026-03-28", channel: "X", content: "Polo Spring Drop Post", like: 3150, impression: 78000, cost: 1800, roas: 3.2 },
+    { date: "2026-03-12", channel: "Instagram", content: "SS26 Tennis Hero Reel", like: 18420, impression: 412000, cost: 3200, roas: 6.8 },
+  ];
 
   function D() {
     return global.STEData;
@@ -32,6 +50,14 @@
 
   function fmtMult(value) {
     return `${value.toFixed(1)}x`;
+  }
+
+  function intFmt(value) {
+    return Math.round(value || 0).toLocaleString("en-US");
+  }
+
+  function euroInt(value) {
+    return `€${intFmt(value)}`;
   }
 
   function periodLabel(state) {
@@ -123,26 +149,24 @@
       roi,
       reason,
     }));
-    const geoSeeds = [
-      ["France", "France", 0.49, 4.2],
-      ["Germany", "DACH", 0.18, 3.6],
-      ["Belgium", "Benelux", 0.10, 4.1],
-      ["Netherlands", "Benelux", 0.08, 3.4],
-      ["Switzerland", "DACH", 0.05, 2.7],
-      ["Austria", "DACH", 0.04, 3.1],
-      ["Luxembourg", "Benelux", 0.02, 4.5],
-      ["Morocco", "North Africa", 0.02, 4.8],
-      ["Tunisia", "North Africa", 0.01, 4.0],
-      ["Algeria", "North Africa", 0.01, 4.3],
-    ];
-    const geo = geoSeeds.map(([country, region, share, roi]) => ({
-      country,
-      region,
-      spend: displaySpend * share,
-      lift: displaySpend * share * roi,
-      roi,
-      share,
+    const territoryScale = displaySpend && displaySpend !== 547000 ? displaySpend / 547000 : 1;
+    const geo = TERRITORY_ROI_BASE.map((row) => ({
+      country: row.country,
+      spend: row.spend * territoryScale,
+      baseline: row.baseline * territoryScale,
+      lift: row.lift * territoryScale,
+      total: row.total * territoryScale,
+      roas: row.roas,
     }));
+    const geoTotal = {
+      country: "Total",
+      spend: geo.reduce((a, r) => a + r.spend, 0),
+      baseline: geo.reduce((a, r) => a + r.baseline, 0),
+      lift: geo.reduce((a, r) => a + r.lift, 0),
+      total: geo.reduce((a, r) => a + r.total, 0),
+      roas: 3.9,
+      totalRow: true,
+    };
     const customerTypes = [
       { label: "Wholesale Trade Activation", value: displaySpend * 0.18, share: 18 },
       { label: "Retail / Brand DTC", value: displaySpend * 0.42, share: 42 },
@@ -157,7 +181,7 @@
     ];
     const sns = snsDetail(base);
     const complianceIssues = 0;
-    return { channels, typeSplit, actualQ, planQ, priorQ, campaignsTop, campaignsBottom, geo, customerTypes, reviews, sns, complianceIssues };
+    return { channels, typeSplit, actualQ, planQ, priorQ, campaignsTop, campaignsBottom, geo, geoTotal, customerTypes, reviews, sns, complianceIssues };
   }
 
   function snsDetail(base) {
@@ -169,8 +193,10 @@
       const goal = goals[name] || src.goal;
       const plan = MONTHS.map((_, i) => Math.round(goal * ((i + 1) / 12)));
       const actualBase = src.actual && src.actual.length ? src.actual : plan.map((v, i) => i < 5 ? Math.round(v * 0.82) : null);
-      const actual = actualBase.map((v, i) => i < 5 ? Math.round((v || plan[i] * 0.82) * (goal / (src.goal || goal))) : null);
-      const prior = plan.map((v, i) => Math.round(v * (0.68 + i * 0.012)));
+      const rawActual = actualBase.map((v, i) => i < CLOSED_ACTUAL_MONTHS ? Math.round((v || plan[i] * 0.82) * (goal / (src.goal || goal))) : null);
+      const rawPrior = plan.map((v, i) => Math.round(v * (0.68 + i * 0.012)));
+      const actual = rawPrior.map((v, i) => i < CLOSED_ACTUAL_MONTHS ? v : null);
+      const prior = rawActual;
       const current = latestActual(actual);
       return {
         name,
@@ -184,6 +210,7 @@
         reach: base.reach * reachShare[name],
         impressions: base.reach * reachShare[name] * 4,
         behind: current < plan[4] * 0.9,
+        _swappedActualPrior: true,
       };
     });
   }
@@ -232,10 +259,49 @@
     </div>`).join("");
   }
 
+  function roasTone(value) {
+    if (value >= 5) return "pill-green";
+    if (value >= 2) return "pill-amber";
+    return "pill-red";
+  }
+
+  function roasLabel(value) {
+    return `${fmtMult(value)}${value >= 5 ? " ★" : value < 2 ? " ⚠" : ""}`;
+  }
+
+  function renderSnsEngagementTracker(data) {
+    const ent = data.ctx.entity;
+    const rows = SNS_ENGAGEMENT_ROWS;
+    const best = rows.slice().sort((a, b) => b.roas - a.roas)[0];
+    return `<div class="card card-pad mt-16" data-mkt-section="brand performance">
+      ${W().sec("SNS Engagement Tracker", "Actual-only posting-level performance · AI Crawling", '<span class="pill pill-violet"><span class="dot"></span>AI Agent</span>')}
+      <div class="between" style="gap:12px;margin:4px 0 14px;align-items:center">
+        <div class="muted" style="font-size:12px">Last crawled: 2026-06-07 09:32 KST · Auto-sync every 4 hours · Read-only</div>
+        <button class="btn btn-ghost btn-sm" type="button" data-mkt-refresh-sns>Refresh</button>
+      </div>
+      <div class="filterbar" style="margin:0 0 12px;padding:10px 12px;min-height:0">
+        <div class="filter-group"><span class="filter-lab">Channel</span><span class="pill pill-gray">All Channels</span></div>
+        <div class="filter-group"><span class="filter-lab">Date Range</span><span class="pill pill-gray">90 days</span></div>
+        <div class="filter-group"><span class="filter-lab">Sort</span><span class="pill pill-gray">Posting Date</span></div>
+      </div>
+      ${W().table([
+        { label: "Posting Date", key: "date" },
+        { label: "Channel", key: "channel", render: (r) => `<span class="pill pill-gray"><span class="dot"></span>${W().esc(r.channel)}</span>` },
+        { label: "Content", key: "content", render: (r) => `<b>${W().esc(r.content)}</b>` },
+        { label: "Like", key: "like", num: true, render: (r) => intFmt(r.like) },
+        { label: "Impression", key: "impression", num: true, render: (r) => intFmt(r.impression) },
+        { label: "Advertising Cost", key: "cost", num: true, render: (r) => euroInt(r.cost) },
+        { label: "ROAS", key: "roas", num: true, render: (r) => `<span class="pill ${roasTone(r.roas)}"><span class="dot"></span>${roasLabel(r.roas)}</span>` },
+      ], rows)}
+      <div class="card" style="margin-top:12px;padding:12px 14px;background:var(--panel-2);box-shadow:none">
+        <div class="ai-line"><span class="sp">*</span><span><b>${W().esc(best.channel)} ${W().esc(best.content)}</b> achieved the highest ROAS (${fmtMult(best.roas)}) with ${euroInt(best.cost)} ad spend - scale this content format for SS27 launch.</span></div>
+      </div>
+    </div>`;
+  }
+
   function renderCampaignTables(data, details) {
     const ent = data.ctx.entity;
-    return `<div class="spec-grid g2 mt-16">
-      <div class="card card-pad" data-mkt-section="performance">
+    return `<div class="card card-pad mt-16" data-mkt-section="performance">
         ${W().sec("Top Campaigns by ROI", "Attributed sales and scaling action")}
         ${W().table([
           { label: "Campaign", key: "name" },
@@ -245,31 +311,13 @@
           { label: "Sales", key: "sales", num: true, render: (r) => money(r.sales, ent) },
           { label: "ROI", key: "roi", num: true, render: (r) => fmtMult(r.roi) },
         ], details.campaignsTop)}
-      </div>
-      <div class="card card-pad" data-mkt-section="performance">
-        ${W().sec("Bottom Campaigns", "Improvement review list")}
-        ${W().table([
-          { label: "Campaign", key: "name" },
-          { label: "Channel", key: "channel" },
-          { label: "Spend", key: "spend", num: true, render: (r) => money(r.spend, ent) },
-          { label: "Sales", key: "sales", num: true, render: (r) => money(r.sales, ent) },
-          { label: "ROI", key: "roi", num: true, render: (r) => fmtMult(r.roi) },
-          { label: "Reason", key: "reason" },
-        ], details.campaignsBottom)}
-      </div>
-    </div>`;
+      </div>`;
   }
 
   function renderBreakdown(data, details) {
     const ent = data.ctx.entity;
     const planView = data.ctx.view === "plan";
-    return `<div class="spec-grid g2 mt-16">
-      <div class="card card-pad" data-mkt-section="brand performance photography">
-        ${W().sec("Brand vs Performance Split", "Spend by marketing type")}
-        <div id="mkt-type-split" class="chart" style="height:250px"></div>
-        <div class="legend wrap" style="margin-top:10px;justify-content:center">${details.typeSplit.map((r, i) => `<span class="lg"><span class="sw" style="background:${TYPE_COLORS[i]}"></span>${W().esc(r.label)} ${Math.round(r.share * 100)}%</span>`).join("")}</div>
-      </div>
-      <div class="card card-pad" data-mkt-section="brand performance photography">
+    return `<div class="card card-pad mt-16" data-mkt-section="brand performance photography">
         ${W().sec("Budget Allocation", planView ? "Plan budget allocation with current actual pace" : "Actual pacing versus plan")}
         ${W().table([
           { label: "Type", key: "label" },
@@ -277,17 +325,13 @@
           { label: "Plan", key: "plan", num: true, render: (r) => money(r.plan, ent) },
           { label: "Pace", key: "pace", num: true, render: (r) => `${(r.spend / r.plan * 100).toFixed(0)}%` },
         ], details.typeSplit)}
-      </div>
-    </div>`;
+      </div>`;
   }
 
   function renderGeoAndCompliance(data, details) {
     const ent = data.ctx.entity;
+    const roiRows = details.geo.concat([details.geoTotal]);
     return `<div class="spec-grid g2 mt-16">
-      <div class="card card-pad" data-mkt-section="brand performance">
-        ${W().sec("Geographic Distribution", "10 authorized territory countries")}
-        <div id="mkt-geo" class="chart" style="height:320px"></div>
-      </div>
       <div class="card card-pad" data-mkt-section="brand">
         ${W().sec("Brand Compliance Tracker", "F&F brand review status")}
         <div class="spec-grid g3" style="gap:10px;margin-bottom:14px">
@@ -303,29 +347,32 @@
           { label: "Reviewer", key: "reviewer" },
         ], details.reviews)}
       </div>
-      <div class="card card-pad" data-mkt-section="brand performance">
-        ${W().sec("Customer Type Distribution", "Marketing spend by activation target")}
-        <div id="mkt-customer-type" class="chart" style="height:250px"></div>
-      </div>
       <div class="card card-pad" data-mkt-section="brand performance photography">
-        ${W().sec("Territory ROI Table", "Spend, sales lift, and ROI")}
+        ${W().sec("Territory ROI Table", "Baseline + AI-attributed lift + total net sales")}
+        <div class="muted" style="font-size:11px;margin:-4px 0 10px">Sales Lift = AI Attribution Model 산출치 (MMM 기반)</div>
         ${W().table([
-          { label: "Country", key: "country" },
-          { label: "Region", key: "region" },
-          { label: "Spend", key: "spend", num: true, render: (r) => money(r.spend, ent) },
-          { label: "Lift", key: "lift", num: true, render: (r) => money(r.lift, ent) },
-          { label: "ROI", key: "roi", num: true, render: (r) => fmtMult(r.roi) },
-        ], details.geo)}
+          { label: "Country", key: "country", render: (r) => r.totalRow ? `<b>${W().esc(r.country)}</b>` : W().esc(r.country) },
+          { label: "Marketing Spend", key: "spend", num: true, render: (r) => r.totalRow ? `<b>${money(r.spend, ent)}</b>` : money(r.spend, ent) },
+          { label: "Baseline Sales", key: "baseline", num: true, render: (r) => `<span style="color:var(--ink-3)">${r.totalRow ? "<b>" : ""}${money(r.baseline, ent)}${r.totalRow ? "</b>" : ""}</span>` },
+          { label: "Sales Lift", key: "lift", num: true, render: (r) => `<b style="color:#1e3a8a">${money(r.lift, ent)}</b>` },
+          { label: "Total Net Sales", key: "total", num: true, render: (r) => r.totalRow ? `<b>${money(r.total, ent)}</b>` : money(r.total, ent) },
+          { label: "ROAS", key: "roas", num: true, render: (r) => `<span class="pill ${roasTone(r.roas)}"><span class="dot"></span>${r.totalRow ? `${fmtMult(r.roas)} avg` : roasLabel(r.roas)}</span>` },
+        ], roiRows)}
       </div>
     </div>`;
   }
 
   function renderInsights(data, details) {
     const tikTok = details.sns.find((s) => s.name === "TikTok");
+    const bestTerritory = details.geo.slice().sort((a, b) => b.roas - a.roas)[0];
+    const lowTerritory = details.geo.slice().sort((a, b) => a.roas - b.roas)[0];
+    const liftPct = details.geoTotal.total ? details.geoTotal.lift / details.geoTotal.total * 100 : 0;
     return W().ai([
       `French Open Activation delivered ${fmtMult(details.campaignsTop[1].roi)} ROI; repeat and scale for Roland-Garros 2027.`,
       `TikTok follower growth is ${tikTok.progress.toFixed(0)}% of target; shift spend from low-ROI print into creator partnerships.`,
-      `North Africa receives ${(details.geo.filter((g) => g.region === "North Africa").reduce((a, g) => a + g.share, 0) * 100).toFixed(0)}% of spend while ROI is above plan; support FW26 launch locally.`,
+      `${bestTerritory.country} achieved highest ROAS (${fmtMult(bestTerritory.roas)}) with ${money(bestTerritory.spend, data.ctx.entity)} spend; scale local creative and low-cost paid boosts.`,
+      `${lowTerritory.country} is the lowest territory ROAS (${fmtMult(lowTerritory.roas)}); review channel mix and creative localization before adding spend.`,
+      `Marketing-attributable lift ${money(details.geoTotal.lift, data.ctx.entity)} represents ${liftPct.toFixed(1)}% of total YTD sales; baseline ${money(details.geoTotal.baseline, data.ctx.entity)} confirms strong brand equity.`,
       `Brand Compliance is clean with ${details.complianceIssues} open issues and 18 of 18 recent reviews approved.`,
     ]);
   }
@@ -342,21 +389,15 @@
         ${renderMarketingTypeControl()}
       </div>
       ${renderKpis(data, details)}
-      <div class="spec-grid g2 mt-16">
-        <div class="card card-pad" data-mkt-section="brand performance photography">
+      <div class="card card-pad mt-16" data-mkt-section="brand performance photography">
           ${W().sec("Spend Pacing", "Quarterly Actual / Plan / Prior Year")}
           <div id="mkt-spend-pacing" class="chart" style="height:300px"></div>
-        </div>
-        <div class="card card-pad" data-mkt-section="brand performance">
-          ${W().sec("Channel Mix", "Spend contribution by channel")}
-          <div id="mkt-channel-mix" class="chart" style="height:300px"></div>
-          <div class="legend wrap" style="margin-top:10px;justify-content:center">${details.channels.map((c, i) => `<span class="lg"><span class="sw" style="background:${CHANNEL_COLORS[i]}"></span>${W().esc(c.name)} ${(c.share * 100).toFixed(0)}%</span>`).join("")}</div>
-        </div>
       </div>
       <div class="between" style="margin:24px 0 12px">
         <div>${W().sec("SNS Performance Tracking", "Monthly cumulative followers, plan, actual, and prior year")}</div>
       </div>
       <div class="spec-grid g3">${renderSnsCards(details)}</div>
+      ${renderSnsEngagementTracker(data)}
       ${renderBreakdown(data, details)}
       ${renderCampaignTables(data, details)}
       ${renderGeoAndCompliance(data, details)}
@@ -369,6 +410,7 @@
     const details = marketingDetail(data.mkt, data.ctx.view);
     renderCharts(data, details);
     bindMarketingTypeFilter();
+    bindSnsTrackerRefresh();
   }
 
   function bindMarketingTypeFilter() {
@@ -386,26 +428,21 @@
     });
   }
 
+  function bindSnsTrackerRefresh() {
+    const btn = document.querySelector("[data-mkt-refresh-sns]");
+    if (!btn || btn._steSnsRefreshWired) return;
+    btn._steSnsRefreshWired = true;
+    btn.addEventListener("click", () => {
+      if (global.STEApp && global.STEApp.toast) {
+        global.STEApp.toast("SNS crawler refresh requested (mock)", "info");
+      }
+    });
+  }
+
   function renderCharts(data, details) {
     renderSpendPacing(document.getElementById("mkt-spend-pacing"), details, data.ctx.entity);
     if (global.Charts) {
-      global.Charts.donut(
-        document.getElementById("mkt-channel-mix"),
-        details.channels.map((c) => ({ label: c.name, value: c.spend })),
-        { palette: CHANNEL_COLORS, sym: "" }
-      );
-      global.Charts.donut(
-        document.getElementById("mkt-type-split"),
-        details.typeSplit.map((r) => ({ label: r.label, value: r.spend })),
-        { palette: TYPE_COLORS, sym: "" }
-      );
-      global.Charts.donut(
-        document.getElementById("mkt-customer-type"),
-        details.customerTypes.map((r) => ({ label: r.label, value: r.value })),
-        { palette: TYPE_COLORS, sym: "" }
-      );
       details.sns.forEach((item, i) => renderSnsChart(document.getElementById(`mkt-sns-${i}`), item));
-      renderGeoChart(document.getElementById("mkt-geo"), details.geo, data.ctx.entity);
     }
   }
 
@@ -483,6 +520,11 @@
       }],
     });
   }
+
+  global.STEMarketingSpecTestHooks = {
+    marketingDetail,
+    snsDetail,
+  };
 
   global.Screens = global.Screens || {};
   global.Screens.a5 = { title: "Marketing", sub, render, init };

@@ -78,6 +78,40 @@ function checkMarketingPlanUsesPlanSpend() {
   assert(planHtml.includes(planSpend), `Marketing plan view should show plan spend ${planSpend}`);
 }
 
+function checkMarketingPatchCardsAndTables() {
+  const html = stripped(Screens.a5.render({ ...baseState, view: "actual" }));
+  const planHtml = stripped(Screens.a5.render({ ...baseState, view: "plan" }));
+
+  ["Channel Mix", "Brand vs Performance Split", "Bottom Campaigns", "Geographic Distribution", "Customer Type Distribution"].forEach((label) => {
+    assert(!html.includes(label), `Marketing should not render removed card: ${label}`);
+  });
+
+  ["SNS Engagement Tracker", "Last crawled: 2026-06-07 09:32 KST", "AI Crawling", "Posting Date", "Like", "Impression", "Advertising Cost", "ROAS"].forEach((label) => {
+    assert(html.includes(label), `Marketing should render SNS Engagement Tracker label ${label}`);
+  });
+  ["SS26 Tennis Hero Reel", "French Open Activation Teaser", "Polo Spring Drop Post", "18,420", "685,000", "€3,200", "6.8x", "5.4x", "3.2x"].forEach((label) => {
+    assert(html.includes(label), `Marketing SNS Engagement Tracker should render mock value ${label}`);
+  });
+  assert(planHtml.includes("SNS Engagement Tracker"), "SNS Engagement Tracker should remain visible in Plan view as Actual-only data");
+  assert(planHtml.includes("Actual-only"), "Plan view should explain SNS Engagement Tracker is actual-only");
+
+  ["Territory ROI Table", "Baseline Sales", "Sales Lift", "Total Net Sales", "France", "Morocco", "Total", "€2.16M", "3.9x avg"].forEach((label) => {
+    assert(html.includes(label), `Marketing Territory ROI Table should render ${label}`);
+  });
+  assert(html.includes("Sales Lift = AI Attribution Model"), "Territory ROI Table should explain the Sales Lift attribution model");
+}
+
+function checkMarketingSnsActualPriorSwapped() {
+  const hooks = globalThis.STEMarketingSpecTestHooks || {};
+  assert(typeof hooks.marketingDetail === "function", "Marketing spec should expose marketingDetail for regression checks");
+  const details = hooks.marketingDetail(STEData.marketingFor("sugifr", "ytd"), "actual");
+  const instagram = details.sns.find((row) => row.name === "Instagram");
+  assert(instagram, "Marketing SNS detail should include Instagram");
+  assert(instagram.actual[0] > instagram.prior[0], "Marketing SNS Actual should display above Prior Year after value swap");
+  assert(instagram.actual.slice(5).every((v) => v == null), "Marketing SNS Actual should stay limited to closed actual months");
+  assert(instagram._swappedActualPrior === true, "Marketing SNS detail should mark Actual/Prior values as swapped");
+}
+
 function checkDistributionPlanUsesPlanDoors() {
   const dist = STEData.distributionFor("sugifr", "ytd");
   const actualHtml = stripped(Screens.a3.render({ ...baseState, view: "actual" }));
@@ -111,12 +145,44 @@ function checkDistributionTierMixHasNoChart() {
   assert(source.includes("min-height:430px"), "Distribution Tier Mix card should match the timeline card height");
 }
 
+function checkDistributionLayoutRefinements() {
+  const html = stripped(Screens.a3.render({ ...baseState, view: "actual" }));
+
+  ["Tier 1 (Anchor)", "Tier 2 (Core)", "Tier 3 (Volume)"].forEach((label) => {
+    assert(!html.includes(label), `Distribution should not render parenthetical tier label ${label}`);
+  });
+  ["Tier 1", "Tier 2", "Tier 3"].forEach((label) => {
+    assert(html.includes(label), `Distribution should render simplified tier label ${label}`);
+  });
+
+  assert(!html.includes("Door Share by Region"), "Distribution Region Grouping should not render Door Share by Region bars");
+  assert(html.includes("dist-productivity-customer-stack"), "Distribution should stack Customer Type below Productivity");
+  assert(html.includes("dist-productivity-card is-compact"), "Distribution Productivity card should use the compact variant");
+  assert(!html.includes('id="dist-hist"'), "Distribution Productivity compact card should not render the revenue-bucket histogram");
+  assert(/dist-productivity-customer-stack[\s\S]*Productivity — Revenue per Door[\s\S]*Customer Type Distribution/.test(html), "Customer Type Distribution should be placed below Productivity");
+}
+
 function checkInventoryMovementAndAgeLayout() {
   const html = stripped(Screens.a4.render({ ...baseState, view: "actual" }));
   assert(!html.includes("Country Inventory"), "Inventory screen should not render the Country Inventory card");
   assert(html.includes("Quarter-over-Quarter Movement"), "Inventory screen should render Quarter-over-Quarter Movement");
   assert(html.includes("Age Distribution"), "Inventory screen should render Age Distribution");
   assert(/spec-grid g2 mt-16[\s\S]*inv-movement[\s\S]*inv-age-dist/.test(html), "QoQ Movement and Age Distribution should share one two-column row");
+}
+
+function checkInventoryMovementSeasonTracking() {
+  const html = stripped(Screens.a4.render({ ...baseState, view: "actual" }));
+  assert(html.includes('id="inv-movement-season"'), "Inventory QoQ Movement card should include a season selector");
+  assert(/Quarter-over-Quarter Movement[\s\S]*inv-movement-season/.test(html), "Inventory season selector should sit in the QoQ Movement card header area");
+  ["SS25", "FW25", "SS26", "FW26"].forEach((label) => {
+    assert(html.includes(`>${label}<`), `Inventory movement season selector should include ${label}`);
+  });
+  assert(html.includes('id="inv-movement-rates"'), "Inventory QoQ Movement rates should have a replaceable container");
+
+  const source = fs.readFileSync("js/console/console-screen-inventory-spec.js", "utf8");
+  assert(source.includes("renderMovementPanel"), "Inventory should render the movement panel through a reusable helper");
+  assert(source.includes("updateMovementSeason"), "Inventory should update movement chart and rates when the selected season changes");
+  assert(source.includes("addEventListener(\"change\""), "Inventory season selector should listen for changes");
 }
 
 function checkInventoryAndSalesPlanContracts() {
@@ -235,8 +301,12 @@ checkDistributionPlanUsesPlanDoors();
 checkDistributionStOnlineHasNoDoors();
 checkDistributionOtherHasNoDoors();
 checkDistributionTierMixHasNoChart();
+checkDistributionLayoutRefinements();
 checkInventoryMovementAndAgeLayout();
+checkInventoryMovementSeasonTracking();
 checkMarketingPlanUsesPlanSpend();
+checkMarketingPatchCardsAndTables();
+checkMarketingSnsActualPriorSwapped();
 checkInventoryAndSalesPlanContracts();
 checkSalesRoyaltyUsesSpecCardHeaders();
 checkSalesRoyaltyGeoProductMatrixShowsCategoryYoy();
