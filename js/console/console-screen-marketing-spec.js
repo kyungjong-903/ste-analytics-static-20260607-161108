@@ -356,7 +356,7 @@
           { label: "Baseline Sales", key: "baseline", num: true, render: (r) => `<span style="color:var(--ink-3)">${r.totalRow ? "<b>" : ""}${money(r.baseline, ent)}${r.totalRow ? "</b>" : ""}</span>` },
           { label: "Sales Lift", key: "lift", num: true, render: (r) => `<b style="color:#1e3a8a">${money(r.lift, ent)}</b>` },
           { label: "Total Net Sales", key: "total", num: true, render: (r) => r.totalRow ? `<b>${money(r.total, ent)}</b>` : money(r.total, ent) },
-          { label: "ROAS", key: "roas", num: true, render: (r) => `<span class="pill ${roasTone(r.roas)}"><span class="dot"></span>${r.totalRow ? `${fmtMult(r.roas)} avg` : roasLabel(r.roas)}</span>` },
+          { label: "ROAS", key: "roas", num: true, render: (r) => `<span class="pill ${roasTone(r.roas)}"><span class="dot"></span>${r.totalRow ? fmtMult(r.roas) : roasLabel(r.roas)}</span>` },
         ], roiRows)}
       </div>
     </div>`;

@@ -95,9 +95,10 @@ function checkMarketingPatchCardsAndTables() {
   assert(planHtml.includes("SNS Engagement Tracker"), "SNS Engagement Tracker should remain visible in Plan view as Actual-only data");
   assert(planHtml.includes("Actual-only"), "Plan view should explain SNS Engagement Tracker is actual-only");
 
-  ["Territory ROI Table", "Baseline Sales", "Sales Lift", "Total Net Sales", "France", "Morocco", "Total", "€2.16M", "3.9x avg"].forEach((label) => {
+  ["Territory ROI Table", "Baseline Sales", "Sales Lift", "Total Net Sales", "France", "Morocco", "Total", "€2.16M", "3.9x"].forEach((label) => {
     assert(html.includes(label), `Marketing Territory ROI Table should render ${label}`);
   });
+  assert(!html.includes("3.9x avg"), "Marketing Territory ROI Table total ROAS should not include avg text");
   assert(html.includes("Sales Lift = AI Attribution Model"), "Territory ROI Table should explain the Sales Lift attribution model");
 }
 
@@ -156,6 +157,8 @@ function checkDistributionLayoutRefinements() {
   });
 
   assert(!html.includes("Door Share by Region"), "Distribution Region Grouping should not render Door Share by Region bars");
+  assert(html.includes("dist-geo-region-row"), "Distribution geography row should use a custom ratio layout");
+  assert(html.includes("grid-template-columns:minmax(0,1.45fr) minmax(340px,.85fr)"), "Distribution geography row should give the chart more width than the region summary");
   assert(html.includes("dist-productivity-customer-stack"), "Distribution should stack Customer Type below Productivity");
   assert(html.includes("dist-productivity-card is-compact"), "Distribution Productivity card should use the compact variant");
   assert(!html.includes('id="dist-hist"'), "Distribution Productivity compact card should not render the revenue-bucket histogram");
@@ -174,6 +177,8 @@ function checkInventoryMovementSeasonTracking() {
   const html = stripped(Screens.a4.render({ ...baseState, view: "actual" }));
   assert(html.includes('id="inv-movement-season"'), "Inventory QoQ Movement card should include a season selector");
   assert(/Quarter-over-Quarter Movement[\s\S]*inv-movement-season/.test(html), "Inventory season selector should sit in the QoQ Movement card header area");
+  assert(html.includes('value="ALL" selected>All Seasons<'), "Inventory QoQ Movement should default to All Seasons");
+  assert(html.includes('data-season="ALL"'), "Inventory QoQ Movement chart should initialize with all-season data");
   ["SS25", "FW25", "SS26", "FW26"].forEach((label) => {
     assert(html.includes(`>${label}<`), `Inventory movement season selector should include ${label}`);
   });

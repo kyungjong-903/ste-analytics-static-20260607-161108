@@ -137,9 +137,10 @@
 
   function movementSeasonOptions(data, det) {
     const allowed = new Set((data.inv.seasons || []).map(normalizeSeasonCode));
-    return det.seasonStock
+    const seasonRows = det.seasonStock
       .filter((row) => allowed.has(normalizeSeasonCode(row.season)))
       .map((row) => ({ code: normalizeSeasonCode(row.season), label: row.season, status: row.status }));
+    return [{ code: "ALL", label: "All Seasons", status: "Total inventory" }].concat(seasonRows);
   }
 
   function selectedMovementSeason(state, data, det) {
@@ -148,11 +149,14 @@
       ? normalizeSeasonCode(state.season)
       : "";
     if (options.some((o) => o.code === requested)) return requested;
-    return options.some((o) => o.code === "SS26") ? "SS26" : (options[0] && options[0].code) || "";
+    return "ALL";
   }
 
   function movementForSeason(data, det, seasonCode) {
     const code = normalizeSeasonCode(seasonCode);
+    if (!code || code === "ALL") {
+      return { ...det.movement, season: "ALL", status: "Total inventory" };
+    }
     const row = det.seasonStock.find((r) => normalizeSeasonCode(r.season) === code) || det.seasonStock[0];
     const share = Math.max(0.01, (row && row.share ? row.share : 100) / 100);
     const profiles = {

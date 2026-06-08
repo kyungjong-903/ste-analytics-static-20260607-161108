@@ -458,12 +458,12 @@
         <td class="num">${money(r.value)}</td>
         <td class="num">${money(r.rpd)}/door${r.star ? " ★" : ""}</td>
       </tr>`).join("");
-      const geoSec = `<div class="spec-grid g2 mt-16">
+      const geoSec = `<div class="grid mt-16 dist-geo-region-row" style="grid-template-columns:minmax(0,1.45fr) minmax(340px,.85fr);gap:16px;align-items:stretch">
         <div class="card card-pad">
           ${W.sec("Geographic Distribution", `${det.geo.length} authorized territory countries — doors · sales · €/door (★ above network average)`)}
           <div id="dist-geo" class="chart" style="height:330px"></div>
         </div>
-        <div class="card card-pad">
+        <div class="card card-pad" style="align-self:start">
           ${W.sec("Region Grouping", "Territory regions — door share and productivity")}
           <table class="tbl spec-table"><thead><tr><th>Region</th><th class="num">Doors</th><th class="num">Net Sales</th><th class="num">Productivity</th></tr></thead><tbody>${regionRows}</tbody></table>
         </div>
